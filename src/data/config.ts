@@ -44,6 +44,8 @@ const CONS = { color: '#4F8EF7', dark: '#1A3A8F', bg: 'rgba(79,142,247,0.08)', g
 const NPRO = { color: '#A855F7', dark: '#5B1FA8', bg: 'rgba(168,85,247,0.08)', glow: 'rgba(168,85,247,0.25)' }
 const MEDI = { color: '#10C98F', dark: '#047A56', bg: 'rgba(16,201,143,0.08)', glow: 'rgba(16,201,143,0.25)' }
 const INVT = { color: '#F97316', dark: '#8B3A00', bg: 'rgba(249,115,22,0.08)', glow: 'rgba(249,115,22,0.25)' }
+const FOUN = { color: '#C4845A', dark: '#7A3E18', bg: 'rgba(196,132,90,0.08)', glow: 'rgba(196,132,90,0.25)' }
+const TEAM = { color: '#5BA8A0', dark: '#1C5E58', bg: 'rgba(91,168,160,0.08)', glow: 'rgba(91,168,160,0.25)' }
 
 // ── Shared placeholder testimonials ───────────────────────
 const t = (name: string, title: string, company: string, quote: string, result: string): Testimonial =>
@@ -855,6 +857,332 @@ export const SECTORS: Sector[] = [
       { title: 'Real Estate Portfolio Scaled to $18M AUM', industry: 'Multifamily', result: '$18M AUM in 24 Months', description: '8 acquisitions across 3 markets. 100% off-market deal sourcing. 21% average cash-on-cash return.' },
     ],
     partnerships: ['CCIM Member', 'NAI Global Partner', 'Private Equity Network Member', 'Angel Capital Association'],
+  },
+
+  // ─────────────────────────────────────────────────────────────
+  // 6. MY STORY — Founder's Personal Narrative
+  // ─────────────────────────────────────────────────────────────
+  {
+    id: 'founder', name: 'My Story', shortName: 'My Story',
+    tagline: 'The Vision, The Journey, The Man Behind the Enterprise',
+    heroHeadline: 'Every Empire Begins With a Single Decision to Refuse Ordinary.',
+    heroSub: 'This is not a corporate biography. It\'s the unfiltered account of faith, sacrifice, and relentless execution that built One United Enterprise from the ground up.',
+    color: FOUN.color, colorDark: FOUN.dark, colorBg: FOUN.bg, glow: FOUN.glow,
+    gradient: 'from-amber-950 via-orange-950 to-black',
+    cardGradient: 'from-amber-900/30 via-orange-900/15 to-transparent',
+    icon: '✨',
+    stats: [
+      { label: 'Industries Built', value: '7', suffix: '+' },
+      { label: 'Years in the Game', value: '10', suffix: '+' },
+      { label: 'Lives Impacted', value: '1,000', suffix: '+' },
+      { label: 'Companies Led', value: '5', suffix: '+' },
+    ],
+    services: [
+      // ── Speaking & Thought Leadership ──────────────────────
+      {
+        id: 'speaking',
+        name: 'Speaking & Keynote Engagements',
+        tagline: 'A Voice That Moves Rooms and Shifts Mindsets',
+        heroHeadline: 'Book a Speaker Who Has Actually Done What He\'s Teaching.',
+        heroSub: 'From corporate conferences and university keynotes to community summits and private masterminds — a speaker who delivers raw insight, real frameworks, and transformational energy every time.',
+        painPoints: [
+          { icon: '🎤', title: 'Speakers Who Talk Theory, Not Experience', desc: 'Audiences are tired of keynotes built on borrowed ideas. They want someone who built it, bled for it, and can prove it.' },
+          { icon: '😴', title: 'Content That Doesn\'t Stick', desc: 'Motivational fluff fades by Monday morning. Real transformation needs real frameworks people can act on immediately.' },
+          { icon: '💼', title: 'A Speaker Who Doesn\'t Match Your Audience', desc: 'The right message delivered to the wrong room changes nothing. Authentic resonance is everything.' },
+        ],
+        solution: 'A dynamic speaker who blends entrepreneurial war stories, strategic frameworks, and authentic faith-fueled conviction — leaving every audience with clarity, action steps, and a fire that doesn\'t go out.',
+        process: [
+          { step: 1, title: 'Event Consultation', desc: 'Understand your audience, theme, desired outcomes, and event format to craft a perfectly tailored presentation.', duration: 'Week 1' },
+          { step: 2, title: 'Custom Content Development', desc: 'Build a bespoke keynote or workshop that threads your event\'s message with the speaker\'s lived experience.', duration: 'Week 1–2' },
+          { step: 3, title: 'Pre-Event Alignment', desc: 'Final run-through with your event team, technical coordination, and audience preparation materials.', duration: '48 Hours Before' },
+          { step: 4, title: 'Delivery & Engagement', desc: 'High-energy, interactive delivery with Q&A, audience activities, or panel participation as needed.', duration: 'Event Day' },
+          { step: 5, title: 'Post-Event Follow-Through', desc: 'Resource packet, framework handouts, and optional follow-on workshop for deeper implementation.', duration: 'Post-Event' },
+        ],
+        packages: [
+          { name: 'Community & Non-Profit', price: 'Contact', period: 'per engagement', highlight: false, cta: 'Request Booking',
+            features: ['45–60 Min Keynote', 'Community & Nonprofit Events', 'Q&A Session', 'Digital Resource Kit', 'Social Media Collaboration'] },
+          { name: 'Corporate & Conference', price: 'Contact', period: 'per engagement', highlight: true, cta: 'Request Booking',
+            features: ['60–90 Min Keynote or Workshop', 'Corporate Teams & Conferences', 'Custom Content Development', 'Pre-Event Audience Research', 'Interactive Breakout Options', 'Post-Event Implementation Guide', 'Green Room Meet & Greet'] },
+          { name: 'Private & Executive', price: 'Contact', period: 'per engagement', highlight: false, cta: 'Request Booking',
+            features: ['Half-Day or Full-Day Sessions', 'C-Suite & Executive Masterminds', 'Private Retreats & Roundtables', 'Deep-Dive Strategic Workshops', 'Personalized Frameworks', 'Ongoing Access & Follow-Up', 'VIP Experience'] },
+        ],
+        testimonials: [
+          t('Dr. Kezia M.', 'Dean', 'Metro Business Institute', 'The room was completely transformed. Students left with a different understanding of what\'s possible for them. We need him back every year.', 'Standing Ovation, 400 Attendees'),
+          t('Andre B.', 'CEO', 'TrueNorth Capital', 'He spoke at our leadership summit and the energy never dipped for 90 minutes. Three of our executives completely changed their approach after that session.', '3 Executives Transformed'),
+          t('Pastor L. Williams', 'Senior Pastor', 'Covenant Community Church', 'He bridged faith and business in a way I\'ve never seen done so naturally. Our congregation left equipped, not just inspired.', '100% Positive Audience Feedback'),
+        ],
+        faq: [
+          { q: 'What topics do you speak on?', a: 'Entrepreneurship & building from nothing, multi-industry business strategy, faith in business, leadership development, community impact, generational wealth, and personal transformation.' },
+          { q: 'Do you travel for engagements?', a: 'Yes, nationally and select international engagements. Travel and accommodation are coordinated as part of the booking process.' },
+          { q: 'How far in advance should we book?', a: 'We recommend 6–8 weeks minimum for corporate events, 3–4 weeks for smaller engagements. Contact us early — the calendar fills fast.' },
+          { q: 'Can the keynote be customized for our industry?', a: 'Absolutely. Every engagement begins with a consultation to ensure the content speaks directly to your audience\'s world.' },
+          { q: 'Do you offer virtual keynotes?', a: 'Yes. Virtual keynotes and workshops are available with the same energy and customization as in-person events.' },
+          { q: 'What is your cancellation policy?', a: 'Cancellation policies vary by engagement type and are outlined in the booking agreement. Please reach out to discuss specifics.' },
+        ],
+        metrics: [{ label: 'Events Delivered', value: '100+' }, { label: 'Avg. Audience Rating', value: '4.9/5' }, { label: 'Repeat Booking Rate', value: '73%' }],
+        calendlyUrl: 'https://calendly.com/oneunitedenterprise/speaking-inquiry',
+      },
+      // ── Executive Mentorship ────────────────────────────────
+      {
+        id: 'mentorship',
+        name: 'Executive Mentorship & Coaching',
+        tagline: 'Accelerate Decades Into Months',
+        heroHeadline: 'The Right Mentor Doesn\'t Just Open Doors — They Hand You the Blueprint.',
+        heroSub: 'One-on-one executive mentorship for entrepreneurs, executives, and high-achievers who are done with average and ready to operate at a completely different level.',
+        painPoints: [
+          { icon: '🧭', title: 'No Clear Path to the Next Level', desc: 'You\'re successful by most measures — but you can feel a ceiling. You need someone who\'s been above it to show you how to break through.' },
+          { icon: '🏝️', title: 'Making Big Decisions Alone', desc: 'The higher you go, the fewer people you can talk to honestly. Real mentorship is a thinking partner with skin in your game.' },
+          { icon: '⏳', title: 'Learning Through Trial and Error That Costs Too Much', desc: 'The wrong moves at this level cost years and millions. A mentor who\'s already paid that tuition saves you both.' },
+        ],
+        solution: 'A direct mentorship relationship with a multi-industry entrepreneur who has built, scaled, restructured, and led across film, consulting, nonprofit, healthcare, and investment — giving you frameworks, accountability, and access that accelerate your trajectory.',
+        process: [
+          { step: 1, title: 'Clarity Assessment', desc: 'Deep-dive session to define your current position, goals, blind spots, and the specific areas where mentorship will have the greatest impact.', duration: 'Session 1' },
+          { step: 2, title: 'Personal Strategic Framework', desc: 'Build a customized growth roadmap aligned with your vision, resources, and timeline.', duration: 'Week 1–2' },
+          { step: 3, title: 'Weekly Strategy Sessions', desc: 'Regular 1:1 sessions covering real-time decisions, challenges, and strategic moves.', duration: 'Ongoing Weekly' },
+          { step: 4, title: 'Network & Resource Access', desc: 'Introductions to relevant contacts, resources, and opportunities within the enterprise ecosystem.', duration: 'As Earned' },
+          { step: 5, title: 'Accountability & Review', desc: 'Monthly performance reviews against goals, with course corrections and strategic pivots as needed.', duration: 'Monthly' },
+        ],
+        packages: [
+          { name: 'Accelerator', price: '2,500', period: '/month (3-mo min)', highlight: false, cta: 'Apply Now',
+            features: ['2 x 60-Min 1:1 Sessions/Month', 'Personal Strategic Framework', 'Email Access Between Sessions', 'Curated Resource Library', 'Accountability Check-Ins'] },
+          { name: 'Executive', price: '5,000', period: '/month (3-mo min)', highlight: true, cta: 'Apply Now',
+            features: ['4 x 60-Min 1:1 Sessions/Month', 'Weekly Strategy Sessions', 'Direct Phone/Text Access', 'Business Plan & Pitch Review', 'Network Introductions', 'Deal & Decision Support', 'Monthly Deep-Dive Review', 'Priority Event Access'] },
+          { name: 'Elite Inner Circle', price: 'Custom', period: 'annual', highlight: false, cta: 'Apply Now',
+            features: ['Unlimited Access (within reason)', 'Quarterly In-Person Strategy Days', 'Full Business Advisory', 'Co-investment Consideration', 'Board Advisory Potential', 'Inner Circle Community Access', 'Annual Retreat Inclusion'] },
+        ],
+        testimonials: [
+          t('Tremaine J.', 'Founder', 'Legacy Tech Solutions', 'In 6 months I went from $18K/month to $112K/month in revenue. Not from luck — from applying a framework that actually works.', '$18K → $112K MRR in 6 Months'),
+          t('Yvonne C.', 'Executive', 'Fortune 500 Company', 'I was stuck in middle management for 4 years. 8 months of mentorship and I\'m now a VP. He saw what I couldn\'t see in myself.', 'Promoted to VP in 8 Months'),
+          t('Marcus O.', 'Serial Entrepreneur', '', 'I\'ve had coaches before. This is completely different. He\'s in the trenches with you, not above you. Game-changing.', '3 New Business Lines Launched'),
+        ],
+        faq: [
+          { q: 'Is this coaching or mentorship?', a: 'Both. Coaching pulls out what\'s inside you. Mentorship transfers what I\'ve already learned. You get both — and the distinction matters because the combination is far more powerful.' },
+          { q: 'Who is this NOT for?', a: 'This isn\'t for people looking for motivational content. It\'s for serious entrepreneurs and executives ready to do the work, be honest about their gaps, and execute relentlessly.' },
+          { q: 'How do I apply?', a: 'Submit an application and we\'ll schedule a discovery call. Spots are extremely limited. We only take clients we can genuinely serve at this level.' },
+          { q: 'What industries do you mentor in?', a: 'Media, entertainment, consulting, nonprofit, healthcare services, real estate, investment, and general high-growth entrepreneurship.' },
+          { q: 'Can my team join the sessions?', a: 'Executive and Elite packages can occasionally include key team members by arrangement. Most sessions are 1:1 for maximum depth.' },
+          { q: 'What if it\'s not a fit after the first month?', a: 'If after the first 30 days we agree it\'s not the right fit, we\'ll part ways professionally. Relationships like this only work when both sides are fully in.' },
+        ],
+        metrics: [{ label: 'Avg. Revenue Increase (6 mo)', value: '3.4x' }, { label: 'Mentees in Senior Roles', value: '82%' }, { label: 'Application Acceptance Rate', value: '23%' }],
+        calendlyUrl: 'https://calendly.com/oneunitedenterprise/mentorship-application',
+      },
+      // ── Brand Collaborations ────────────────────────────────
+      {
+        id: 'brand-collab',
+        name: 'Brand & Media Collaborations',
+        tagline: 'Authentic Partnerships That Amplify Both Brands',
+        heroHeadline: 'Collaboration Is the New Competition.',
+        heroSub: 'Strategic brand partnerships, media features, and collaborative projects with One United Enterprise — for brands, media outlets, and creators who want to reach an engaged, achievement-oriented audience.',
+        painPoints: [
+          { icon: '📡', title: 'Reaching the Wrong Audience', desc: 'Massive reach means nothing if it\'s not the right people. Quality of audience matters more than quantity.' },
+          { icon: '🤝', title: 'Partnerships That Feel Forced', desc: 'Inauthentic brand deals destroy credibility. The right collaboration needs aligned values, not just aligned follower counts.' },
+          { icon: '🎯', title: 'No Clear ROI From Influencer Spend', desc: 'Sponsored posts that generate likes but not leads. Collaboration needs a conversion strategy, not just exposure.' },
+        ],
+        solution: 'Authentic, value-aligned brand and media collaborations that deliver real exposure, credibility transfer, and measurable results to partners who are serious about reaching ambitious, high-intent audiences.',
+        process: [
+          { step: 1, title: 'Alignment Assessment', desc: 'Evaluate brand fit, audience overlap, values alignment, and collaboration objectives.', duration: 'Week 1' },
+          { step: 2, title: 'Collaboration Design', desc: 'Co-create a partnership structure: content, events, co-branding, or product integration.', duration: 'Week 1–2' },
+          { step: 3, title: 'Agreement & Timeline', desc: 'Finalize terms, deliverables, timelines, and success metrics.', duration: 'Week 2' },
+          { step: 4, title: 'Execution', desc: 'Deliver the collaboration with full professional production support.', duration: 'Week 3–6' },
+          { step: 5, title: 'Results Review', desc: 'Measure outcomes against agreed metrics and evaluate the continuation of the partnership.', duration: 'Post-Campaign' },
+        ],
+        packages: [
+          { name: 'Content Feature', price: 'Contact', period: 'per project', highlight: false, cta: 'Inquire',
+            features: ['Podcast Guest Feature', 'Social Media Collaboration', 'Newsletter Feature', 'Co-Created Content', 'Authentic Endorsement Potential'] },
+          { name: 'Brand Partnership', price: 'Contact', period: 'per campaign', highlight: true, cta: 'Inquire',
+            features: ['Multi-Platform Campaign', 'Event Co-Sponsorship', 'Co-Branded Content Series', 'Live Activation Opportunities', 'Cross-Promotion to Full Audience', 'Dedicated Partnership Manager', 'Performance Reporting'] },
+          { name: 'Strategic Alliance', price: 'Custom', period: 'ongoing', highlight: false, cta: 'Inquire',
+            features: ['Long-Term Strategic Partnership', 'Equity / Revenue Share Models', 'Joint Product Development', 'Co-Ownership Structures', 'Shared Infrastructure Access', 'Board-Level Relationship'] },
+        ],
+        testimonials: [
+          t('Jason W.', 'CMO', 'BuildRight Technologies', 'Our sponsored integration reached 40,000 highly engaged entrepreneurs in one week. The quality of leads from that campaign was unlike anything we\'d run before.', '40K Engaged Entrepreneurs Reached'),
+          t('Naomi F.', 'Founder', 'Clarity Media Group', 'The partnership felt completely natural because it was — our values are genuinely aligned. That\'s rare and it showed in the audience response.', '22% Conversion Rate on Co-Campaign'),
+          t('Terrence A.', 'CEO', 'Apex Ventures LLC', 'We\'ve run three collaborations now. Every one has driven qualified leads and elevated both of our brand reputations. This is how partnerships should work.', '3 Campaigns, 100% Renewed'),
+        ],
+        faq: [
+          { q: 'What size audience do you reach?', a: 'Our combined reach spans multiple platforms and networks. Details on current audience size and demographics are available upon inquiry.' },
+          { q: 'What kind of brands do you partner with?', a: 'We partner with brands, services, and tools that genuinely serve ambitious entrepreneurs, executives, healthcare professionals, and investors — our core audiences.' },
+          { q: 'Do you do paid promotions?', a: 'We do both paid partnerships and equity/revenue-share collaborations depending on alignment and structure. We do not promote anything we wouldn\'t personally use or recommend.' },
+          { q: 'Can individual creators or coaches partner with you?', a: 'Yes. We collaborate with coaches, consultants, creators, and individual brands whose work aligns with our audience and values.' },
+          { q: 'How do I submit a collaboration proposal?', a: 'Use the inquiry form and give us a brief overview of your brand, audience, and what you\'re hoping to build together. We review every submission.' },
+          { q: 'What\'s your typical response time on inquiries?', a: 'We respond to all serious inquiries within 48–72 business hours.' },
+        ],
+        metrics: [{ label: 'Active Brand Partners', value: '30+' }, { label: 'Avg. Campaign Engagement Rate', value: '8.4%' }, { label: 'Partnership Renewal Rate', value: '78%' }],
+        calendlyUrl: 'https://calendly.com/oneunitedenterprise/brand-collab',
+      },
+    ],
+    testimonials: [
+      t('Tremaine J.', 'Founder', 'Legacy Tech', 'He doesn\'t just mentor — he transforms. My business looks completely different 6 months later.', '$18K → $112K MRR'),
+      t('Dr. Kezia M.', 'Dean', 'Metro Business Institute', 'One of the most powerful speakers we\'ve ever had on our stage. He changes the room.', 'Standing Ovation, 400 Attendees'),
+    ],
+    caseStudies: [
+      { title: 'Startup Founder Breaks Through Revenue Ceiling', industry: 'Tech / SaaS', result: '6x Revenue in 6 Months', description: 'Through executive mentorship, identified three untapped revenue channels and restructured pricing — taking MRR from $18K to $112K.' },
+      { title: 'Corporate Executive Breaks Into Entrepreneurship', industry: 'Corporate / Entrepreneurship', result: 'Left Corporate, Built $500K Business', description: 'Year-long mentorship guided a senior executive through the transition from employee to founder, launching a profitable consulting firm.' },
+    ],
+    partnerships: ['TEDx Affiliated Events', 'Chamber of Commerce Speaker Network', 'HBCU Partner Institutions', 'Faith & Business Roundtable'],
+  },
+
+  // ─────────────────────────────────────────────────────────────
+  // 7. TEAM & ASSOCIATES
+  // ─────────────────────────────────────────────────────────────
+  {
+    id: 'team', name: 'Team & Associates', shortName: 'Team',
+    tagline: 'The Minds, Companies, and Partners That Power the Enterprise',
+    heroHeadline: 'No One Builds an Empire Alone.',
+    heroSub: 'One United Enterprise is powered by an ecosystem of elite companies, strategic partners, and accomplished business associates — each a leader in their domain, united by a shared standard of excellence.',
+    color: TEAM.color, colorDark: TEAM.dark, colorBg: TEAM.bg, glow: TEAM.glow,
+    gradient: 'from-teal-950 via-cyan-950 to-black',
+    cardGradient: 'from-teal-900/40 via-cyan-900/20 to-transparent',
+    icon: '🤝',
+    stats: [
+      { label: 'Portfolio Companies', value: '7', suffix: '+' },
+      { label: 'Business Associates', value: '25', suffix: '+' },
+      { label: 'Industries Represented', value: '7', suffix: '' },
+      { label: 'Combined Years Experience', value: '150', suffix: '+' },
+    ],
+    services: [
+      // ── Portfolio Companies ─────────────────────────────────
+      {
+        id: 'portfolio-companies',
+        name: 'Our Portfolio Companies',
+        tagline: 'Seven Verticals. One Standard. Limitless Reach.',
+        heroHeadline: 'A Family of Companies Built to Lead in Every Industry They Enter.',
+        heroSub: 'Each company in the One United Enterprise portfolio operates with full autonomy in its vertical — and with the combined resources, network, and strategy of the entire enterprise behind it.',
+        painPoints: [
+          { icon: '🏢', title: 'Single-Industry Exposure', desc: 'Relying on one business or one industry creates dangerous fragility. True enterprise diversification requires coordinated multi-vertical operations.' },
+          { icon: '🔗', title: 'Siloed Teams and Resources', desc: 'Most business groups operate independently, missing massive synergy opportunities. Our portfolio companies cross-leverage talent, clients, and infrastructure.' },
+          { icon: '📊', title: 'Inconsistent Standards Across Entities', desc: 'Multi-company ownership often means inconsistent quality. The OUE brand standard applies uniformly across every company in the portfolio.' },
+        ],
+        solution: 'A curated portfolio of operationally distinct, strategically connected companies — each leading in its vertical while contributing to and benefiting from the broader enterprise ecosystem.',
+        process: [
+          { step: 1, title: 'Discovery Consultation', desc: 'Learn which portfolio company aligns with your needs and connect you with the right team or opportunity.', duration: 'Week 1' },
+          { step: 2, title: 'Needs Assessment', desc: 'Deep dive into your specific situation to identify the best service, partnership, or investment fit within the portfolio.', duration: 'Week 1–2' },
+          { step: 3, title: 'Introduction & Proposal', desc: 'Connect with the relevant portfolio company team and receive a tailored proposal.', duration: 'Week 2' },
+          { step: 4, title: 'Engagement Launch', desc: 'Onboard with the specific portfolio company and begin the engagement with enterprise-level support.', duration: 'Week 3' },
+          { step: 5, title: 'Cross-Portfolio Access', desc: 'As an OUE client or partner, receive access to resources and relationships across the entire portfolio.', duration: 'Ongoing' },
+        ],
+        packages: [
+          { name: 'Client Referral', price: 'No Cost', period: 'introduction only', highlight: false, cta: 'Connect Us',
+            features: ['Portfolio Navigation Consultation', 'Introduction to Relevant Company', 'Needs-Based Matching', 'No Obligation Discovery', 'Access to Full Portfolio Network'] },
+          { name: 'Multi-Company Engagement', price: 'Custom', period: 'per engagement', highlight: true, cta: 'Schedule Strategy Call',
+            features: ['Coordinated Services Across Portfolio', 'Single Point of Contact', 'Bundled Pricing Options', 'Cross-Company Strategy Alignment', 'Enterprise Client Status', 'Priority Access Across All Verticals', 'Dedicated Relationship Manager'] },
+          { name: 'Portfolio Partnership', price: 'Custom', period: 'strategic', highlight: false, cta: 'Request Proposal',
+            features: ['Strategic Alliance with Portfolio', 'Co-Venture Opportunities', 'Revenue Share Structures', 'Joint Go-to-Market Potential', 'Investor Relations Access', 'Board-Level Engagement Options'] },
+        ],
+        testimonials: [
+          t('Sandra W.', 'CEO', 'Westbrook Holdings', 'What we loved most was the seamless handoff between companies. We engaged three different verticals and it felt like one team the entire time.', 'Three Verticals, One Seamless Experience'),
+          t('Darius P.', 'Founder', 'BuildForce Technologies', 'I needed film production, consulting, and capital advisory. Working through OUE meant I got all three aligned around the same strategic vision.', 'Three Services, One Vision'),
+          t('Patricia H.', 'COO', 'Horizon Group', 'The multi-company model is genuinely unique. It\'s not a holding company — it\'s a living, breathing enterprise that treats every client like they\'re the only one.', 'Enterprise Experience at Every Level'),
+        ],
+        faq: [
+          { q: 'What companies are in the portfolio?', a: 'The portfolio spans Film & Entertainment, Business Consulting & AI Automation, Global Non-Profit initiatives, Health & Medical services, Investment & Acquisition advisory, and more. Each is detailed on its respective sector page.' },
+          { q: 'Can I work with multiple portfolio companies simultaneously?', a: 'Absolutely — and we encourage it. Cross-portfolio engagements often produce results no single company could achieve alone.' },
+          { q: 'How are portfolio companies governed?', a: 'Each company has its own leadership, P&L, and operational independence, governed by enterprise-level standards, values, and strategic alignment with OUE.' },
+          { q: 'Are there investment opportunities in portfolio companies?', a: 'Selected portfolio companies periodically open co-investment rounds. These are available to qualified partners with existing OUE relationships. Contact our Investment sector for details.' },
+          { q: 'How do I know which company to contact?', a: 'Start with this page. Tell us your challenge or goal, and we\'ll route you to the right team within 24 hours.' },
+          { q: 'Does OUE add new companies to the portfolio?', a: 'Yes. We actively evaluate acquisition, incubation, and strategic partnership opportunities. See our Investment & Acquisition sector if you have a business that may fit.' },
+        ],
+        metrics: [{ label: 'Portfolio Companies', value: '7+' }, { label: 'Cross-Portfolio Clients', value: '35%' }, { label: 'Avg. Client Retention', value: '91%' }],
+        calendlyUrl: 'https://calendly.com/oneunitedenterprise/portfolio-intro',
+      },
+      // ── Business Associates ─────────────────────────────────
+      {
+        id: 'associates',
+        name: 'Business Associates Network',
+        tagline: 'Leaders in Their Field. United in Their Standard.',
+        heroHeadline: 'The Company You Keep Determines the Heights You Reach.',
+        heroSub: 'The OUE Associates Network is a curated roster of accomplished professionals, executives, and entrepreneurs who are formally aligned with One United Enterprise — bringing specialized expertise, extended capacity, and elite-level execution to every engagement.',
+        painPoints: [
+          { icon: '🔍', title: 'Finding Experts You Can Actually Trust', desc: 'Anyone can claim expertise. The OUE Associates Network is built on verified track records, personal vetting, and demonstrated results.' },
+          { icon: '🌐', title: 'Fragmented Specialized Resources', desc: 'Finding the right attorney, accountant, strategist, or specialist takes months of referrals. The right network collapses that search to minutes.' },
+          { icon: '⚡', title: 'No Bench When You Need to Scale Fast', desc: 'Growth opportunities don\'t wait for hiring cycles. An active associates network means capacity is available when you need it most.' },
+        ],
+        solution: 'A living, growing network of personally vetted business associates — attorneys, accountants, marketers, operators, healthcare professionals, investors, and specialists — available to OUE clients and aligned with OUE standards.',
+        process: [
+          { step: 1, title: 'Needs Identification', desc: 'Identify the specific expertise or capacity need — a specialist, a project team, a referral, or a strategic connection.', duration: 'Day 1' },
+          { step: 2, title: 'Associate Matching', desc: 'We match your need against the network and identify the right associate or associates for the engagement.', duration: 'Day 1–3' },
+          { step: 3, title: 'Warm Introduction', desc: 'A personal introduction is made — not a cold referral — with full context and alignment on your needs.', duration: 'Day 3–5' },
+          { step: 4, title: 'Engagement Support', desc: 'We stay available to support the relationship and ensure the engagement meets OUE standards.', duration: 'Ongoing' },
+          { step: 5, title: 'Network Integration', desc: 'If it\'s a great fit on both sides, explore becoming part of the network yourself.', duration: 'By Invitation' },
+        ],
+        packages: [
+          { name: 'Client Access', price: 'Complimentary', period: 'for OUE clients', highlight: false, cta: 'Request Introduction',
+            features: ['Access to Vetted Associates', 'Warm Introductions', 'Needs-Based Matching', 'Legal, Finance & Operations Specialists', 'OUE Client Priority Access'] },
+          { name: 'Associate Listing', price: 'Application Only', period: 'by invitation', highlight: true, cta: 'Apply for Membership',
+            features: ['Featured in Associates Directory', 'OUE Client Referrals', 'Co-Collaboration Opportunities', 'Enterprise Event Invitations', 'Co-Branded Marketing', 'Network Events Access', 'OUE Associate Badge & Credentials'] },
+          { name: 'Strategic Associate', price: 'Custom', period: 'partnership', highlight: false, cta: 'Request Conversation',
+            features: ['Deep Strategic Alignment with OUE', 'Joint Ventures & Co-Ventures', 'Revenue Share Frameworks', 'Co-Branded Service Delivery', 'Cross-Referral Infrastructure', 'Leadership Roundtable Participation'] },
+        ],
+        testimonials: [
+          t('Reginald S.', 'Attorney', 'Sterling Law Group', 'Being part of the OUE network has brought 11 qualified referrals in 6 months. The clients are serious, prepared, and a pleasure to serve.', '11 Referrals in 6 Months'),
+          t('Carmen L.', 'CPA', 'Apex Financial Advisory', 'The level of the entrepreneurs I\'m introduced to through OUE is consistently exceptional. This is the best professional network I\'ve been a part of.', 'Best Professional Network I\'ve Joined'),
+          t('Devon A.', 'VP Operations', 'MedFirst Group', 'OUE connected us with three specialists we needed urgently during a growth sprint. All three delivered. That network is the real deal.', 'Three Specialists, All Delivered'),
+        ],
+        faq: [
+          { q: 'How do I join the Associates Network?', a: 'The network is by application and invitation only. Submit an application describing your specialty, experience, and what you bring to the network. We review all applications personally.' },
+          { q: 'What types of professionals are in the network?', a: 'Attorneys, CPAs, financial advisors, marketing strategists, operations executives, healthcare administrators, real estate professionals, investors, technology specialists, and more.' },
+          { q: 'Is there a fee to join the Associates Network?', a: 'Standard Associate Listing is by invitation with no fee. Strategic Associate partnerships are structured individually based on the relationship model.' },
+          { q: 'How are associates vetted?', a: 'Every associate is personally vetted by OUE leadership — we verify credentials, check track records, and in most cases have worked with or observed them directly before extending an invitation.' },
+          { q: 'Can I refer someone to the network?', a: 'Referrals from existing OUE clients and associates are the primary way we grow the network. Refer someone you genuinely believe in.' },
+          { q: 'What are the obligations of network membership?', a: 'Associates commit to the OUE standard of service: excellence, integrity, responsiveness, and putting the client\'s outcome above everything. No ego, no shortcuts.' },
+        ],
+        metrics: [{ label: 'Vetted Associates', value: '25+' }, { label: 'Specialties Represented', value: '14+' }, { label: 'Avg. Intro-to-Engagement Rate', value: '64%' }],
+        calendlyUrl: 'https://calendly.com/oneunitedenterprise/associates-inquiry',
+      },
+      // ── Join the Network ────────────────────────────────────
+      {
+        id: 'join-network',
+        name: 'Join the OUE Network',
+        tagline: 'Apply to Work With, Partner With, or Be Part of One United Enterprise',
+        heroHeadline: 'The Right Room Changes Everything. This Is That Room.',
+        heroSub: 'Whether you\'re an entrepreneur seeking community, a professional ready to align with an elite network, or a company looking for a strategic home — this is how you step into the OUE ecosystem.',
+        painPoints: [
+          { icon: '🚪', title: 'Can\'t Break Into the Right Rooms', desc: 'Access is the invisible advantage. The people you need to meet are inside networks you don\'t know how to enter.' },
+          { icon: '🧩', title: 'Building Alone Without Infrastructure', desc: 'Great entrepreneurs underperform because they lack the systems, support, and strategic infrastructure that turn good work into great outcomes.' },
+          { icon: '🔄', title: 'Constantly Chasing Resources Reactively', desc: 'Most entrepreneurs find resources after they need them. Network membership means you have the resources before you need them.' },
+        ],
+        solution: 'A structured pathway to enter the OUE ecosystem — from client relationships and associate memberships to strategic partnerships and co-venture opportunities — at the right level for where you are and where you\'re going.',
+        process: [
+          { step: 1, title: 'Application Submission', desc: 'Submit your application with background, goals, and the specific way you want to be part of the network.', duration: 'Day 1' },
+          { step: 2, title: 'Discovery Conversation', desc: 'A personal conversation with OUE leadership to assess fit, alignment, and the right entry point into the ecosystem.', duration: 'Week 1' },
+          { step: 3, title: 'Onboarding & Orientation', desc: 'Formal welcome into the network with introductions, resource access, and a clear roadmap for your involvement.', duration: 'Week 2' },
+          { step: 4, title: 'First Engagement', desc: 'Your first meaningful collaboration, project, or relationship within the network — where value begins to flow in both directions.', duration: 'Week 2–4' },
+          { step: 5, title: 'Deep Integration', desc: 'Grow your footprint within the ecosystem through relationships, referrals, collaborations, and long-term strategic alignment.', duration: 'Ongoing' },
+        ],
+        packages: [
+          { name: 'Community Member', price: 'Free', period: 'application required', highlight: false, cta: 'Apply Now',
+            features: ['OUE Network Community Access', 'Monthly Virtual Roundtables', 'Resource Library Access', 'Event Invitations', 'Peer Network Introductions'] },
+          { name: 'Professional Member', price: '297', period: '/month', highlight: true, cta: 'Apply Now',
+            features: ['Everything in Community', 'Monthly Group Mentorship Session', 'Direct Network Introduction Service', 'OUE Associate Consideration', 'Private Community Forum', 'Co-Marketing Opportunities', 'Business Resource Vault Access', 'Priority Event Seating'] },
+          { name: 'Strategic Partner', price: 'Custom', period: 'by application', highlight: false, cta: 'Apply Now',
+            features: ['Full Ecosystem Partnership', 'Co-Venture Opportunities', 'Revenue Share Models', 'Joint Venture Structures', 'Inner Circle Access', 'Board Seat Consideration', 'Custom Integration Path'] },
+        ],
+        testimonials: [
+          t('Malik J.', 'Entrepreneur', '', 'I applied not knowing what to expect and walked into the most serious, action-oriented business community I\'ve ever been a part of. This network delivered.', 'Found My Strategic Circle'),
+          t('Stephanie R.', 'Consultant', 'SR Advisory', 'Within 60 days of joining, I had two client introductions, a speaking opportunity, and a collaboration that added $40K to my revenue. The ROI is absurd.', '+$40K Revenue in 60 Days'),
+          t('Marcus B.', 'CEO', 'Atlas Logistics', 'I joined as a Community Member and within three months was elevated to Professional. The quality of the people here is unlike any networking group I\'ve seen.', 'Elevated to Professional in 90 Days'),
+        ],
+        faq: [
+          { q: 'Who is the OUE Network for?', a: 'Entrepreneurs at any stage, executives, professionals, and business owners who operate with integrity, pursue excellence, and want to grow inside a serious ecosystem — not just another Facebook group.' },
+          { q: 'Is this just another mastermind?', a: 'No. A mastermind is a meeting. This is an ecosystem — with companies, clients, capital, associates, and actual enterprise infrastructure behind it.' },
+          { q: 'How selective is the application process?', a: 'We are selective. Not elitist — selective. We\'re looking for people who are aligned with the values of the enterprise: excellence, integrity, execution, and community.' },
+          { q: 'Can I upgrade my membership level over time?', a: 'Yes. Most members start at Community or Professional and grow into deeper partnership as the relationship develops. Advancement is earned, not purchased.' },
+          { q: 'What do I get immediately when I join?', a: 'Community access, welcome introductions, event invitations, and a direct conversation with the team to identify your most valuable first connections within the network.' },
+          { q: 'Is there a commitment period?', a: 'Community membership is free with no commitment. Professional membership is month-to-month after the first 3 months. Strategic partnerships are structured per agreement.' },
+        ],
+        metrics: [{ label: 'Active Members', value: '200+' }, { label: 'Avg. First Collaboration (days)', value: '45' }, { label: 'Member Revenue Generated', value: '$2M+' }],
+        calendlyUrl: 'https://calendly.com/oneunitedenterprise/network-application',
+      },
+    ],
+    testimonials: [
+      t('Malik J.', 'Entrepreneur', '', 'The most serious, action-oriented business community I\'ve ever been a part of. This network delivered.', 'Found My Strategic Circle'),
+      t('Carmen L.', 'CPA', 'Apex Financial Advisory', 'The best professional network I\'ve joined. The quality here is consistently exceptional.', 'Best Professional Network'),
+    ],
+    caseStudies: [
+      { title: 'Associates Network Drives $2M+ in Member Revenue', industry: 'Multi-Industry', result: '$2M+ Member Revenue Generated', description: 'Cross-referral and collaboration infrastructure generated over $2M in combined revenue across the network in its first year.' },
+      { title: 'Professional Member Scales Consulting Practice 4x', industry: 'Business Consulting', result: '4x Revenue in 8 Months', description: 'Network introductions, co-marketing, and OUE client referrals scaled a solo consultant\'s practice from $80K to $340K annually.' },
+    ],
+    partnerships: ['Local Chamber of Commerce', 'SCORE Mentoring Network', 'National Black Business Alliance', 'Entrepreneurs\' Organization'],
   },
 ]
 
