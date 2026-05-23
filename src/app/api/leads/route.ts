@@ -3,8 +3,35 @@ import { NextRequest, NextResponse } from 'next/server'
 const AZOTH_URL    = process.env.AZOTH_URL || 'http://localhost:3002'
 const AZOTH_SECRET = process.env.AZOTH_API_SECRET!
 const WORKSPACE_ID = process.env.AZOTH_WORKSPACE_ID!
-const PIPELINE_ID  = process.env.AZOTH_PIPELINE_ID!
-const STAGE_ID     = process.env.AZOTH_DEFAULT_STAGE_ID!
+const PIPELINE_ID  = process.env.AZOTH_PIPELINE_ID!   // fallback only
+const STAGE_ID     = process.env.AZOTH_DEFAULT_STAGE_ID! // fallback only
+
+// Cache pipeline lookups for the lifetime of this serverless instance
+const pipelineCache = new Map<string, { pipeline_id: string; stage_id: string }>()
+
+async function resolvePipeline(sector: string): Promise<{ pipeline_id: string; stage_id: string }> {
+  if (pipelineCache.has(sector)) return pipelineCache.get(sector)!
+
+  try {
+    const res = await fetch(
+      `${AZOTH_URL}/api/pipeline?workspace_id=${WORKSPACE_ID}&name=${encodeURIComponent(sector)}`,
+      { headers: { 'Authorization': `Bearer ${AZOTH_SECRET}` } }
+    )
+    if (res.ok) {
+      const json = await res.json()
+      if (json.pipeline && json.default_stage_id) {
+        const result = { pipeline_id: json.pipeline.id, stage_id: json.default_stage_id }
+        pipelineCache.set(sector, result)
+        return result
+      }
+    }
+  } catch (err) {
+    console.error('[leads] pipeline lookup failed:', err)
+  }
+
+  // Fall back to default pipeline
+  return { pipeline_id: PIPELINE_ID, stage_id: STAGE_ID }
+}
 
 export async function POST(req: NextRequest) {
   let body: Record<string, unknown>
@@ -25,14 +52,19 @@ export async function POST(req: NextRequest) {
   if (service) tags.push(service)
   if (plan)    tags.push(`plan:${plan}`)
 
+  // Route to the correct sector pipeline
+  const { pipeline_id, stage_id } = sector
+    ? await resolvePipeline(sector)
+    : { pipeline_id: PIPELINE_ID, stage_id: STAGE_ID }
+
   const contact = {
     name,
     email,
     phone:       phone   || undefined,
     company:     company || undefined,
     source:      'one-united-enterprise',
-    pipeline_id: PIPELINE_ID,
-    stage_id:    STAGE_ID,
+    pipeline_id,
+    stage_id,
     tags,
     notes: message || undefined,
   }
