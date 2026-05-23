@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { ArrowRight, CheckCircle2 } from 'lucide-react'
 import { type Service, type Sector, BRAND } from '@/data/config'
 import SectionLabel from '@/components/ui/SectionLabel'
+import { getAffiliateCode } from '@/components/AffiliateTracker'
 
 interface LeadFormProps { sector: Sector; service: Service }
 
@@ -15,10 +16,16 @@ export default function LeadForm({ sector, service }: LeadFormProps) {
     e.preventDefault()
     setLoading(true)
     try {
+      const affiliateCode = getAffiliateCode()
       await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, sector: sector.id, service: service.id }),
+        body: JSON.stringify({
+          ...form,
+          sector: sector.id,
+          service: service.id,
+          ...(affiliateCode ? { affiliate_code: affiliateCode } : {}),
+        }),
       })
     } catch {}
     setLoading(false)

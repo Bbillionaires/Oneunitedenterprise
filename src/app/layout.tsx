@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import './globals.css'
 import SpaceBackground from '@/components/SpaceBackground'
+import { AffiliateTracker } from '@/components/AffiliateTracker'
 
 export const metadata: Metadata = {
   title: {
@@ -21,6 +23,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <body>
         <SpaceBackground />
+        <Suspense fallback={null}>
+          <AffiliateTracker />
+        </Suspense>
         <div style={{ position: 'relative', zIndex: 1 }}>
           {children}
         </div>

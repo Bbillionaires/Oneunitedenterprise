@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
   }
 
-  const { name, email, phone, company, sector, service, message, plan } = body as Record<string, string>
+  const { name, email, phone, company, sector, service, message, plan, affiliate_code } = body as Record<string, string>
 
   if (!name || !email) {
     return NextResponse.json({ error: 'Name and email are required' }, { status: 422 })
@@ -53,6 +53,25 @@ export async function POST(req: NextRequest) {
     if (!res.ok) {
       console.error('[leads] Azoth error:', data)
       return NextResponse.json({ error: 'CRM unavailable', details: data }, { status: 502 })
+    }
+
+    // If an affiliate code was passed, record the lead against that affiliate
+    if (affiliate_code) {
+      fetch(`${AZOTH_URL}/api/affiliate/lead`, {
+        method: 'POST',
+        headers: {
+          'Content-Type':   'application/json',
+          'Authorization':  `Bearer ${AZOTH_SECRET}`,
+        },
+        body: JSON.stringify({
+          affiliate_code,
+          workspace_id:   WORKSPACE_ID,
+          contact_name:   name,
+          contact_email:  email,
+          source_project: 'one-united-enterprise',
+          metadata: { sector, service, plan },
+        }),
+      }).catch(err => console.error('[leads] affiliate record failed:', err))
     }
 
     return NextResponse.json({ success: true, id: data.contact?.id }, { status: 201 })
