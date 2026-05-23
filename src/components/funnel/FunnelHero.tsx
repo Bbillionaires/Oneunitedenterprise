@@ -19,7 +19,7 @@ export default function FunnelHero({ sector, service }: FunnelHeroProps) {
         <div className="flex items-center gap-2 font-body text-xs text-white/30 mb-8 flex-wrap">
           <Link href="/" className="hover:text-white/60 transition-colors">Home</Link>
           <ChevronRight size={12} />
-          <Link href={`/sector/${sector.id}`} className="hover:text-white/60 transition-colors" style={{ color: `${sector.color}80` }}>
+          <Link href={`/${sector.id}`} className="hover:text-white/60 transition-colors" style={{ color: `${sector.color}80` }}>
             {sector.shortName}
           </Link>
           <ChevronRight size={12} />

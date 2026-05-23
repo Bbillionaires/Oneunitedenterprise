@@ -37,7 +37,7 @@ export default function Navbar() {
           {SECTORS.map(s => (
             <Link
               key={s.id}
-              href={`/sector/${s.id}`}
+              href={`/${s.id}`}
               className="font-body text-sm text-white/60 hover:text-white transition-colors duration-200"
               style={{ '--hover-color': s.color } as React.CSSProperties}
             >
@@ -73,7 +73,7 @@ export default function Navbar() {
             {SECTORS.map(s => (
               <Link
                 key={s.id}
-                href={`/sector/${s.id}`}
+                href={`/${s.id}`}
                 className="flex items-center gap-3 font-body text-sm text-white/70 hover:text-white py-2"
               >
                 <span className="w-2 h-2 rounded-full" style={{ background: s.color }} />

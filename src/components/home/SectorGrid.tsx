@@ -33,7 +33,7 @@ export default function SectorGrid() {
           return (
             <Link
               key={sector.id}
-              href={`/sector/${sector.id}`}
+              href={`/${sector.id}`}
               className={`group relative rounded-2xl overflow-hidden border border-white/7 transition-all duration-500 hover:-translate-y-2 hover:border-opacity-30 ${isLast ? 'md:col-span-2 lg:col-span-1' : ''}`}
               style={{
                 background: `linear-gradient(135deg, ${sector.color}10 0%, rgba(13,13,28,0.95) 60%)`,

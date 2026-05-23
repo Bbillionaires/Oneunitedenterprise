@@ -43,7 +43,7 @@ export default function Footer() {
               {SECTORS.map(s => (
                 <li key={s.id}>
                   <Link
-                    href={`/sector/${s.id}`}
+                    href={`/${s.id}`}
                     className="font-body text-sm text-white/50 hover:text-white transition-colors flex items-center gap-2"
                   >
                     <span className="w-1.5 h-1.5 rounded-full opacity-60" style={{ background: s.color }} />
@@ -61,7 +61,7 @@ export default function Footer() {
               {SECTORS.map(s => s.services[0] && (
                 <li key={s.services[0].id}>
                   <Link
-                    href={`/service/${s.id}/${s.services[0].id}`}
+                    href={`/${s.id}`}
                     className="font-body text-sm text-white/50 hover:text-white transition-colors"
                   >
                     {s.services[0].name}
