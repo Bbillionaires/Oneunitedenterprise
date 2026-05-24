@@ -703,7 +703,7 @@ export const SECTORS: Sector[] = [
   // 5. INVESTMENT & ACQUISITION
   // ─────────────────────────────────────────────────────────────
   {
-    id: 'investment', name: 'Investment & Acq.', shortName: 'Investment',
+    id: 'investment', name: 'Investment Opportunities', shortName: 'Investment',
     tagline: 'Strategic Capital. Calculated Risk. Maximum Returns.',
     heroHeadline: 'Capital Doesn\'t Create Opportunity. Vision Does.',
     heroSub: 'Multi-industry investment and acquisition expertise that identifies, evaluates, and closes deals other investors miss — from business acquisitions and capital raises to real estate and strategic assets.',
