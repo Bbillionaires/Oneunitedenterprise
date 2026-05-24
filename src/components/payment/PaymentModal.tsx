@@ -9,31 +9,32 @@ import {
   useStripe,
   useElements,
 } from '@stripe/react-stripe-js'
+import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js'
 
-// ── Types ────────────────────────────────────────────────────────────
+// ── Types ────────────────────────────────────────────────────────────────
 interface Package {
-  name: string
-  price: string
+  name:   string
+  price:  string
   period: string
-  cta: string
+  cta:    string
 }
 
 interface PaymentModalProps {
-  isOpen: boolean
-  onClose: () => void
-  pkg: Package
-  service: string
+  isOpen:      boolean
+  onClose:     () => void
+  pkg:         Package
+  service:     string
   sectorColor: string
 }
 
 type PayMethod = 'stripe' | 'paypal' | 'square' | 'cashapp' | 'zelle'
 
-// ── Promo code state ─────────────────────────────────────────────────
+// ── Promo code ──────────────────────────────────────────────────────────
 function usePromo(rawPrice: string) {
-  const [code, setCode]         = useState('')
-  const [applied, setApplied]   = useState<{ label: string; discount: number } | null>(null)
-  const [error, setError]       = useState('')
-  const [loading, setLoading]   = useState(false)
+  const [code, setCode]       = useState('')
+  const [applied, setApplied] = useState<{ label: string; discount: number } | null>(null)
+  const [error, setError]     = useState('')
+  const [loading, setLoading] = useState(false)
 
   const baseAmount = parseFloat(rawPrice.replace(/[^0-9.]/g, '')) || 0
 
@@ -41,10 +42,10 @@ function usePromo(rawPrice: string) {
     if (!code.trim()) return
     setLoading(true); setError('')
     try {
-      const res = await fetch(`/api/payment/intent?validate=1`, {
-        method: 'POST',
+      const res  = await fetch('/api/payment/intent?validate=1', {
+        method:  'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ amount: baseAmount, promoCode: code, packageName: '', service: '' }),
+        body:    JSON.stringify({ amount: baseAmount, promoCode: code, packageName: '', service: '' }),
       })
       const data = await res.json()
       if (!res.ok) { setError(data.error || 'Invalid code'); setApplied(null) }
@@ -54,24 +55,23 @@ function usePromo(rawPrice: string) {
   }, [code, baseAmount])
 
   const remove = () => { setApplied(null); setCode('') }
-
   const finalAmount = applied ? baseAmount * (1 - applied.discount) : baseAmount
 
   return { code, setCode, applied, error, loading, apply, remove, baseAmount, finalAmount }
 }
 
-// ── Stripe card form ─────────────────────────────────────────────────
+// ── Stripe ─────────────────────────────────────────────────────────────────
 function StripeForm({ amount, pkg, service, sectorColor, promoCode, onSuccess }: {
-  amount: number
-  pkg: Package
-  service: string
+  amount:      number
+  pkg:         Package
+  service:     string
   sectorColor: string
-  promoCode: string
-  onSuccess: () => void
+  promoCode:   string
+  onSuccess:   () => void
 }) {
   const stripe   = useStripe()
   const elements = useElements()
-  const [status, setStatus]   = useState<'idle' | 'loading' | 'error' | 'success'>('idle')
+  const [status,  setStatus]  = useState<'idle' | 'loading' | 'error' | 'success'>('idle')
   const [message, setMessage] = useState('')
 
   async function handleSubmit(e: React.FormEvent) {
@@ -80,9 +80,9 @@ function StripeForm({ amount, pkg, service, sectorColor, promoCode, onSuccess }:
     setStatus('loading'); setMessage('')
 
     const res = await fetch('/api/payment/intent', {
-      method: 'POST',
+      method:  'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ amount, packageName: pkg.name, service, promoCode }),
+      body:    JSON.stringify({ amount, packageName: pkg.name, service, promoCode }),
     })
     const { clientSecret, error } = await res.json()
     if (error) { setStatus('error'); setMessage(error); return }
@@ -91,25 +91,23 @@ function StripeForm({ amount, pkg, service, sectorColor, promoCode, onSuccess }:
       payment_method: { card: elements.getElement(CardElement)! },
     })
     if (stripeErr) { setStatus('error'); setMessage(stripeErr.message || 'Payment failed') }
-    else { setStatus('success'); onSuccess() }
-  }
-
-  const CARD_STYLE = {
-    style: {
-      base: {
-        color: '#F5F0E8',
-        fontFamily: 'Inter, sans-serif',
-        fontSize: '15px',
-        '::placeholder': { color: 'rgba(245,240,232,0.35)' },
-      },
-      invalid: { color: '#ff6b6b' },
-    },
+    else           { setStatus('success'); onSuccess() }
   }
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
       <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3.5">
-        <CardElement options={CARD_STYLE} />
+        <CardElement options={{
+          style: {
+            base: {
+              color:         '#F5F0E8',
+              fontFamily:    'Inter, sans-serif',
+              fontSize:      '15px',
+              '::placeholder': { color: 'rgba(245,240,232,0.35)' },
+            },
+            invalid: { color: '#ff6b6b' },
+          },
+        }} />
       </div>
 
       {status === 'error' && (
@@ -124,65 +122,94 @@ function StripeForm({ amount, pkg, service, sectorColor, promoCode, onSuccess }:
         className="flex items-center justify-center gap-2 py-3.5 rounded-xl font-semibold text-sm text-white transition-all hover:scale-[1.02] disabled:opacity-50"
         style={{ background: sectorColor, boxShadow: `0 0 24px ${sectorColor}40` }}
       >
-        {status === 'loading' ? <Loader2 size={16} className="animate-spin" /> : <CreditCard size={16} />}
+        {status === 'loading'
+          ? <Loader2 size={16} className="animate-spin" />
+          : <CreditCard size={16} />
+        }
         {status === 'loading' ? 'Processing…' : `Pay $${amount.toFixed(2)}`}
       </button>
     </form>
   )
 }
 
-// ── PayPal tab ───────────────────────────────────────────────────────
-function PayPalTab({ amount, sectorColor, onSuccess }: { amount: number; sectorColor: string; onSuccess: () => void }) {
-  const [ready, setReady]     = useState(false)
-  const [loading, setLoading] = useState(true)
+// ── PayPal ─────────────────────────────────────────────────────────────────
+function PayPalTab({ amount, packageName, service, onSuccess }: {
+  amount:      number
+  packageName: string
+  service:     string
+  onSuccess:   () => void
+}) {
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID
 
-  useEffect(() => {
-    if (!clientId || clientId.includes('xxxxx')) { setLoading(false); return }
-    const script = document.createElement('script')
-    script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=USD`
-    script.onload = () => setReady(true)
-    document.head.appendChild(script)
-    setLoading(false)
-    return () => { document.head.removeChild(script) }
-  }, [clientId])
-
-  if (!clientId || clientId.includes('xxxxx')) {
+  if (!clientId) {
     return <PaymentNotConfigured label="PayPal" />
   }
 
-  if (loading) return <div className="flex justify-center py-6"><Loader2 size={20} className="animate-spin text-white/40" /></div>
+  return (
+    <PayPalScriptProvider options={{ clientId, currency: 'USD', intent: 'capture' }}>
+      <PayPalInner
+        amount={amount}
+        packageName={packageName}
+        service={service}
+        onSuccess={onSuccess}
+      />
+    </PayPalScriptProvider>
+  )
+}
+
+function PayPalInner({ amount, packageName, service, onSuccess }: {
+  amount:      number
+  packageName: string
+  service:     string
+  onSuccess:   () => void
+}) {
+  const [error, setError] = useState('')
+
+  async function createOrder() {
+    const res = await fetch('/api/payment/paypal/order', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ amount, packageName, service }),
+    })
+    const data = await res.json()
+    if (!res.ok) throw new Error(data.error || 'Order creation failed')
+    return data.id as string
+  }
+
+  async function onApprove(data: { orderID: string }) {
+    setError('')
+    const res = await fetch(`/api/payment/paypal/capture/${data.orderID}`, { method: 'POST' })
+    if (res.ok) {
+      onSuccess()
+    } else {
+      const err = await res.json()
+      setError(err.error || 'Payment capture failed. Please contact support.')
+    }
+  }
 
   return (
-    <div className="flex flex-col gap-4">
-      <p className="text-sm text-white/50 text-center">You'll be redirected to PayPal to complete your ${amount.toFixed(2)} payment securely.</p>
-      <div id="paypal-button-container" />
-      {ready && <PayPalRenderer amount={amount} sectorColor={sectorColor} onSuccess={onSuccess} />}
+    <div className="flex flex-col gap-3">
+      {error && (
+        <p className="flex items-center gap-2 text-sm text-red-400">
+          <AlertCircle size={14} /> {error}
+        </p>
+      )}
+      <PayPalButtons
+        style={{ layout: 'vertical', color: 'gold', shape: 'rect', label: 'pay', height: 48 }}
+        createOrder={createOrder}
+        onApprove={onApprove}
+        onError={() => setError('PayPal encountered an error. Please try again or choose another payment method.')}
+      />
     </div>
   )
 }
 
-function PayPalRenderer({ amount, onSuccess }: { amount: number; sectorColor: string; onSuccess: () => void }) {
-  useEffect(() => {
-    const win = window as Window & { paypal?: { Buttons: (opts: unknown) => { render: (id: string) => void } } }
-    if (!win.paypal) return
-    win.paypal.Buttons({
-      createOrder: (_data: unknown, actions: { order: { create: (opts: unknown) => Promise<string> } }) => actions.order.create({
-        purchase_units: [{ amount: { value: amount.toFixed(2) } }],
-      }),
-      onApprove: (_data: unknown, actions: { order: { capture: () => Promise<void> } }) =>
-        actions.order.capture().then(onSuccess),
-    }).render('#paypal-button-container')
-  }, [amount, onSuccess])
-  return null
-}
-
-// ── Square tab ───────────────────────────────────────────────────────
+// ── Square ─────────────────────────────────────────────────────────────────
 function SquareTab({ amount, sectorColor }: { amount: number; sectorColor: string }) {
-  const appId     = process.env.NEXT_PUBLIC_SQUARE_APP_ID
+  const appId      = process.env.NEXT_PUBLIC_SQUARE_APP_ID
   const locationId = process.env.NEXT_PUBLIC_SQUARE_LOCATION_ID
 
-  if (!appId || appId.includes('xxxxx')) return <PaymentNotConfigured label="Square" />
+  if (!appId) return <PaymentNotConfigured label="Square" />
 
   return (
     <div className="flex flex-col gap-4 items-center text-center">
@@ -193,18 +220,15 @@ function SquareTab({ amount, sectorColor }: { amount: number; sectorColor: strin
       <p className="text-xs text-white/40">Location: {locationId}</p>
       <div className="rounded-xl border border-white/10 bg-white/5 p-4 w-full">
         <p className="text-sm text-white/50">Square card form loads here when keys are configured.</p>
-        <p className="text-xs text-white/30 mt-1">Add Square Web Payments SDK via CDN in app/layout.tsx and initialize here.</p>
       </div>
       <p className="text-sm font-semibold" style={{ color: sectorColor }}>Amount due: ${amount.toFixed(2)}</p>
     </div>
   )
 }
 
-// ── Cash App tab ─────────────────────────────────────────────────────
+// ── Cash App ───────────────────────────────────────────────────────────────
 function CashAppTab({ amount, sectorColor }: { amount: number; sectorColor: string }) {
-  const appId = process.env.NEXT_PUBLIC_SQUARE_APP_ID
-
-  if (!appId || appId.includes('xxxxx')) return <PaymentNotConfigured label="Cash App Pay" />
+  if (!process.env.NEXT_PUBLIC_SQUARE_APP_ID) return <PaymentNotConfigured label="Cash App Pay" />
 
   return (
     <div className="flex flex-col gap-4 items-center text-center">
@@ -214,16 +238,16 @@ function CashAppTab({ amount, sectorColor }: { amount: number; sectorColor: stri
       <p className="text-white/60 text-sm">Cash App Pay via Square SDK</p>
       <div className="rounded-xl border border-white/10 bg-white/5 p-4 w-full">
         <p className="text-sm text-white/50">Cash App Pay button loads via Square Web Payments SDK.</p>
-        <p className="text-xs text-white/30 mt-1">Enabled automatically when Square keys are configured.</p>
       </div>
       <p className="text-sm font-semibold" style={{ color: sectorColor }}>Amount due: ${amount.toFixed(2)}</p>
     </div>
   )
 }
 
-// ── Zelle tab ────────────────────────────────────────────────────────
+// ── Zelle ─────────────────────────────────────────────────────────────────
 function ZelleTab({ amount, sectorColor }: { amount: number; sectorColor: string }) {
   const [copied, setCopied] = useState<string | null>(null)
+
   const copy = (text: string, key: string) => {
     navigator.clipboard.writeText(text)
     setCopied(key)
@@ -268,35 +292,45 @@ function ZelleTab({ amount, sectorColor }: { amount: number; sectorColor: string
 
       <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 px-4 py-3">
         <p className="text-xs text-amber-300/80 leading-relaxed">
-          After sending, email <strong>payments@oneunitedenterprise.com</strong> with your name, the service purchased, and your Zelle confirmation number to activate your account.
+          After sending, email <strong>payments@oneunitedenterprise.com</strong> with your name,
+          the service purchased, and your Zelle confirmation number to activate your account.
         </p>
       </div>
     </div>
   )
 }
 
-// ── Placeholder for unconfigured providers ───────────────────────────
+// ── Not configured ─────────────────────────────────────────────────────────
 function PaymentNotConfigured({ label }: { label: string }) {
   return (
     <div className="flex flex-col items-center gap-3 py-8 text-center">
       <AlertCircle size={28} className="text-amber-400" />
       <p className="text-white/60 text-sm">{label} is not yet configured.</p>
-      <p className="text-white/30 text-xs">Add your {label} credentials to .env.local to enable this payment method.</p>
+      <p className="text-white/30 text-xs">
+        Add your {label} credentials to the environment to enable this payment method.
+      </p>
     </div>
   )
 }
 
-// ── Success screen ───────────────────────────────────────────────────
+// ── Success ─────────────────────────────────────────────────────────────────
 function SuccessScreen({ pkg, sectorColor, onClose }: { pkg: Package; sectorColor: string; onClose: () => void }) {
   return (
     <div className="flex flex-col items-center gap-6 py-8 text-center">
-      <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{ background: `${sectorColor}20`, border: `2px solid ${sectorColor}60` }}>
+      <div
+        className="w-20 h-20 rounded-full flex items-center justify-center"
+        style={{ background: `${sectorColor}20`, border: `2px solid ${sectorColor}60` }}
+      >
         <CheckCircle2 size={40} style={{ color: sectorColor }} />
       </div>
       <div>
         <h3 className="font-display text-2xl text-white mb-2">Payment Confirmed!</h3>
-        <p className="text-white/50 text-sm">You've successfully enrolled in <strong className="text-white">{pkg.name}</strong>.</p>
-        <p className="text-white/40 text-xs mt-1">A confirmation email is on its way. We'll be in touch within 24 hours.</p>
+        <p className="text-white/50 text-sm">
+          You’ve successfully enrolled in <strong className="text-white">{pkg.name}</strong>.
+        </p>
+        <p className="text-white/40 text-xs mt-1">
+          A confirmation email is on its way. We’ll be in touch within 24 hours.
+        </p>
       </div>
       <button
         onClick={onClose}
@@ -309,20 +343,20 @@ function SuccessScreen({ pkg, sectorColor, onClose }: { pkg: Package; sectorColo
   )
 }
 
-// ── Stripe provider wrapper ──────────────────────────────────────────
+// ── Stripe provider ─────────────────────────────────────────────────────────
 let stripePromise: ReturnType<typeof loadStripe> | null = null
 function getStripe() {
   const pk = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-  if (!pk || pk.includes('xxxxx')) return null
+  if (!pk || pk.includes('YOUR_')) return null
   if (!stripePromise) stripePromise = loadStripe(pk)
   return stripePromise
 }
 
-// ── Main modal ───────────────────────────────────────────────────────
+// ── Main modal ─────────────────────────────────────────────────────────────
 export default function PaymentModal({ isOpen, onClose, pkg, service, sectorColor }: PaymentModalProps) {
-  const [method, setMethod]   = useState<PayMethod>('zelle')
+  const [method,  setMethod]  = useState<PayMethod>('zelle')
   const [success, setSuccess] = useState(false)
-  const promo = usePromo(pkg.price)
+  const promo  = usePromo(pkg.price)
   const stripe = getStripe()
 
   useEffect(() => {
@@ -340,6 +374,8 @@ export default function PaymentModal({ isOpen, onClose, pkg, service, sectorColo
     { id: 'cashapp', label: 'Cash App', icon: '$' },
     { id: 'square',  label: 'Square',   icon: '□' },
   ]
+
+  const amount = promo.finalAmount || promo.baseAmount
 
   return (
     <div
@@ -404,11 +440,11 @@ export default function PaymentModal({ isOpen, onClose, pkg, service, sectorColo
                 {promo.error && <p className="text-xs text-red-400">{promo.error}</p>}
               </div>
 
-              {/* Amount summary */}
+              {/* Discounted total */}
               {promo.applied && (
                 <div className="flex items-center justify-between px-4 py-3 rounded-xl bg-white/5 border border-white/8 text-sm">
                   <span className="text-white/50">Total after discount</span>
-                  <span className="font-semibold" style={{ color: sectorColor }}>${promo.finalAmount.toFixed(2)}</span>
+                  <span className="font-semibold" style={{ color: sectorColor }}>${amount.toFixed(2)}</span>
                 </div>
               )}
 
@@ -432,26 +468,33 @@ export default function PaymentModal({ isOpen, onClose, pkg, service, sectorColo
                 </div>
               </div>
 
-              {/* Method content */}
+              {/* Active method */}
               <div>
                 {method === 'stripe' && (
-                  stripe ? (
-                    <Elements stripe={stripe}>
-                      <StripeForm
-                        amount={promo.finalAmount || promo.baseAmount}
-                        pkg={pkg}
-                        service={service}
-                        sectorColor={sectorColor}
-                        promoCode={promo.applied ? promo.code : ''}
-                        onSuccess={() => setSuccess(true)}
-                      />
-                    </Elements>
-                  ) : <PaymentNotConfigured label="Stripe" />
+                  stripe
+                    ? <Elements stripe={stripe}>
+                        <StripeForm
+                          amount={amount}
+                          pkg={pkg}
+                          service={service}
+                          sectorColor={sectorColor}
+                          promoCode={promo.applied ? promo.code : ''}
+                          onSuccess={() => setSuccess(true)}
+                        />
+                      </Elements>
+                    : <PaymentNotConfigured label="Stripe" />
                 )}
-                {method === 'paypal'  && <PayPalTab amount={promo.finalAmount || promo.baseAmount} sectorColor={sectorColor} onSuccess={() => setSuccess(true)} />}
-                {method === 'square'  && <SquareTab amount={promo.finalAmount || promo.baseAmount} sectorColor={sectorColor} />}
-                {method === 'cashapp' && <CashAppTab amount={promo.finalAmount || promo.baseAmount} sectorColor={sectorColor} />}
-                {method === 'zelle'   && <ZelleTab amount={promo.finalAmount || promo.baseAmount} sectorColor={sectorColor} />}
+                {method === 'paypal' && (
+                  <PayPalTab
+                    amount={amount}
+                    packageName={pkg.name}
+                    service={service}
+                    onSuccess={() => setSuccess(true)}
+                  />
+                )}
+                {method === 'square'  && <SquareTab  amount={amount} sectorColor={sectorColor} />}
+                {method === 'cashapp' && <CashAppTab amount={amount} sectorColor={sectorColor} />}
+                {method === 'zelle'   && <ZelleTab   amount={amount} sectorColor={sectorColor} />}
               </div>
             </>
           )}
