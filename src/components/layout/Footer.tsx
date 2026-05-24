@@ -6,9 +6,9 @@ export default function Footer() {
   return (
     <footer className="bg-surface border-t border-white/7 pt-16 pb-8">
       <div className="container-wide px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
           {/* Brand */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 md:col-span-2">
             <div className="mb-4">
               <div className="font-display text-xl font-semibold text-gold tracking-wide">ONE UNITED</div>
               <div className="font-body text-[10px] tracking-[0.3em] text-white/40 uppercase">Enterprise LLC</div>
@@ -68,6 +68,33 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+            </ul>
+          </div>
+
+          {/* Developers */}
+          <div>
+            <h4 className="font-body text-xs tracking-[0.2em] uppercase text-white/30 mb-5">Developers</h4>
+            <ul className="flex flex-col gap-3">
+              <li>
+                <Link href="/partner" className="font-body text-sm text-white/50 hover:text-white transition-colors">
+                  Partner API
+                </Link>
+              </li>
+              <li>
+                <Link href="/partner#mcp" className="font-body text-sm text-white/50 hover:text-white transition-colors">
+                  AI / MCP Integration
+                </Link>
+              </li>
+              <li>
+                <Link href="/partner#embed" className="font-body text-sm text-white/50 hover:text-white transition-colors">
+                  Embed Widget
+                </Link>
+              </li>
+              <li>
+                <Link href="/partner#affiliate" className="font-body text-sm text-white/50 hover:text-white transition-colors">
+                  Affiliate Program
+                </Link>
+              </li>
             </ul>
           </div>
 
