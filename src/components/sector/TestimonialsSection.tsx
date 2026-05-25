@@ -8,11 +8,11 @@ interface TestimonialsSectionProps { sector: Sector }
 export default function TestimonialsSection({ sector }: TestimonialsSectionProps) {
   if (!sector.testimonials.length) return null
   return (
-    <section className="section-padding bg-surface/30 border-y border-white/7">
+    <section className="section-padding bg-surface/30 border-y border-black/7">
       <div className="container-wide mx-auto px-6">
         <div className="text-center mb-12">
           <SectionLabel color={sector.color} className="justify-center">Client Stories</SectionLabel>
-          <h2 className="font-display text-4xl md:text-5xl font-light text-white">
+          <h2 className="font-display text-4xl md:text-5xl font-light text-gray-900">
             What Our <span style={{ color: sector.color }}>Clients Say</span>
           </h2>
         </div>
@@ -24,10 +24,10 @@ export default function TestimonialsSection({ sector }: TestimonialsSectionProps
                   <Star key={i} size={14} fill={sector.color} style={{ color: sector.color }} />
                 ))}
               </div>
-              <p className="font-body text-sm text-white/65 leading-relaxed flex-1">"{t.quote}"</p>
+              <p className="font-body text-sm text-gray-900/65 leading-relaxed flex-1">"{t.quote}"</p>
               <div>
-                <div className="font-body text-sm font-semibold text-white">{t.name}</div>
-                <div className="font-body text-xs text-white/35">{t.title}, {t.company}</div>
+                <div className="font-body text-sm font-semibold text-gray-900">{t.name}</div>
+                <div className="font-body text-xs text-gray-900/35">{t.title}, {t.company}</div>
               </div>
             </GlassCard>
           ))}

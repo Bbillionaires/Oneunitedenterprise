@@ -50,12 +50,12 @@ function StripeForm({ amount, pkg, service, sectorColor, promoCode, onSuccess }:
   }
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-      <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3.5">
-        <CardElement options={{ style: { base: { color: '#F5F0E8', fontFamily: 'Inter, sans-serif', fontSize: '15px', '::placeholder': { color: 'rgba(245,240,232,0.35)' } }, invalid: { color: '#ff6b6b' } } }} />
+      <div className="rounded-xl border border-black/10 bg-white/5 px-4 py-3.5">
+        <CardElement options={{ style: { base: { color: '#141414', fontFamily: 'Inter, sans-serif', fontSize: '15px', '::placeholder': { color: 'rgba(20,20,20,0.35)' } }, invalid: { color: '#ff6b6b' } } }} />
       </div>
       {status === 'error' && <p className="flex items-center gap-2 text-sm text-red-400"><AlertCircle size={14} />{message}</p>}
       <button type="submit" disabled={status === 'loading' || !stripe}
-        className="flex items-center justify-center gap-2 py-3.5 rounded-xl font-semibold text-sm text-white transition-all hover:scale-[1.02] disabled:opacity-50"
+        className="flex items-center justify-center gap-2 py-3.5 rounded-xl font-semibold text-sm text-gray-900 transition-all hover:scale-[1.02] disabled:opacity-50"
         style={{ background: sectorColor, boxShadow: `0 0 24px ${sectorColor}40` }}>
         {status === 'loading' ? <Loader2 size={16} className="animate-spin" /> : <CreditCard size={16} />}
         {status === 'loading' ? 'Processing…' : `Pay $${amount.toFixed(2)}`}
@@ -125,20 +125,20 @@ function ZelleTab({ amount, sectorColor }: { amount: number; sectorColor: string
   const [copied, setCopied] = useState<string | null>(null)
   const copy = (text: string, key: string) => { navigator.clipboard.writeText(text); setCopied(key); setTimeout(() => setCopied(null), 2000) }
   const CopyBtn = ({ value, id }: { value: string; id: string }) => (
-    <button onClick={() => copy(value, id)} className="ml-auto text-white/40 hover:text-white transition-colors">
+    <button onClick={() => copy(value, id)} className="ml-auto text-gray-900/40 hover:text-gray-900 transition-colors">
       {copied === id ? <Check size={14} className="text-green-400" /> : <Copy size={14} />}
     </button>
   )
   return (
     <div className="flex flex-col gap-5">
       <div className="flex items-center justify-center gap-3">
-        <div className="w-12 h-12 rounded-2xl bg-[#6D1ED4] flex items-center justify-center"><span className="text-white font-black text-lg">Z</span></div>
-        <div><p className="text-white font-semibold">Send via Zelle</p><p className="text-white/40 text-xs">Instant bank transfer — no fees</p></div>
+        <div className="w-12 h-12 rounded-2xl bg-[#6D1ED4] flex items-center justify-center"><span className="text-gray-900 font-black text-lg">Z</span></div>
+        <div><p className="text-gray-900 font-semibold">Send via Zelle</p><p className="text-gray-900/40 text-xs">Instant bank transfer — no fees</p></div>
       </div>
-      <div className="rounded-xl border border-white/10 bg-white/5 divide-y divide-white/5">
-        <div className="flex items-center gap-3 px-4 py-3"><span className="text-white/40 text-xs w-16">Name</span><span className="text-white text-sm font-medium flex-1">One United Enterprise LLC</span><CopyBtn value="One United Enterprise LLC" id="name" /></div>
-        <div className="flex items-center gap-3 px-4 py-3"><span className="text-white/40 text-xs w-16">Email</span><span className="text-white text-sm font-medium flex-1">payments@oneunitedenterprise.com</span><CopyBtn value="payments@oneunitedenterprise.com" id="email" /></div>
-        <div className="flex items-center gap-3 px-4 py-3"><span className="text-white/40 text-xs w-16">Amount</span><span className="font-semibold flex-1" style={{ color: sectorColor }}>${amount.toFixed(2)}</span><CopyBtn value={amount.toFixed(2)} id="amount" /></div>
+      <div className="rounded-xl border border-black/10 bg-white/5 divide-y divide-white/5">
+        <div className="flex items-center gap-3 px-4 py-3"><span className="text-gray-900/40 text-xs w-16">Name</span><span className="text-gray-900 text-sm font-medium flex-1">One United Enterprise LLC</span><CopyBtn value="One United Enterprise LLC" id="name" /></div>
+        <div className="flex items-center gap-3 px-4 py-3"><span className="text-gray-900/40 text-xs w-16">Email</span><span className="text-gray-900 text-sm font-medium flex-1">payments@oneunitedenterprise.com</span><CopyBtn value="payments@oneunitedenterprise.com" id="email" /></div>
+        <div className="flex items-center gap-3 px-4 py-3"><span className="text-gray-900/40 text-xs w-16">Amount</span><span className="font-semibold flex-1" style={{ color: sectorColor }}>${amount.toFixed(2)}</span><CopyBtn value={amount.toFixed(2)} id="amount" /></div>
       </div>
       <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 px-4 py-3">
         <p className="text-xs text-amber-300/80 leading-relaxed">After sending, email <strong>payments@oneunitedenterprise.com</strong> with your name, the service purchased, and your Zelle confirmation number.</p>
@@ -151,7 +151,7 @@ function PaymentNotConfigured({ label }: { label: string }) {
   return (
     <div className="flex flex-col items-center gap-3 py-8 text-center">
       <AlertCircle size={28} className="text-amber-400" />
-      <p className="text-white/60 text-sm">{label} is not yet configured.</p>
+      <p className="text-gray-900/60 text-sm">{label} is not yet configured.</p>
     </div>
   )
 }
@@ -163,11 +163,11 @@ function SuccessScreen({ pkg, sectorColor, onClose }: { pkg: Package; sectorColo
         <CheckCircle2 size={40} style={{ color: sectorColor }} />
       </div>
       <div>
-        <h3 className="font-display text-2xl text-white mb-2">Payment Confirmed!</h3>
-        <p className="text-white/50 text-sm">You’ve successfully enrolled in <strong className="text-white">{pkg.name}</strong>.</p>
-        <p className="text-white/40 text-xs mt-1">A confirmation email is on its way. We’ll be in touch within 24 hours.</p>
+        <h3 className="font-display text-2xl text-gray-900 mb-2">Payment Confirmed!</h3>
+        <p className="text-gray-900/50 text-sm">You’ve successfully enrolled in <strong className="text-gray-900">{pkg.name}</strong>.</p>
+        <p className="text-gray-900/40 text-xs mt-1">A confirmation email is on its way. We’ll be in touch within 24 hours.</p>
       </div>
-      <button onClick={onClose} className="px-8 py-3 rounded-xl font-semibold text-sm text-white transition-all hover:scale-[1.02]" style={{ background: sectorColor }}>Done</button>
+      <button onClick={onClose} className="px-8 py-3 rounded-xl font-semibold text-sm text-gray-900 transition-all hover:scale-[1.02]" style={{ background: sectorColor }}>Done</button>
     </div>
   )
 }
@@ -205,35 +205,35 @@ export default function PaymentModal({ isOpen, onClose, pkg, service, sectorColo
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      style={{ background: 'rgba(7,7,15,0.85)', backdropFilter: 'blur(12px)' }}
+      style={{ background: 'rgba(253,252,248,0.85)', backdropFilter: 'blur(12px)' }}
       onClick={e => { if (e.target === e.currentTarget) onClose() }}>
       <div className="relative w-full max-w-md rounded-2xl flex flex-col max-h-[90vh] overflow-y-auto"
-        style={{ background: '#12121F', border: '1px solid rgba(255,255,255,0.08)' }}>
+        style={{ background: 'transparent', border: '1px solid rgba(255,255,255,0.08)' }}>
         <div className="flex items-start justify-between p-6 pb-0">
           <div>
-            <h2 className="font-display text-xl text-white">{pkg.name}</h2>
+            <h2 className="font-display text-xl text-gray-900">{pkg.name}</h2>
             <div className="flex items-baseline gap-1.5 mt-1">
               <span className="font-display text-3xl font-light" style={{ color: sectorColor }}>{pkg.price}</span>
-              <span className="text-white/35 text-xs">{pkg.period}</span>
+              <span className="text-gray-900/35 text-xs">{pkg.period}</span>
             </div>
           </div>
-          <button onClick={onClose} className="text-white/30 hover:text-white transition-colors mt-1"><X size={20} /></button>
+          <button onClick={onClose} className="text-gray-900/30 hover:text-gray-900 transition-colors mt-1"><X size={20} /></button>
         </div>
         <div className="px-6 pt-4 pb-6 flex flex-col gap-5">
           {success ? <SuccessScreen pkg={pkg} sectorColor={sectorColor} onClose={onClose} /> : (
             <>
               <div className="flex flex-col gap-2">
-                <label className="text-xs text-white/40 font-medium tracking-wide uppercase">Promo Code</label>
+                <label className="text-xs text-gray-900/40 font-medium tracking-wide uppercase">Promo Code</label>
                 {promo.applied ? (
                   <div className="flex items-center gap-2 px-3 py-2.5 rounded-xl border border-green-500/30 bg-green-500/10">
                     <Tag size={14} className="text-green-400" />
                     <span className="text-green-300 text-sm flex-1">{promo.applied.label}</span>
-                    <button onClick={promo.remove} className="text-white/30 hover:text-white"><X size={13} /></button>
+                    <button onClick={promo.remove} className="text-gray-900/30 hover:text-gray-900"><X size={13} /></button>
                   </div>
                 ) : (
                   <div className="flex gap-2">
                     <input type="text" value={promo.code} onChange={e => promo.setCode(e.target.value.toUpperCase())} onKeyDown={e => e.key === 'Enter' && promo.apply()} placeholder="Enter code…"
-                      className="flex-1 bg-white/5 border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white placeholder-white/25 outline-none focus:border-white/25 font-mono tracking-widest" />
+                      className="flex-1 bg-white/5 border border-black/10 rounded-xl px-3 py-2.5 text-sm text-gray-900 placeholder-white/25 outline-none focus:border-black/25 font-mono tracking-widest" />
                     <button onClick={promo.apply} disabled={promo.loading || !promo.code}
                       className="px-4 rounded-xl text-sm font-semibold transition-all hover:scale-[1.03] disabled:opacity-40"
                       style={{ background: sectorColor, color: '#07070F' }}>
@@ -244,13 +244,13 @@ export default function PaymentModal({ isOpen, onClose, pkg, service, sectorColo
                 {promo.error && <p className="text-xs text-red-400">{promo.error}</p>}
               </div>
               {promo.applied && (
-                <div className="flex items-center justify-between px-4 py-3 rounded-xl bg-white/5 border border-white/8 text-sm">
-                  <span className="text-white/50">Total after discount</span>
+                <div className="flex items-center justify-between px-4 py-3 rounded-xl bg-white/5 border border-black/8 text-sm">
+                  <span className="text-gray-900/50">Total after discount</span>
                   <span className="font-semibold" style={{ color: sectorColor }}>${amount.toFixed(2)}</span>
                 </div>
               )}
               <div>
-                <label className="text-xs text-white/40 font-medium tracking-wide uppercase mb-2 block">Payment Method</label>
+                <label className="text-xs text-gray-900/40 font-medium tracking-wide uppercase mb-2 block">Payment Method</label>
                 <div className="flex gap-2 flex-wrap">
                   {METHODS.map(m => (
                     <button key={m.id} onClick={() => setMethod(m.id)}

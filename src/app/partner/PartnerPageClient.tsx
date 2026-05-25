@@ -73,7 +73,7 @@ function CodeBlock({ code, language = 'bash' }: { code: string; language?: strin
         style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}
         className="flex items-center justify-between px-4 py-2"
       >
-        <span className="text-xs text-white/30 font-mono">{language}</span>
+        <span className="text-xs text-gray-900/30 font-mono">{language}</span>
         <CopyButton text={code} />
       </div>
       <pre className="px-4 py-4 overflow-x-auto text-sm font-mono leading-relaxed">
@@ -86,7 +86,7 @@ function CodeBlock({ code, language = 'bash' }: { code: string; language?: strin
 export default function PartnerPageClient() {
   return (
     <main
-      style={{ background: '#0a0a0a', color: '#fff', minHeight: '100vh' }}
+      style={{ background: 'transparent', color: '#fff', minHeight: '100vh' }}
       className="font-body"
     >
       {/* ── Hero ── */}
@@ -117,7 +117,7 @@ export default function PartnerPageClient() {
             Build With{' '}
             <span style={{ color: GOLD }}>One United Enterprise</span>
           </h1>
-          <p className="text-lg md:text-xl text-white/55 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-900/55 leading-relaxed max-w-2xl mx-auto">
             Connect your platform, AI, or application to OUE&apos;s ecosystem — submit
             leads, check services, and integrate our capabilities directly into your
             workflow.
@@ -127,7 +127,7 @@ export default function PartnerPageClient() {
 
       {/* ── Integration Methods ── */}
       <section className="px-6 pb-24 max-w-6xl mx-auto">
-        <h2 className="text-center text-xs tracking-[0.25em] uppercase text-white/30 mb-12">
+        <h2 className="text-center text-xs tracking-[0.25em] uppercase text-gray-900/30 mb-12">
           Choose Your Integration Method
         </h2>
 
@@ -144,8 +144,8 @@ export default function PartnerPageClient() {
             <div className="flex items-start gap-4">
               <span className="text-3xl">🔌</span>
               <div>
-                <h3 className="text-lg font-semibold text-white mb-1">REST API</h3>
-                <p className="text-sm text-white/50 leading-relaxed">
+                <h3 className="text-lg font-semibold text-gray-900 mb-1">REST API</h3>
+                <p className="text-sm text-gray-900/50 leading-relaxed">
                   Submit leads, check availability, and integrate OUE services directly
                   into your platform using standard HTTP requests.
                 </p>
@@ -166,13 +166,13 @@ export default function PartnerPageClient() {
             <div className="flex items-start gap-4">
               <span className="text-3xl">🤖</span>
               <div>
-                <h3 className="text-lg font-semibold text-white mb-1">
+                <h3 className="text-lg font-semibold text-gray-900 mb-1">
                   AI Assistant Integration{' '}
                   <span style={{ color: GOLD }} className="text-sm font-normal">
                     (MCP)
                   </span>
                 </h3>
-                <p className="text-sm text-white/50 leading-relaxed">
+                <p className="text-sm text-gray-900/50 leading-relaxed">
                   Connect Claude or any MCP-compatible AI directly to OUE. Your AI can
                   submit leads, check services, and interact with our ecosystem using
                   natural language.
@@ -194,8 +194,8 @@ export default function PartnerPageClient() {
             <div className="flex items-start gap-4">
               <span className="text-3xl">🪄</span>
               <div>
-                <h3 className="text-lg font-semibold text-white mb-1">One-Line Embed</h3>
-                <p className="text-sm text-white/50 leading-relaxed">
+                <h3 className="text-lg font-semibold text-gray-900 mb-1">One-Line Embed</h3>
+                <p className="text-sm text-gray-900/50 leading-relaxed">
                   Add a lead capture form to any website with a single script tag.
                   Visitors can contact OUE directly from your site.
                 </p>
@@ -216,10 +216,10 @@ export default function PartnerPageClient() {
             <div className="flex items-start gap-4">
               <span className="text-3xl">🤝</span>
               <div>
-                <h3 className="text-lg font-semibold text-white mb-1">
+                <h3 className="text-lg font-semibold text-gray-900 mb-1">
                   Become an Affiliate
                 </h3>
-                <p className="text-sm text-white/50 leading-relaxed">
+                <p className="text-sm text-gray-900/50 leading-relaxed">
                   Earn commissions by referring clients to OUE. Get your unique tracking
                   link, access marketing materials, and track your earnings in real-time.
                 </p>
@@ -280,10 +280,10 @@ export default function PartnerPageClient() {
         className="px-6 py-20"
       >
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-display font-bold text-white mb-2">
+          <h2 className="text-2xl md:text-3xl font-display font-bold text-gray-900 mb-2">
             API Reference
           </h2>
-          <p className="text-white/40 text-sm mb-10">
+          <p className="text-gray-900/40 text-sm mb-10">
             Base URL:{' '}
             <code
               style={{
@@ -314,13 +314,13 @@ export default function PartnerPageClient() {
                     borderBottom: '1px solid rgba(255,255,255,0.08)',
                   }}
                 >
-                  <th className="text-left px-5 py-3 text-white/40 font-semibold tracking-wider text-xs uppercase">
+                  <th className="text-left px-5 py-3 text-gray-900/40 font-semibold tracking-wider text-xs uppercase">
                     Endpoint
                   </th>
-                  <th className="text-left px-5 py-3 text-white/40 font-semibold tracking-wider text-xs uppercase">
+                  <th className="text-left px-5 py-3 text-gray-900/40 font-semibold tracking-wider text-xs uppercase">
                     Method
                   </th>
-                  <th className="text-left px-5 py-3 text-white/40 font-semibold tracking-wider text-xs uppercase">
+                  <th className="text-left px-5 py-3 text-gray-900/40 font-semibold tracking-wider text-xs uppercase">
                     Description
                   </th>
                 </tr>
@@ -344,7 +344,7 @@ export default function PartnerPageClient() {
                       POST
                     </span>
                   </td>
-                  <td className="px-5 py-4 text-white/55">Submit a new lead</td>
+                  <td className="px-5 py-4 text-gray-900/55">Submit a new lead</td>
                 </tr>
                 <tr>
                   <td className="px-5 py-4">
@@ -364,9 +364,9 @@ export default function PartnerPageClient() {
                       GET
                     </span>
                   </td>
-                  <td className="px-5 py-4 text-white/55">
+                  <td className="px-5 py-4 text-gray-900/55">
                     List leads{' '}
-                    <span className="text-white/25 text-xs">(auth required)</span>
+                    <span className="text-gray-900/25 text-xs">(auth required)</span>
                   </td>
                 </tr>
               </tbody>
@@ -374,7 +374,7 @@ export default function PartnerPageClient() {
           </div>
 
           {/* POST /api/leads fields */}
-          <h3 className="text-lg font-semibold text-white mb-4">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">
             POST{' '}
             <code style={{ color: GOLD }} className="font-mono text-base">
               /api/leads
@@ -396,13 +396,13 @@ export default function PartnerPageClient() {
                     borderBottom: '1px solid rgba(255,255,255,0.08)',
                   }}
                 >
-                  <th className="text-left px-5 py-3 text-white/40 font-semibold tracking-wider text-xs uppercase">
+                  <th className="text-left px-5 py-3 text-gray-900/40 font-semibold tracking-wider text-xs uppercase">
                     Field
                   </th>
-                  <th className="text-left px-5 py-3 text-white/40 font-semibold tracking-wider text-xs uppercase">
+                  <th className="text-left px-5 py-3 text-gray-900/40 font-semibold tracking-wider text-xs uppercase">
                     Type
                   </th>
-                  <th className="text-left px-5 py-3 text-white/40 font-semibold tracking-wider text-xs uppercase">
+                  <th className="text-left px-5 py-3 text-gray-900/40 font-semibold tracking-wider text-xs uppercase">
                     Notes
                   </th>
                 </tr>
@@ -435,9 +435,9 @@ export default function PartnerPageClient() {
                     }
                   >
                     <td className="px-5 py-4">
-                      <code className="font-mono text-white/80">{row.field}</code>
+                      <code className="font-mono text-gray-900/80">{row.field}</code>
                     </td>
-                    <td className="px-5 py-4 text-white/30 font-mono text-xs">
+                    <td className="px-5 py-4 text-gray-900/30 font-mono text-xs">
                       {row.type}
                     </td>
                     <td className="px-5 py-4">
@@ -446,7 +446,7 @@ export default function PartnerPageClient() {
                           Required
                         </span>
                       ) : (
-                        <span className="text-white/35 text-xs">{row.note}</span>
+                        <span className="text-gray-900/35 text-xs">{row.note}</span>
                       )}
                     </td>
                   </tr>
@@ -460,10 +460,10 @@ export default function PartnerPageClient() {
       {/* ── CTA ── */}
       <section className="px-6 py-24 text-center">
         <div className="max-w-xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4">
             Ready to integrate?
           </h2>
-          <p className="text-white/50 text-lg mb-8 leading-relaxed">
+          <p className="text-gray-900/50 text-lg mb-8 leading-relaxed">
             Get your API key and start connecting to the OUE ecosystem today.
           </p>
           <a
@@ -483,7 +483,7 @@ export default function PartnerPageClient() {
           >
             Get Your API Key &rarr;
           </a>
-          <p className="mt-5 text-white/25 text-sm">
+          <p className="mt-5 text-gray-900/25 text-sm">
             Questions?{' '}
             <a
               href={`mailto:${BRAND.email}`}

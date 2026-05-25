@@ -9,9 +9,9 @@ interface GlassCardProps extends HTMLAttributes<HTMLDivElement> {
 
 export default function GlassCard({ className, glow, hover = true, variant = 'default', children, style, ...props }: GlassCardProps) {
   const variants = {
-    default: 'bg-card/80 backdrop-blur-xl border border-white/7',
-    dark: 'bg-base/90 backdrop-blur-xl border border-white/5',
-    light: 'bg-card2/70 backdrop-blur-lg border border-white/10',
+    default: 'bg-card/80 backdrop-blur-xl border border-black/7',
+    dark: 'bg-base/90 backdrop-blur-xl border border-black/5',
+    light: 'bg-card2/70 backdrop-blur-lg border border-black/10',
   }
 
   return (
@@ -19,7 +19,7 @@ export default function GlassCard({ className, glow, hover = true, variant = 'de
       className={cn(
         'rounded-2xl transition-all duration-300',
         variants[variant],
-        hover && 'hover:-translate-y-1 hover:border-white/12',
+        hover && 'hover:-translate-y-1 hover:border-black/12',
         className
       )}
       style={{

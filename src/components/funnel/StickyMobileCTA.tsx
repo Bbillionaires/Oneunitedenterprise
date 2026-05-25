@@ -18,10 +18,10 @@ export default function StickyMobileCTA({ sector, service }: StickyMobileCTAProp
   if (!visible) return null
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden border-t border-white/10 bg-base/95 backdrop-blur-xl px-4 py-3 flex gap-3">
+    <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden border-t border-black/10 bg-base/95 backdrop-blur-xl px-4 py-3 flex gap-3">
       <a
         href="#lead-form"
-        className="flex-1 flex items-center justify-center gap-2 font-body text-sm font-semibold py-3 rounded-xl border border-white/10 text-white/70 hover:text-white transition-colors"
+        className="flex-1 flex items-center justify-center gap-2 font-body text-sm font-semibold py-3 rounded-xl border border-black/10 text-gray-900/70 hover:text-gray-900 transition-colors"
       >
         Contact Us
       </a>

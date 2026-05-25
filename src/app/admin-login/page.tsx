@@ -40,7 +40,7 @@ function LoginForm() {
     <div className="min-h-screen flex items-center justify-center px-6">
       <div
         className="w-full max-w-sm rounded-2xl p-8 flex flex-col gap-6"
-        style={{ background: '#12121F', border: '1px solid rgba(255,255,255,0.08)', boxShadow: '0 0 60px rgba(201,168,76,0.06)' }}
+        style={{ background: 'transparent', border: '1px solid rgba(255,255,255,0.08)', boxShadow: '0 0 60px rgba(201,168,76,0.06)' }}
       >
         <div className="flex flex-col items-center gap-3 text-center">
           <div className="w-12 h-12 rounded-xl bg-gold/10 border border-gold/20 flex items-center justify-center">
@@ -48,7 +48,7 @@ function LoginForm() {
           </div>
           <div>
             <div className="font-display text-gold tracking-wider text-xs uppercase mb-1">One United Enterprise</div>
-            <h1 className="font-display text-2xl text-white">Admin Access</h1>
+            <h1 className="font-display text-2xl text-gray-900">Admin Access</h1>
           </div>
         </div>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -59,10 +59,10 @@ function LoginForm() {
               onChange={e => setPassword(e.target.value)}
               placeholder="Admin password"
               autoFocus
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 pr-11 text-sm text-white placeholder-white/25 outline-none focus:border-gold/40 font-body transition-colors"
+              className="w-full bg-white/5 border border-black/10 rounded-xl px-4 py-3 pr-11 text-sm text-gray-900 placeholder-white/25 outline-none focus:border-gold/40 font-body transition-colors"
             />
             <button type="button" onClick={() => setShow(s => !s)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60 transition-colors p-1">
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-900/30 hover:text-gray-900/60 transition-colors p-1">
               {show ? <EyeOff size={14} /> : <Eye size={14} />}
             </button>
           </div>

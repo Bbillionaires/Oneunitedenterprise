@@ -33,7 +33,7 @@ export default function HeroSection() {
         </div>
 
         <h1 className="font-display text-6xl md:text-7xl lg:text-8xl font-light leading-[0.95] mb-6">
-          <span className="text-white">One Universe.</span>
+          <span className="text-gray-900">One Universe.</span>
           <br />
           <span className="text-gradient-gold">Infinite Reach.</span>
         </h1>
@@ -46,7 +46,7 @@ export default function HeroSection() {
           />
         </div>
 
-        <p className="font-body text-lg md:text-xl text-white/55 max-w-2xl mx-auto leading-relaxed mb-12">
+        <p className="font-body text-lg md:text-xl text-gray-900/55 max-w-2xl mx-auto leading-relaxed mb-12">
           {BRAND.sub}
         </p>
 
@@ -61,7 +61,7 @@ export default function HeroSection() {
           </Link>
           <Link
             href="#sectors"
-            className="inline-flex items-center gap-2 font-body text-base font-medium px-8 py-4 rounded-xl border border-white/10 text-white/60 hover:border-white/20 hover:text-white transition-all duration-300"
+            className="inline-flex items-center gap-2 font-body text-base font-medium px-8 py-4 rounded-xl border border-black/10 text-gray-900/60 hover:border-black/20 hover:text-gray-900 transition-all duration-300"
           >
             Explore the Planets
             <ChevronDown size={18} />
@@ -71,7 +71,7 @@ export default function HeroSection() {
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
-        <span className="font-body text-[10px] tracking-[0.3em] uppercase text-white/50">Scroll</span>
+        <span className="font-body text-[10px] tracking-[0.3em] uppercase text-gray-900/50">Scroll</span>
         <div className="w-px h-12 bg-gradient-to-b from-white/30 to-transparent" />
       </div>
     </section>

@@ -5,7 +5,7 @@ interface StatsBarProps { sector: Sector }
 
 export default function StatsBar({ sector }: StatsBarProps) {
   return (
-    <div className="border-y border-white/7 bg-surface/40">
+    <div className="border-y border-black/7 bg-surface/40">
       <div className="container-wide mx-auto px-6 py-12">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {sector.stats.map(stat => {
@@ -21,7 +21,7 @@ export default function StatsBar({ sector }: StatsBarProps) {
                     suffix={autoSuffix}
                   />
                 </div>
-                <div className="font-body text-xs text-white/35 tracking-wide uppercase">{stat.label}</div>
+                <div className="font-body text-xs text-gray-900/35 tracking-wide uppercase">{stat.label}</div>
               </div>
             )
           })}

@@ -8,7 +8,7 @@ export default function ProcessTimeline({ sector, service }: ProcessTimelineProp
     <section className="section-padding container-wide mx-auto px-6">
       <div className="text-center mb-16">
         <SectionLabel color={sector.color} className="justify-center">Our Process</SectionLabel>
-        <h2 className="font-display text-4xl md:text-5xl font-light text-white">
+        <h2 className="font-display text-4xl md:text-5xl font-light text-gray-900">
           How We <span style={{ color: sector.color }}>Deliver</span>
         </h2>
       </div>
@@ -32,8 +32,8 @@ export default function ProcessTimeline({ sector, service }: ProcessTimelineProp
                 <div className="font-body text-xs tracking-[0.2em] uppercase mb-1" style={{ color: sector.color }}>
                   {step.duration}
                 </div>
-                <h3 className="font-display text-2xl font-semibold text-white mb-2">{step.title}</h3>
-                <p className="font-body text-sm text-white/50 leading-relaxed">{step.desc}</p>
+                <h3 className="font-display text-2xl font-semibold text-gray-900 mb-2">{step.title}</h3>
+                <p className="font-body text-sm text-gray-900/50 leading-relaxed">{step.desc}</p>
               </div>
             </div>
           ))}

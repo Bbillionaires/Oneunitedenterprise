@@ -45,7 +45,7 @@ export default function Navbar() {
     <header
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
-        scrolled ? 'bg-base/90 backdrop-blur-xl border-b border-white/7 py-3' : 'py-5'
+        scrolled ? 'bg-base/90 backdrop-blur-xl border-b border-black/7 py-3' : 'py-5'
       )}
     >
       <nav className="container-wide px-6 flex items-center justify-between gap-6">
@@ -53,7 +53,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex flex-col leading-none flex-shrink-0">
           <span className="font-display text-lg font-semibold text-gold tracking-wide">ONE UNITED</span>
-          <span className="font-body text-[10px] tracking-[0.3em] text-white/40 uppercase">Enterprise LLC</span>
+          <span className="font-body text-[10px] tracking-[0.3em] text-gray-900/40 uppercase">Enterprise LLC</span>
         </Link>
 
         {/* Desktop — Sectors dropdown */}
@@ -62,7 +62,7 @@ export default function Navbar() {
             onClick={() => setDropdownOpen(v => !v)}
             className={cn(
               'flex items-center gap-1.5 font-body text-sm font-medium transition-colors duration-200',
-              dropdownOpen ? 'text-gold' : 'text-white/60 hover:text-white'
+              dropdownOpen ? 'text-gold' : 'text-gray-900/60 hover:text-gray-900'
             )}
           >
             Sectors
@@ -75,10 +75,10 @@ export default function Navbar() {
           {/* Dropdown panel */}
           {dropdownOpen && (
             <div
-              className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[780px] rounded-2xl border border-white/10 p-5 shadow-2xl"
-              style={{ background: 'rgba(10,10,18,0.97)', backdropFilter: 'blur(20px)' }}
+              className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[780px] rounded-2xl border border-black/10 p-5 shadow-2xl"
+              style={{ background: 'rgba(253,252,248,0.97)', backdropFilter: 'blur(20px)' }}
             >
-              <p className="font-body text-[10px] tracking-[0.3em] uppercase text-white/25 mb-4 px-1">
+              <p className="font-body text-[10px] tracking-[0.3em] uppercase text-gray-900/25 mb-4 px-1">
                 ★ The Solar System — Choose a Planet
               </p>
               <div className="grid grid-cols-4 gap-2">
@@ -102,7 +102,7 @@ export default function Navbar() {
                       >
                         {s.shortName}
                       </p>
-                      <p className="font-body text-[10px] text-white/30 leading-tight truncate mt-0.5">
+                      <p className="font-body text-[10px] text-gray-900/30 leading-tight truncate mt-0.5">
                         {s.name}
                       </p>
                     </div>
@@ -134,7 +134,7 @@ export default function Navbar() {
 
         {/* Mobile toggle */}
         <button
-          className="lg:hidden p-2 text-white/70 hover:text-white"
+          className="lg:hidden p-2 text-gray-900/70 hover:text-gray-900"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
@@ -144,9 +144,9 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="lg:hidden bg-surface/95 backdrop-blur-xl border-t border-white/7">
+        <div className="lg:hidden bg-surface/95 backdrop-blur-xl border-t border-black/7">
           <div className="px-6 py-5">
-            <p className="font-body text-[10px] tracking-[0.3em] uppercase text-white/25 mb-3">
+            <p className="font-body text-[10px] tracking-[0.3em] uppercase text-gray-900/25 mb-3">
               ★ The Solar System
             </p>
             <div className="grid grid-cols-2 gap-2 mb-5">

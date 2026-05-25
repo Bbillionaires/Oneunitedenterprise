@@ -57,7 +57,7 @@ function StarCard({
       className="group w-full text-left rounded-2xl border p-8 relative overflow-hidden transition-all duration-400 hover:-translate-y-2 focus:outline-none"
       style={{
         borderColor: `${sector.color}28`,
-        background: `radial-gradient(ellipse at 50% 0%, ${sector.color}12 0%, rgba(5,5,14,0.97) 65%)`,
+        background: `radial-gradient(ellipse at 50% 0%, ${sector.color}12 0%, rgba(253,252,248,0.97) 65%)`,
       }}
     >
       {/* Top accent line */}
@@ -88,17 +88,17 @@ function StarCard({
         </span>
       </div>
 
-      <h3 className="font-display text-xl font-semibold text-white mb-2 leading-tight relative z-10">
+      <h3 className="font-display text-xl font-semibold text-gray-900 mb-2 leading-tight relative z-10">
         ★ {service.name}
       </h3>
-      <p className="font-body text-sm text-white/50 leading-relaxed mb-6 relative z-10">
+      <p className="font-body text-sm text-gray-900/50 leading-relaxed mb-6 relative z-10">
         {service.tagline}
       </p>
 
       {/* Key pain points as bullets */}
       <ul className="flex flex-col gap-2 mb-6 relative z-10">
         {service.painPoints.slice(0, 3).map(pp => (
-          <li key={pp.title} className="flex items-start gap-2 font-body text-xs text-white/40">
+          <li key={pp.title} className="flex items-start gap-2 font-body text-xs text-gray-900/40">
             <span className="mt-0.5 flex-shrink-0" style={{ color: sector.color }}>✦</span>
             {pp.title}
           </li>
@@ -159,7 +159,7 @@ export default function SectorFunnelClient({ sector }: { sector: Sector }) {
       {entering && <BlackHoleOverlay color={sector.color} />}
 
       <Navbar />
-      <main style={{ background: '#07070F', minHeight: '100vh' }}>
+      <main style={{ background: 'transparent', minHeight: '100vh' }}>
 
         {/* ── Planet Hero ─────────────────────────────────────────── */}
         <section
@@ -180,8 +180,8 @@ export default function SectorFunnelClient({ sector }: { sector: Sector }) {
           </div>
 
           {/* Breadcrumb */}
-          <div className="relative z-10 flex items-center gap-2 font-body text-xs text-white/30 mb-10">
-            <Link href="/" className="hover:text-white/60 transition-colors">Home</Link>
+          <div className="relative z-10 flex items-center gap-2 font-body text-xs text-gray-900/30 mb-10">
+            <Link href="/" className="hover:text-gray-900/60 transition-colors">Home</Link>
             <ChevronRight size={12} />
             <span style={{ color: `${sector.color}cc` }}>{sector.name}</span>
           </div>
@@ -191,7 +191,7 @@ export default function SectorFunnelClient({ sector }: { sector: Sector }) {
             className="relative z-10 flex items-center justify-center mb-8 rounded-full"
             style={{
               width: 130, height: 130,
-              background: `radial-gradient(circle at 38% 32%, ${sector.color}40 0%, ${sector.color}16 40%, rgba(5,5,14,0.97) 100%)`,
+              background: `radial-gradient(circle at 38% 32%, ${sector.color}40 0%, ${sector.color}16 40%, rgba(253,252,248,0.97) 100%)`,
               border: '2.5px solid #D4A217',
               boxShadow: `0 0 40px ${sector.glow}, 0 0 80px ${sector.glow}25`,
             }}
@@ -206,17 +206,17 @@ export default function SectorFunnelClient({ sector }: { sector: Sector }) {
             >
               {sector.shortName} — Select Your Star
             </div>
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light text-white mb-4 leading-[1.05]">
+            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light text-gray-900 mb-4 leading-[1.05]">
               {sector.name}
             </h1>
-            <p className="font-body text-lg text-white/50 max-w-2xl leading-relaxed">
+            <p className="font-body text-lg text-gray-900/50 max-w-2xl leading-relaxed">
               {sector.tagline}
             </p>
           </div>
 
           {/* Down arrow */}
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-40">
-            <span className="font-body text-[9px] tracking-[0.3em] uppercase text-white/40">Choose a Star</span>
+            <span className="font-body text-[9px] tracking-[0.3em] uppercase text-gray-900/40">Choose a Star</span>
             <div className="w-px h-10 bg-gradient-to-b from-white/30 to-transparent" />
           </div>
         </section>
@@ -225,13 +225,13 @@ export default function SectorFunnelClient({ sector }: { sector: Sector }) {
         <section className="py-16 px-6">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <p className="font-body text-xs text-white/30 tracking-[0.3em] uppercase mb-3">
+              <p className="font-body text-xs text-gray-900/30 tracking-[0.3em] uppercase mb-3">
                 ★ Stars in the {sector.shortName} System
               </p>
-              <h2 className="font-display text-3xl md:text-4xl font-light text-white">
+              <h2 className="font-display text-3xl md:text-4xl font-light text-gray-900">
                 Which <span style={{ color: sector.color }}>Star</span> Will You Enter?
               </h2>
-              <p className="font-body text-sm text-white/40 mt-3 max-w-lg mx-auto">
+              <p className="font-body text-sm text-gray-900/40 mt-3 max-w-lg mx-auto">
                 Each star is a dedicated service. Click to enter its black hole and access pricing, the team, and enrollment.
               </p>
             </div>
@@ -255,14 +255,14 @@ export default function SectorFunnelClient({ sector }: { sector: Sector }) {
           <div className="max-w-2xl mx-auto text-center">
             <div
               className="rounded-3xl p-10 border relative overflow-hidden"
-              style={{ borderColor: `${sector.color}20`, background: `linear-gradient(135deg, ${sector.color}08 0%, rgba(5,5,14,0.97) 100%)` }}
+              style={{ borderColor: `${sector.color}20`, background: `linear-gradient(135deg, ${sector.color}08 0%, rgba(253,252,248,0.97) 100%)` }}
             >
               <div
                 className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-16 blur-[50px] pointer-events-none"
                 style={{ background: `${sector.color}20` }}
               />
-              <p className="font-display text-2xl font-light text-white mb-2 relative z-10">Not sure which star?</p>
-              <p className="font-body text-sm text-white/40 mb-6 relative z-10">
+              <p className="font-display text-2xl font-light text-gray-900 mb-2 relative z-10">Not sure which star?</p>
+              <p className="font-body text-sm text-gray-900/40 mb-6 relative z-10">
                 Book a free strategy call — we&apos;ll map the right path through the system.
               </p>
               <a

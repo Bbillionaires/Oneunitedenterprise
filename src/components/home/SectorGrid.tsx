@@ -24,10 +24,10 @@ export default function SectorGrid() {
       <div className="container-wide mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
           <SectionLabel className="justify-center">The Solar System</SectionLabel>
-          <h2 className="font-display text-5xl md:text-6xl font-light text-white mb-4">
+          <h2 className="font-display text-5xl md:text-6xl font-light text-gray-900 mb-4">
             Choose Your <span className="text-gradient-gold">Planet</span>
           </h2>
-          <p className="font-body text-white/50 max-w-xl mx-auto text-lg">
+          <p className="font-body text-gray-900/50 max-w-xl mx-auto text-lg">
             Eleven planets. One unified economy. Select a planet to explore its stars and enter the system.
           </p>
         </div>
@@ -65,7 +65,7 @@ function PlanetCard({ sector }: { sector: (typeof SECTORS)[number] }) {
           width: 210,
           height: 210,
           borderRadius: '50%',
-          background: `radial-gradient(circle at 38% 32%, ${sector.color}45 0%, ${sector.color}18 40%, rgba(5,5,14,0.97) 100%)`,
+          background: `radial-gradient(circle at 38% 32%, ${sector.color}45 0%, ${sector.color}18 40%, rgba(253,252,248,0.97) 100%)`,
           border: '2.5px solid #D4A217',
           boxShadow: `0 0 35px ${sector.glow}, 0 0 70px ${sector.glow}22, inset 0 0 40px ${sector.color}0c`,
         }}
@@ -98,7 +98,7 @@ function PlanetCard({ sector }: { sector: (typeof SECTORS)[number] }) {
 
         {/* Short name */}
         <span
-          className="font-display text-lg font-semibold text-white text-center px-6 relative z-10 leading-tight"
+          className="font-display text-lg font-semibold text-gray-900 text-center px-6 relative z-10 leading-tight"
         >
           {sector.shortName}
         </span>
@@ -114,10 +114,10 @@ function PlanetCard({ sector }: { sector: (typeof SECTORS)[number] }) {
 
       {/* Label below planet */}
       <div className="text-center">
-        <p className="font-display text-sm text-white/70 group-hover:text-white transition-colors duration-300">
+        <p className="font-display text-sm text-gray-900/70 group-hover:text-gray-900 transition-colors duration-300">
           {sector.name}
         </p>
-        <p className="font-body text-[11px] text-white/30 mt-0.5 max-w-[180px] leading-snug">
+        <p className="font-body text-[11px] text-gray-900/30 mt-0.5 max-w-[180px] leading-snug">
           {sector.tagline.split('.')[0]}
         </p>
       </div>

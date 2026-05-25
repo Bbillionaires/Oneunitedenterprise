@@ -18,10 +18,10 @@ export default function FunnelCTA({ sector }: FunnelCTAProps) {
             style={{ background: `${sector.color}20` }}
           />
           <div className="relative z-10">
-            <h2 className="font-display text-4xl md:text-5xl font-light text-white mb-4">
+            <h2 className="font-display text-4xl md:text-5xl font-light text-gray-900 mb-4">
               Ready to Get Started?
             </h2>
-            <p className="font-body text-white/50 mb-8 max-w-lg mx-auto">
+            <p className="font-body text-gray-900/50 mb-8 max-w-lg mx-auto">
               Let's discuss how our {sector.name} services can transform your outcomes.
             </p>
             <Link

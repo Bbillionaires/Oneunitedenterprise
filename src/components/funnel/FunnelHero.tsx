@@ -16,14 +16,14 @@ export default function FunnelHero({ sector, service }: FunnelHeroProps) {
 
       <div className="relative z-10 container-wide mx-auto">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 font-body text-xs text-white/30 mb-8 flex-wrap">
-          <Link href="/" className="hover:text-white/60 transition-colors">Home</Link>
+        <div className="flex items-center gap-2 font-body text-xs text-gray-900/30 mb-8 flex-wrap">
+          <Link href="/" className="hover:text-gray-900/60 transition-colors">Home</Link>
           <ChevronRight size={12} />
-          <Link href={`/${sector.id}`} className="hover:text-white/60 transition-colors" style={{ color: `${sector.color}80` }}>
+          <Link href={`/${sector.id}`} className="hover:text-gray-900/60 transition-colors" style={{ color: `${sector.color}80` }}>
             {sector.shortName}
           </Link>
           <ChevronRight size={12} />
-          <span className="text-white/50">{service.name}</span>
+          <span className="text-gray-900/50">{service.name}</span>
         </div>
 
         <div className="max-w-4xl">
@@ -32,19 +32,19 @@ export default function FunnelHero({ sector, service }: FunnelHeroProps) {
             <span className="font-body text-xs tracking-[0.2em] uppercase" style={{ color: sector.color }}>{sector.shortName}</span>
           </div>
 
-          <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light leading-[1] text-white mb-4">
+          <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light leading-[1] text-gray-900 mb-4">
             {service.heroHeadline}
           </h1>
-          <p className="font-body text-xl text-white/55 max-w-2xl leading-relaxed mb-10">
+          <p className="font-body text-xl text-gray-900/55 max-w-2xl leading-relaxed mb-10">
             {service.heroSub}
           </p>
 
           {/* Social proof */}
           <div className="flex items-center gap-4 mb-10">
             {service.metrics.slice(0, 3).map(m => (
-              <div key={m.label} className="text-center px-5 py-3 rounded-xl border border-white/7 bg-white/3">
+              <div key={m.label} className="text-center px-5 py-3 rounded-xl border border-black/7 bg-white/3">
                 <div className="font-display text-2xl font-semibold" style={{ color: sector.color }}>{m.value}</div>
-                <div className="font-body text-[10px] text-white/35 tracking-wide">{m.label}</div>
+                <div className="font-body text-[10px] text-gray-900/35 tracking-wide">{m.label}</div>
               </div>
             ))}
           </div>
@@ -61,7 +61,7 @@ export default function FunnelHero({ sector, service }: FunnelHeroProps) {
             </Link>
             <a
               href="#pricing"
-              className="inline-flex items-center gap-2 font-body text-sm font-medium px-8 py-4 rounded-xl border border-white/10 text-white/60 hover:border-white/20 hover:text-white transition-all duration-300"
+              className="inline-flex items-center gap-2 font-body text-sm font-medium px-8 py-4 rounded-xl border border-black/10 text-gray-900/60 hover:border-black/20 hover:text-gray-900 transition-all duration-300"
             >
               View Pricing
             </a>

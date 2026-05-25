@@ -20,8 +20,8 @@ export default function SectorHero({ sector }: SectorHeroProps) {
 
       <div className="relative z-10 container-wide mx-auto">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 font-body text-xs text-white/30 mb-8">
-          <Link href="/" className="hover:text-white/60 transition-colors">Home</Link>
+        <div className="flex items-center gap-2 font-body text-xs text-gray-900/30 mb-8">
+          <Link href="/" className="hover:text-gray-900/60 transition-colors">Home</Link>
           <ChevronRight size={12} />
           <span style={{ color: sector.color }}>{sector.shortName}</span>
         </div>
@@ -32,11 +32,11 @@ export default function SectorHero({ sector }: SectorHeroProps) {
             <span className="font-body text-xs tracking-[0.2em] uppercase" style={{ color: sector.color }}>{sector.name}</span>
           </div>
 
-          <h1 className="font-display text-6xl md:text-7xl lg:text-8xl font-light leading-[0.95] text-white mb-6">
+          <h1 className="font-display text-6xl md:text-7xl lg:text-8xl font-light leading-[0.95] text-gray-900 mb-6">
             {sector.heroHeadline}
           </h1>
 
-          <p className="font-body text-xl text-white/55 max-w-2xl leading-relaxed mb-10">
+          <p className="font-body text-xl text-gray-900/55 max-w-2xl leading-relaxed mb-10">
             {sector.heroSub}
           </p>
 
@@ -52,7 +52,7 @@ export default function SectorHero({ sector }: SectorHeroProps) {
             </Link>
             <a
               href="#services"
-              className="inline-flex items-center gap-2 font-body text-sm font-medium px-8 py-4 rounded-xl border border-white/10 text-white/60 hover:border-white/20 hover:text-white transition-all duration-300"
+              className="inline-flex items-center gap-2 font-body text-sm font-medium px-8 py-4 rounded-xl border border-black/10 text-gray-900/60 hover:border-black/20 hover:text-gray-900 transition-all duration-300"
             >
               View Services
             </a>

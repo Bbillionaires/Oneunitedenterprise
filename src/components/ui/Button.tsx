@@ -23,7 +23,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       gold: 'bg-gradient-to-r from-gold-dark via-gold to-gold-light text-base hover:shadow-gold hover:scale-[1.02] active:scale-[0.98]',
       ghost: 'text-gold hover:text-gold-light hover:bg-gold/10',
       outline: 'border border-gold/30 text-gold hover:border-gold/60 hover:bg-gold/5',
-      sector: 'text-white hover:scale-[1.02] active:scale-[0.98]',
+      sector: 'text-gray-900 hover:scale-[1.02] active:scale-[0.98]',
     }
 
     const sectorStyle = variant === 'sector' && sectorColor

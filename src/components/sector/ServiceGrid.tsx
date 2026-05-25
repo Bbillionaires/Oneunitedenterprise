@@ -11,10 +11,10 @@ export default function ServiceGrid({ sector }: ServiceGridProps) {
     <section id="services" className="section-padding container-wide mx-auto px-6">
       <div className="text-center mb-16">
         <SectionLabel color={sector.color} className="justify-center">Our Services</SectionLabel>
-        <h2 className="font-display text-5xl md:text-6xl font-light text-white mb-4">
+        <h2 className="font-display text-5xl md:text-6xl font-light text-gray-900 mb-4">
           What We <span style={{ color: sector.color }}>Deliver</span>
         </h2>
-        <p className="font-body text-white/50 max-w-xl mx-auto">
+        <p className="font-body text-gray-900/50 max-w-xl mx-auto">
           Three specialized service offerings, each engineered for maximum impact.
         </p>
       </div>
@@ -42,13 +42,13 @@ export default function ServiceGrid({ sector }: ServiceGridProps) {
                 style={{ background: `linear-gradient(90deg, transparent, ${sector.color}, transparent)` }}
               />
 
-              <h3 className="font-display text-2xl font-semibold text-white mb-3 leading-tight">{service.name}</h3>
-              <p className="font-body text-sm text-white/50 leading-relaxed mb-6">{service.tagline}</p>
+              <h3 className="font-display text-2xl font-semibold text-gray-900 mb-3 leading-tight">{service.name}</h3>
+              <p className="font-body text-sm text-gray-900/50 leading-relaxed mb-6">{service.tagline}</p>
 
               {/* Pain point preview */}
               <ul className="flex flex-col gap-2 mb-8 flex-1">
                 {service.painPoints.slice(0, 3).map(pp => (
-                  <li key={pp.title} className="flex items-start gap-2 font-body text-sm text-white/45">
+                  <li key={pp.title} className="flex items-start gap-2 font-body text-sm text-gray-900/45">
                     <CheckCircle2 size={14} className="mt-0.5 flex-shrink-0" style={{ color: sector.color }} />
                     {pp.title}
                   </li>

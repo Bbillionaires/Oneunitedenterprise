@@ -16,14 +16,14 @@ export default function PricingSection({ sector, service }: PricingSectionProps)
 
   return (
     <>
-      <section id="pricing" className="section-padding bg-surface/30 border-y border-white/7">
+      <section id="pricing" className="section-padding bg-surface/30 border-y border-black/7">
         <div className="container-wide mx-auto px-6">
           <div className="text-center mb-16">
             <SectionLabel color={sector.color} className="justify-center">Investment</SectionLabel>
-            <h2 className="font-display text-4xl md:text-5xl font-light text-white mb-4">
+            <h2 className="font-display text-4xl md:text-5xl font-light text-gray-900 mb-4">
               Choose Your <span style={{ color: sector.color }}>Package</span>
             </h2>
-            <p className="font-body text-white/50 max-w-xl mx-auto">
+            <p className="font-body text-gray-900/50 max-w-xl mx-auto">
               Transparent pricing. No hidden fees. Cancel anytime.
             </p>
           </div>
@@ -39,7 +39,7 @@ export default function PricingSection({ sector, service }: PricingSectionProps)
                 >
                   {isFeatured && (
                     <div
-                      className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-body font-semibold text-white tracking-wide"
+                      className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-body font-semibold text-gray-900 tracking-wide"
                       style={{ background: sector.color }}
                     >
                       Most Popular
@@ -51,19 +51,19 @@ export default function PricingSection({ sector, service }: PricingSectionProps)
                   )}
 
                   <div className="mb-6">
-                    <h3 className="font-display text-2xl font-semibold text-white mb-1">{pkg.name}</h3>
+                    <h3 className="font-display text-2xl font-semibold text-gray-900 mb-1">{pkg.name}</h3>
                   </div>
 
                   <div className="mb-8">
                     <div className="font-display text-4xl font-light" style={{ color: isFeatured ? sector.color : 'white' }}>
                       {pkg.price}
                     </div>
-                    <div className="font-body text-xs text-white/35 mt-1">{pkg.period}</div>
+                    <div className="font-body text-xs text-gray-900/35 mt-1">{pkg.period}</div>
                   </div>
 
                   <ul className="flex flex-col gap-3 mb-8 flex-1">
                     {pkg.features.map(f => (
-                      <li key={f} className="flex items-start gap-2 font-body text-sm text-white/60">
+                      <li key={f} className="flex items-start gap-2 font-body text-sm text-gray-900/60">
                         <CheckCircle2 size={14} className="mt-0.5 flex-shrink-0" style={{ color: sector.color }} />
                         {f}
                       </li>

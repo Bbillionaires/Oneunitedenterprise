@@ -105,7 +105,7 @@ function hexToRgb(hex: string): { r: number; g: number; b: number } {
 function initStars(w: number, h: number): Star[] {
   const stars: Star[] = [];
   for (let i = 0; i < 300; i++) {
-    const isBlue = Math.random() > 0.5;
+    const isBlue = Math.random() > 0.5; // star colors for light bg
     stars.push({
       x: rand(0, w),
       y: rand(0, h),
@@ -113,8 +113,8 @@ function initStars(w: number, h: number): Star[] {
       twinkleSpeed: rand(0.01, 0.05),
       twinkleOffset: rand(0, Math.PI * 2),
       color: isBlue
-        ? `rgba(${180 + randInt(0, 40)}, ${190 + randInt(0, 40)}, 255, 1)`
-        : `rgba(255, ${220 + randInt(0, 30)}, ${160 + randInt(0, 60)}, 1)`,
+        ? `rgba(${20 + randInt(0, 30)}, ${40 + randInt(0, 30)}, ${130 + randInt(0, 60)}, 1)`
+        : `rgba(${140 + randInt(0, 40)}, ${50 + randInt(0, 30)}, ${10 + randInt(0, 20)}, 1)`,
     });
   }
   return stars;
@@ -178,8 +178,8 @@ function makeAsteroidPoints(): AsteroidPoint[] {
 
 function initAsteroids(w: number, h: number): Asteroid[] {
   return Array.from({ length: 25 }, () => {
-    const gray = randInt(90, 160);
-    const brown = randInt(0, 30);
+    const gray = randInt(40, 100);
+    const brown = randInt(0, 25);
     return {
       x: rand(0, w),
       y: rand(0, h),
@@ -219,10 +219,10 @@ function initPlanets(w: number, h: number): Planet[] {
 
 function drawNebulaClouds(ctx: CanvasRenderingContext2D, w: number, h: number) {
   const nebulas = [
-    { x: w * 0.05, y: h * 0.08, r: w * 0.45, color: '80, 0, 120', opacity: 0.06 },
-    { x: w * 0.9, y: h * 0.88, r: w * 0.4, color: '0, 30, 100', opacity: 0.07 },
-    { x: w * 0.5, y: h * 0.05, r: w * 0.35, color: '180, 130, 0', opacity: 0.04 },
-    { x: w * 0.08, y: h * 0.82, r: w * 0.38, color: '100, 0, 80', opacity: 0.05 },
+    { x: w * 0.05, y: h * 0.08, r: w * 0.45, color: '80, 0, 120', opacity: 0.12 },
+    { x: w * 0.9, y: h * 0.88, r: w * 0.4, color: '0, 30, 100', opacity: 0.13 },
+    { x: w * 0.5, y: h * 0.05, r: w * 0.35, color: '180, 130, 0', opacity: 0.08 },
+    { x: w * 0.08, y: h * 0.82, r: w * 0.38, color: '100, 0, 80', opacity: 0.10 },
   ];
 
   for (const n of nebulas) {
@@ -286,9 +286,9 @@ function drawShootingStars(
     const tailX = ss.x - Math.cos(ss.angle) * ss.length;
     const tailY = ss.y - Math.sin(ss.angle) * ss.length;
     const grad = ctx.createLinearGradient(tailX, tailY, ss.x, ss.y);
-    grad.addColorStop(0, `rgba(255, 255, 255, 0)`);
-    grad.addColorStop(0.6, `rgba(220, 240, 255, ${ss.opacity * 0.4})`);
-    grad.addColorStop(1, `rgba(255, 255, 255, ${ss.opacity})`);
+    grad.addColorStop(0, `rgba(20, 40, 120, 0)`);
+    grad.addColorStop(0.6, `rgba(30, 60, 160, ${ss.opacity * 0.4})`);
+    grad.addColorStop(1, `rgba(20, 40, 120, ${ss.opacity})`);
 
     ctx.beginPath();
     ctx.moveTo(tailX, tailY);
@@ -299,8 +299,8 @@ function drawShootingStars(
 
     // Head glow
     const headGrad = ctx.createRadialGradient(ss.x, ss.y, 0, ss.x, ss.y, 4);
-    headGrad.addColorStop(0, `rgba(255, 255, 255, ${ss.opacity})`);
-    headGrad.addColorStop(1, `rgba(255, 255, 255, 0)`);
+    headGrad.addColorStop(0, `rgba(20, 40, 120, ${ss.opacity})`);
+    headGrad.addColorStop(1, `rgba(20, 40, 120, 0)`);
     ctx.beginPath();
     ctx.arc(ss.x, ss.y, 4, 0, Math.PI * 2);
     ctx.fillStyle = headGrad;
@@ -324,9 +324,9 @@ function drawComets(ctx: CanvasRenderingContext2D, comets: Comet[], w: number, h
     const tailEndY = c.y - Math.sin(angle) * c.tailLength;
 
     const grad = ctx.createLinearGradient(tailEndX, tailEndY, c.x, c.y);
-    grad.addColorStop(0, 'rgba(200, 220, 255, 0)');
-    grad.addColorStop(0.7, 'rgba(200, 220, 255, 0.15)');
-    grad.addColorStop(1, 'rgba(255, 255, 255, 0.9)');
+    grad.addColorStop(0, 'rgba(20, 40, 130, 0)');
+    grad.addColorStop(0.7, 'rgba(30, 60, 160, 0.15)');
+    grad.addColorStop(1, 'rgba(20, 40, 130, 0.85)');
 
     ctx.beginPath();
     ctx.moveTo(tailEndX, tailEndY);
@@ -337,9 +337,9 @@ function drawComets(ctx: CanvasRenderingContext2D, comets: Comet[], w: number, h
 
     // Head glow
     const glow = ctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, 8);
-    glow.addColorStop(0, 'rgba(255, 255, 255, 0.9)');
-    glow.addColorStop(0.4, 'rgba(180, 210, 255, 0.4)');
-    glow.addColorStop(1, 'rgba(180, 210, 255, 0)');
+    glow.addColorStop(0, 'rgba(20, 40, 130, 0.85)');
+    glow.addColorStop(0.4, 'rgba(30, 60, 160, 0.4)');
+    glow.addColorStop(1, 'rgba(30, 60, 160, 0)');
     ctx.beginPath();
     ctx.arc(c.x, c.y, 8, 0, Math.PI * 2);
     ctx.fillStyle = glow;
@@ -375,7 +375,7 @@ function drawAsteroids(ctx: CanvasRenderingContext2D, asteroids: Asteroid[], w: 
     ctx.closePath();
     ctx.fillStyle = a.color;
     ctx.fill();
-    ctx.strokeStyle = 'rgba(200,200,200,0.15)';
+    ctx.strokeStyle = 'rgba(40,40,40,0.2)';
     ctx.lineWidth = 0.5;
     ctx.stroke();
 
@@ -648,17 +648,17 @@ function drawMoon(
 
   const moonRadius = 12;
 
-  // Silver-blue glow
+  // Navy-indigo glow (visible on white bg)
   const glow = ctx.createRadialGradient(mx, my, 0, mx, my, moonRadius * 2.5);
-  glow.addColorStop(0, 'rgba(200, 215, 255, 0.25)');
-  glow.addColorStop(0.5, 'rgba(160, 180, 230, 0.1)');
-  glow.addColorStop(1, 'rgba(100, 120, 200, 0)');
+  glow.addColorStop(0, 'rgba(40, 60, 160, 0.25)');
+  glow.addColorStop(0.5, 'rgba(50, 70, 170, 0.1)');
+  glow.addColorStop(1, 'rgba(30, 50, 140, 0)');
   ctx.beginPath();
   ctx.arc(mx, my, moonRadius * 2.5, 0, Math.PI * 2);
   ctx.fillStyle = glow;
   ctx.fill();
 
-  // Moon body
+  // Moon body — dark navy so it's visible on white
   const moonGrad = ctx.createRadialGradient(
     mx - moonRadius * 0.2,
     my - moonRadius * 0.2,
@@ -667,20 +667,20 @@ function drawMoon(
     my,
     moonRadius
   );
-  moonGrad.addColorStop(0, 'rgba(220, 230, 255, 1)');
-  moonGrad.addColorStop(0.6, 'rgba(180, 195, 230, 1)');
-  moonGrad.addColorStop(1, 'rgba(130, 150, 200, 1)');
+  moonGrad.addColorStop(0, 'rgba(80, 100, 190, 1)');
+  moonGrad.addColorStop(0.6, 'rgba(50, 65, 155, 1)');
+  moonGrad.addColorStop(1, 'rgba(30, 40, 110, 1)');
   ctx.beginPath();
   ctx.arc(mx, my, moonRadius, 0, Math.PI * 2);
   ctx.fillStyle = moonGrad;
   ctx.fill();
 
-  // Crescent shadow — dark circle offset to create illusion
+  // Crescent shadow — warm white offset circle to create crescent illusion on white bg
   const shadowOffsetX = moonRadius * 0.45;
   const shadowOffsetY = moonRadius * 0.1;
   ctx.beginPath();
   ctx.arc(mx + shadowOffsetX, my + shadowOffsetY, moonRadius * 0.88, 0, Math.PI * 2);
-  ctx.fillStyle = 'rgba(5, 5, 20, 0.92)';
+  ctx.fillStyle = 'rgba(253, 252, 248, 0.95)';
   ctx.fill();
 }
 
@@ -729,7 +729,7 @@ export default function SpaceBackground() {
       if (!ctx) return;
 
       // Clear
-      ctx.fillStyle = '#07070F';
+      ctx.fillStyle = '#FDFCF8';
       ctx.fillRect(0, 0, w, h);
 
       // Layer 1: Nebula clouds (fixed background depth)

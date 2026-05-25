@@ -11,11 +11,11 @@ export default function FAQSection({ sector, service }: FAQSectionProps) {
   const [open, setOpen] = useState<number | null>(0)
 
   return (
-    <section className="section-padding bg-surface/30 border-t border-white/7">
+    <section className="section-padding bg-surface/30 border-t border-black/7">
       <div className="container-narrow mx-auto px-6">
         <div className="text-center mb-12">
           <SectionLabel color={sector.color} className="justify-center">FAQ</SectionLabel>
-          <h2 className="font-display text-4xl md:text-5xl font-light text-white">
+          <h2 className="font-display text-4xl md:text-5xl font-light text-gray-900">
             Common <span style={{ color: sector.color }}>Questions</span>
           </h2>
         </div>
@@ -24,23 +24,23 @@ export default function FAQSection({ sector, service }: FAQSectionProps) {
           {service.faq.map((item, i) => (
             <div
               key={item.q}
-              className="rounded-2xl border border-white/7 bg-card/60 overflow-hidden transition-all duration-300"
+              className="rounded-2xl border border-black/7 bg-card/60 overflow-hidden transition-all duration-300"
               style={open === i ? { borderColor: `${sector.color}30` } : {}}
             >
               <button
                 onClick={() => setOpen(open === i ? null : i)}
                 className="w-full flex items-center justify-between gap-4 px-7 py-5 text-left"
               >
-                <span className="font-body text-sm font-semibold text-white">{item.q}</span>
+                <span className="font-body text-sm font-semibold text-gray-900">{item.q}</span>
                 <ChevronDown
                   size={16}
-                  className={cn('flex-shrink-0 transition-transform duration-300 text-white/40', open === i && 'rotate-180')}
+                  className={cn('flex-shrink-0 transition-transform duration-300 text-gray-900/40', open === i && 'rotate-180')}
                   style={open === i ? { color: sector.color } : {}}
                 />
               </button>
               {open === i && (
                 <div className="px-7 pb-5">
-                  <p className="font-body text-sm text-white/55 leading-relaxed">{item.a}</p>
+                  <p className="font-body text-sm text-gray-900/55 leading-relaxed">{item.a}</p>
                 </div>
               )}
             </div>
