@@ -7,6 +7,7 @@ import { type Sector, type Service } from '@/data/config'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import LeadForm from '@/components/funnel/LeadForm'
+import PricingSection from '@/components/funnel/PricingSection'
 
 // ─── Service Selector Card ─────────────────────────────────────────────────
 function ServiceCard({
@@ -184,6 +185,9 @@ export default function SectorFunnelClient({ sector }: { sector: Sector }) {
 
         {/* ── Pain Points ─────────────────────────────────────────── */}
         <div id="pain-points"><PainPointsSection sector={sector} service={selectedService} /></div>
+
+        {/* ── Pricing ─────────────────────────────────────────────── */}
+        <PricingSection sector={sector} service={selectedService} />
 
         {/* ── Lead Form ───────────────────────────────────────────── */}
         <div id="lead-form" className="py-8"><LeadForm sector={sector} service={selectedService} /></div>
