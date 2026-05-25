@@ -383,7 +383,7 @@ export const SECTORS: Sector[] = [
   // 3. GLOBAL NON PROFIT
   // ─────────────────────────────────────────────────────────────
   {
-    id: 'nonprofit', name: 'Community & Social Impact', shortName: 'Community',
+    id: 'nonprofit', name: 'Community & Global Social Impact', shortName: 'Community',
     tagline: 'Workforce development, community programs, and grant strategy that transform lives and build lasting legacies.',
     heroHeadline: 'Real Change Requires Real Infrastructure.',
     heroSub: 'Greenwood 100 Inc — a global 501(c)(3) building pathways to education, employment, and economic independence for communities worldwide.',
@@ -703,7 +703,7 @@ export const SECTORS: Sector[] = [
   // 5. INVESTMENT & ACQUISITION
   // ─────────────────────────────────────────────────────────────
   {
-    id: 'investment', name: 'Capital & Finance', shortName: 'Finance',
+    id: 'investment', name: 'Funding & Investment Opportunities', shortName: 'Investment',
     tagline: 'Strategic capital deployment, acquisition advisory, and real estate that builds generational wealth.',
     heroHeadline: 'Capital Doesn\'t Create Opportunity. Vision Does.',
     heroSub: 'Multi-industry investment and acquisition expertise that identifies, evaluates, and closes deals other investors miss — from business acquisitions and capital raises to real estate and strategic assets.',
