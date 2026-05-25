@@ -46,6 +46,7 @@ const MEDI = { color: '#10C98F', dark: '#047A56', bg: 'rgba(16,201,143,0.08)', g
 const INVT = { color: '#F97316', dark: '#8B3A00', bg: 'rgba(249,115,22,0.08)', glow: 'rgba(249,115,22,0.25)' }
 const FOUN = { color: '#C4845A', dark: '#7A3E18', bg: 'rgba(196,132,90,0.08)', glow: 'rgba(196,132,90,0.25)' }
 const TEAM = { color: '#5BA8A0', dark: '#1C5E58', bg: 'rgba(91,168,160,0.08)', glow: 'rgba(91,168,160,0.25)' }
+const TECH = { color: '#00C8FF', dark: '#006B87', bg: 'rgba(0,200,255,0.08)', glow: 'rgba(0,200,255,0.22)' }
 
 // ── Shared placeholder testimonials ───────────────────────
 const t = (name: string, title: string, company: string, quote: string, result: string): Testimonial =>
@@ -860,7 +861,167 @@ export const SECTORS: Sector[] = [
   },
 
   // ─────────────────────────────────────────────────────────────
-  // 6. MY STORY — Founder's Personal Narrative
+  // 6. TECHNOLOGY & RESEARCH DATA
+  // ─────────────────────────────────────────────────────────────
+  {
+    id: 'technology', name: 'Technology & Research Data', shortName: 'Technology',
+    tagline: 'Data intelligence, AI solutions, and research-driven technology that powers every sector of a modern economy.',
+    heroHeadline: 'The Civilization That Controls Data Controls the Future.',
+    heroSub: 'We build the data infrastructure, AI systems, and research frameworks that give organizations an unfair advantage — turning raw information into precision decisions.',
+    color: TECH.color, colorDark: TECH.dark, colorBg: TECH.bg, glow: TECH.glow,
+    gradient: 'from-cyan-950 via-sky-950 to-black',
+    cardGradient: 'from-cyan-900/40 via-sky-900/20 to-transparent',
+    icon: '🔬',
+    stats: [
+      { label: 'Data Points Processed', value: '1.2', suffix: 'B+' },
+      { label: 'AI Models Deployed', value: '80', suffix: '+' },
+      { label: 'Avg. Decision Speed', value: '94', suffix: '% faster' },
+      { label: 'Research Projects', value: '200', suffix: '+' },
+    ],
+    services: [
+      // ── Service 1 ──────────────────────────────────────────
+      {
+        id: 'data-analytics',
+        name: 'Data Analytics & Business Intelligence',
+        tagline: 'Turn Raw Data Into Revenue-Generating Decisions',
+        heroHeadline: 'Your Competitors Are Reading the Future. Are You Still Guessing?',
+        heroSub: 'We design and deploy custom data analytics pipelines, dashboards, and BI systems that transform scattered data into clear, actionable intelligence — so every decision is backed by evidence.',
+        painPoints: [
+          { icon: '🌊', title: 'Drowning in Data, Starving for Insights', desc: 'Your business generates thousands of data points daily but none of it connects into a coherent picture that drives action.' },
+          { icon: '⏳', title: 'Decisions Made on Gut Feeling', desc: 'Without real-time dashboards and predictive models, leadership is flying blind and reacting to problems instead of anticipating them.' },
+          { icon: '🔀', title: 'Siloed Systems That Don\'t Talk', desc: 'CRM, finance, ops, and marketing all live in separate tools with no unified view — leaving massive blind spots in performance.' },
+        ],
+        solution: 'We architect end-to-end data systems — from ingestion and warehousing to visualization and predictive analytics — giving your leadership team a single source of truth and the intelligence to act on it.',
+        process: [
+          { step: 1, title: 'Data Audit & Source Mapping', desc: 'We map every data source across your organization and identify gaps, redundancies, and untapped intelligence opportunities.', duration: 'Week 1' },
+          { step: 2, title: 'Pipeline Architecture', desc: 'Design and build automated data pipelines that consolidate, clean, and enrich your data in real time.', duration: 'Week 2–3' },
+          { step: 3, title: 'Warehouse & Modeling', desc: 'Stand up a cloud data warehouse and build semantic data models aligned to your KPIs and business questions.', duration: 'Week 3–4' },
+          { step: 4, title: 'Dashboard & Visualization', desc: 'Deliver executive dashboards, departmental scorecards, and drill-down reports that surface the metrics that matter.', duration: 'Week 5–6' },
+          { step: 5, title: 'Predictive Layer & Training', desc: 'Add forecasting models, anomaly detection, and team training so your organization can sustain and extend the system.', duration: 'Week 7–8' },
+        ],
+        packages: [
+          { name: 'Insight', price: '4,997', period: 'one-time setup', highlight: false, cta: 'Get Started',
+            features: ['Data Audit (up to 5 sources)', 'Automated ETL Pipeline', 'Cloud Data Warehouse Setup', 'Executive Dashboard (10 KPIs)', '2 Department Scorecards', '30-Day Hypercare Support'] },
+          { name: 'Intelligence', price: '9,997', period: 'one-time + $1,497/mo', highlight: true, cta: 'Apply Now',
+            features: ['Unlimited Data Sources', 'Real-Time Streaming Pipelines', 'Predictive Forecasting Models', 'Unlimited Dashboards & Reports', 'Anomaly Detection Alerts', 'Monthly Model Retraining', 'Dedicated Data Analyst', 'Quarterly Strategy Reviews'] },
+          { name: 'Enterprise', price: 'Custom', period: 'annual contract', highlight: false, cta: 'Book a Call',
+            features: ['Full Data Platform Build-Out', 'AI-Powered BI Layer', 'Custom ML Model Development', 'Data Governance Framework', 'Embedded Analytics in Products', 'Dedicated Data Engineering Team', 'SLA-Backed Uptime & Support', 'C-Suite Data Strategy Advisory'] },
+        ],
+        testimonials: [
+          t('Priya S.', 'VP of Operations', 'LogiCore Systems', 'We went from monthly Excel reports to real-time dashboards in 6 weeks. Leadership now makes decisions in hours that used to take weeks.', '10x faster decision cycles'),
+          t('James O.', 'CFO', 'Meridian Health Group', 'The predictive model they built forecasted our Q3 revenue within 2% accuracy. We restructured our hiring plan based on it and saved $800K.', '$800K in avoided overhire costs'),
+          t('Alicia M.', 'Director of Growth', 'NovaSpark Retail', 'Finally, one dashboard that shows everything — sales, inventory, marketing, and customer behavior — all in one place. Game changing.', '360° business visibility achieved'),
+        ],
+        faq: [
+          { q: 'What data tools do you work with?', a: 'We work across the major stack: BigQuery, Snowflake, Databricks, dbt, Fivetran, Airbyte, Looker, Metabase, Power BI, Tableau, and custom solutions.' },
+          { q: 'Do we need a data team to maintain this?', a: 'No. Our Intelligence package includes a dedicated analyst. For the Insight package we document everything and provide training so your team can manage it.' },
+          { q: 'How long until we see results?', a: 'Most clients have a working dashboard within 3–4 weeks of kickoff. Full predictive layers are live within 8 weeks.' },
+          { q: 'Can you integrate with our existing CRM and tools?', a: 'Yes. We\'ve integrated with Salesforce, HubSpot, Stripe, QuickBooks, Shopify, and 50+ other platforms via native connectors and custom APIs.' },
+          { q: 'Is our data secure?', a: 'All data is encrypted in transit and at rest. We implement role-based access controls, audit logging, and comply with SOC 2, HIPAA, and GDPR requirements as needed.' },
+        ],
+        metrics: [{ label: 'Setup Time', value: '6–8 Weeks' }, { label: 'Avg. ROI', value: '8.3x Year 1' }, { label: 'Data Sources Supported', value: '50+' }],
+        calendlyUrl: 'https://calendly.com/oneunitedenterprise/technology-strategy',
+      },
+      // ── Service 2 ──────────────────────────────────────────
+      {
+        id: 'ai-solutions',
+        name: 'AI Solutions & Custom Technology',
+        tagline: 'Purpose-Built AI That Solves Real Problems and Scales With You',
+        heroHeadline: 'Off-the-Shelf AI Won\'t Give You an Edge. Custom AI Will.',
+        heroSub: 'We design, build, and deploy custom artificial intelligence systems — from machine learning models and NLP pipelines to computer vision and intelligent automation — engineered specifically for your industry and use case.',
+        painPoints: [
+          { icon: '🤖', title: 'Generic AI Tools Don\'t Fit Your Workflow', desc: 'ChatGPT and off-the-shelf tools create buzz but can\'t be trained on your proprietary data or integrated deeply into your operations.' },
+          { icon: '📉', title: 'Manual Processes Eating Profit Margins', desc: 'Repetitive, high-volume tasks are consuming your team\'s time and introducing costly human error at scale.' },
+          { icon: '🔒', title: 'Falling Behind AI-Native Competitors', desc: 'Every quarter you delay building AI capabilities is another quarter competitors use to widen the gap in speed, cost, and output quality.' },
+        ],
+        solution: 'We build AI systems from scratch on your data, integrated into your stack, solving your specific bottlenecks — not generic problems. From model training to deployment and monitoring, we own the full lifecycle.',
+        process: [
+          { step: 1, title: 'Use Case Discovery & ROI Modeling', desc: 'Identify the highest-impact AI opportunities across your organization and model the expected return on each.', duration: 'Week 1' },
+          { step: 2, title: 'Data Preparation & Model Architecture', desc: 'Prepare training data, select model architecture, and define evaluation metrics tied to business outcomes.', duration: 'Week 2–4' },
+          { step: 3, title: 'Model Training & Validation', desc: 'Train, test, and validate models against held-out data. Iterate until accuracy and reliability benchmarks are met.', duration: 'Week 4–7' },
+          { step: 4, title: 'Integration & Deployment', desc: 'Deploy models to production via API or embedded in your existing software. Full CI/CD pipeline for model updates.', duration: 'Week 7–9' },
+          { step: 5, title: 'Monitoring & Continuous Improvement', desc: 'Ongoing model performance monitoring, drift detection, retraining schedules, and capability expansion.', duration: 'Ongoing' },
+        ],
+        packages: [
+          { name: 'Build', price: '14,997', period: 'per project', highlight: false, cta: 'Get Started',
+            features: ['1 Custom AI Model', 'Data Preparation & Cleaning', 'Model Training & Validation', 'REST API Deployment', 'Integration with 1 System', '90-Day Post-Launch Support', 'Model Performance Dashboard'] },
+          { name: 'Scale', price: '29,997', period: 'per project', highlight: true, cta: 'Apply Now',
+            features: ['Up to 5 AI Models', 'Custom Training Data Pipeline', 'Fine-Tuning on Proprietary Data', 'Multi-System Integration', 'Real-Time Inference API', 'Automated Retraining Pipeline', 'Dedicated ML Engineer', 'Quarterly Capability Reviews'] },
+          { name: 'Enterprise', price: 'Custom', period: 'retainer', highlight: false, cta: 'Book a Call',
+            features: ['Unlimited AI System Development', 'On-Premise or Private Cloud Deploy', 'Custom LLM Fine-Tuning', 'Computer Vision & NLP Systems', 'Embedded AI Product Features', 'AI Governance Framework', 'Dedicated Engineering Pod', 'Board-Level AI Strategy Advisory'] },
+        ],
+        testimonials: [
+          t('Devon K.', 'CTO', 'FinPath Capital', 'Their underwriting AI reduced our loan review time from 4 days to 23 minutes while improving accuracy by 31%. That\'s a completely different business model.', '23-min underwriting vs 4 days'),
+          t('Nadia T.', 'CEO', 'Omni Logistics', 'The route optimization model they built saves us $180K per month in fuel and labor. It paid for itself in 11 days.', '$180K/month in cost savings'),
+          t('Marcus W.', 'Head of Product', 'Strata Health', 'We embedded their clinical NLP into our EHR. Physicians now get AI-generated SOAP notes in real time. Patient throughput is up 40%.', '+40% patient throughput'),
+        ],
+        faq: [
+          { q: 'Do we need our own data to build a custom AI?', a: 'Yes, in most cases. We help you identify, collect, and prepare the training data. If your dataset is small, we use transfer learning and synthetic data augmentation strategies.' },
+          { q: 'How is this different from using OpenAI or Google AI?', a: 'Those are foundation models. We fine-tune them on your proprietary data or build entirely custom models — giving you IP you own, results tuned to your use case, and security you control.' },
+          { q: 'What industries do you serve?', a: 'Healthcare, finance, logistics, legal, real estate, manufacturing, retail, and media. If you have data and a repeatable problem, AI can help.' },
+          { q: 'How do you handle data privacy?', a: 'All client data is isolated. We use on-premise training for highly sensitive use cases and implement full data governance policies aligned to HIPAA, GDPR, and SOC 2.' },
+          { q: 'What if the model underperforms after launch?', a: 'Our support window covers retraining and performance remediation. Long-term clients on retainer get continuous improvement included in their contract.' },
+        ],
+        metrics: [{ label: 'Avg. Automation Rate', value: '73%' }, { label: 'Models in Production', value: '80+' }, { label: 'Avg. Accuracy', value: '94.2%' }],
+        calendlyUrl: 'https://calendly.com/oneunitedenterprise/technology-strategy',
+      },
+      // ── Service 3 ──────────────────────────────────────────
+      {
+        id: 'research-strategy',
+        name: 'Research & Innovation Strategy',
+        tagline: 'Evidence-Based Research That Powers Smarter Products, Policy, and Investment',
+        heroHeadline: 'Strategy Without Research Is Just Opinion.',
+        heroSub: 'We conduct rigorous primary and secondary research — market studies, competitive landscapes, technology assessments, policy analysis — and translate findings into clear strategic direction for enterprises, institutions, and investors.',
+        painPoints: [
+          { icon: '🎲', title: 'Decisions Based on Incomplete Information', desc: 'Leadership is making million-dollar calls on market entry, product direction, or capital deployment without a research foundation to back them up.' },
+          { icon: '🔍', title: 'No Visibility Into Emerging Technologies', desc: 'The pace of technological change means your industry is being disrupted before you even know where to look — leaving you reactive instead of strategic.' },
+          { icon: '📊', title: 'Data Without Context Is Noise', desc: 'You may have access to data but lack the analytical frameworks to extract strategic meaning and translate it into a clear action plan.' },
+        ],
+        solution: 'We combine academic rigor with strategic consulting to deliver research that doesn\'t just describe the landscape — it tells you exactly what to do next, with the evidence to back every recommendation.',
+        process: [
+          { step: 1, title: 'Research Scoping & Hypothesis Design', desc: 'Define research questions, success criteria, and the analytical frameworks that will drive meaningful conclusions.', duration: 'Week 1' },
+          { step: 2, title: 'Primary Research', desc: 'Surveys, expert interviews, field studies, and ethnographic research gathering first-party data directly from your target population.', duration: 'Week 2–4' },
+          { step: 3, title: 'Secondary Research & Synthesis', desc: 'Deep review of academic literature, industry reports, regulatory filings, patent databases, and competitive intelligence sources.', duration: 'Week 3–5' },
+          { step: 4, title: 'Analytical Modeling', desc: 'Statistical analysis, trend modeling, scenario planning, and competitive benchmarking to extract strategic signals from the data.', duration: 'Week 5–6' },
+          { step: 5, title: 'Strategic Report & Briefing', desc: 'Delivery of executive research report with ranked recommendations, implementation roadmap, and live briefing with Q&A.', duration: 'Week 7' },
+        ],
+        packages: [
+          { name: 'Rapid Report', price: '3,997', period: 'one-time', highlight: false, cta: 'Order Now',
+            features: ['Focused Research Brief (1 topic)', 'Secondary Research & Analysis', 'Competitive Landscape Snapshot', 'Executive Summary (20–30 pages)', '5 Strategic Recommendations', '1 Briefing Session'] },
+          { name: 'Deep Research', price: '8,997', period: 'one-time', highlight: true, cta: 'Apply Now',
+            features: ['Full-Scope Research Study', 'Primary + Secondary Research', 'Expert Interview Program (10+)', 'Statistical Data Modeling', 'Scenario & Risk Analysis', 'Full Report (60–100 pages)', 'Implementation Roadmap', '3 Executive Briefings'] },
+          { name: 'Ongoing Intelligence', price: 'Custom', period: 'quarterly retainer', highlight: false, cta: 'Book a Call',
+            features: ['Continuous Market Monitoring', 'Quarterly Research Briefings', 'Technology Horizon Scanning', 'Regulatory & Policy Watch', 'Competitive Intelligence Updates', 'Custom Research on Demand', 'Dedicated Research Director', 'Board Presentation Support'] },
+        ],
+        testimonials: [
+          t('Claire B.', 'Managing Partner', 'Apex Ventures', 'Their technology landscape report on health-tech was the most comprehensive I\'ve seen outside of a top-tier consulting firm — at a fraction of the price.', 'Informed $12M investment decision'),
+          t('Tariq A.', 'Chief Strategy Officer', 'MedCore Alliance', 'The market entry research they conducted saved us from a $3M mistake. The competitive dynamics were completely different from our assumptions.', '$3M in avoided market entry losses'),
+          t('Yasmin L.', 'Director of Innovation', 'City of Atlanta (Partner)', 'We commissioned a workforce technology study for our economic development plan. The findings shaped a $40M municipal grant application.', 'Informed $40M grant application'),
+        ],
+        faq: [
+          { q: 'How is this different from hiring a research analyst?', a: 'We bring a multidisciplinary research team — economists, data scientists, industry specialists, and strategists — for the duration of the project, without the overhead of a full-time hire.' },
+          { q: 'What topics do you research?', a: 'Market sizing & entry, technology assessment, competitive intelligence, consumer behavior, policy & regulation, workforce & labor, industry disruption, and investment due diligence.' },
+          { q: 'How do you ensure research quality?', a: 'All findings are peer-reviewed internally before delivery. We cite every source, document our methodology, and our work can withstand board-level scrutiny.' },
+          { q: 'Can research be used for grant applications or investor materials?', a: 'Yes. Many clients commission research specifically to support grant applications, investor decks, regulatory filings, or strategic plans.' },
+          { q: 'How quickly can you deliver?', a: 'Rapid Reports are delivered in 3 weeks. Deep Research studies take 6–8 weeks. Rush timelines are available for critical decisions.' },
+        ],
+        metrics: [{ label: 'Avg. Delivery Time', value: '6–7 Weeks' }, { label: 'Research Projects', value: '200+' }, { label: 'Avg. Client NPS', value: '91' }],
+        calendlyUrl: 'https://calendly.com/oneunitedenterprise/technology-strategy',
+      },
+    ],
+    testimonials: [
+      t('Devon K.', 'CTO', 'FinPath Capital', 'Their AI and data work completely transformed how we underwrite. We\'re 3 years ahead of where we would have been otherwise.', 'Full technology transformation'),
+      t('Priya S.', 'VP Operations', 'LogiCore Systems', 'Every major decision we make now starts with the dashboards they built. Data is no longer a department — it\'s our operating system.', 'Data-first organization achieved'),
+    ],
+    caseStudies: [
+      { title: 'AI Underwriting Reduces Review Time 97%', industry: 'FinTech', result: '4 days → 23 minutes', description: 'Custom ML model trained on 50K historical loan decisions. Deployed in 9 weeks. 31% improvement in default prediction accuracy.' },
+      { title: 'Unified BI Platform for 8-Brand Retailer', industry: 'Retail', result: '$2.4M in recovered revenue', description: 'Consolidated 14 data sources into a single warehouse. Real-time inventory and margin dashboards surfaced $2.4M in pricing leakage within 60 days.' },
+    ],
+    partnerships: ['AWS Advanced Partner', 'Google Cloud Partner', 'Snowflake Partner', 'Databricks Partner', 'OpenAI API Partner'],
+  },
+
+  // ─────────────────────────────────────────────────────────────
+  // 7. MY STORY — Founder's Personal Narrative
   // ─────────────────────────────────────────────────────────────
   {
     id: 'founder', name: 'My Story', shortName: 'My Story',
