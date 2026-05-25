@@ -1,100 +1,128 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowDown, ArrowRight, CheckCircle2, ChevronRight } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 import { type Sector, type Service } from '@/data/config'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
-import LeadForm from '@/components/funnel/LeadForm'
-import PricingSection from '@/components/funnel/PricingSection'
 
-// ─── Service Selector Card ─────────────────────────────────────────────────
-function ServiceCard({
-  service, sector, selected, index, onClick,
+// ─── Black Hole Overlay ────────────────────────────────────────────────────
+function BlackHoleOverlay({ color }: { color: string }) {
+  return (
+    <div className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-black">
+      {/* Spinning concentric rings */}
+      {[0, 1, 2, 3, 4].map(i => (
+        <div
+          key={i}
+          className="absolute rounded-full border-2"
+          style={{
+            width:  80 + i * 56,
+            height: 80 + i * 56,
+            borderColor: i === 0 ? color : `rgba(212,162,23,${0.55 - i * 0.1})`,
+            animation: `spin ${0.35 + i * 0.12}s linear infinite ${i % 2 === 0 ? 'normal' : 'reverse'}`,
+          }}
+        />
+      ))}
+
+      {/* Event horizon */}
+      <div
+        className="relative z-10 w-20 h-20 rounded-full flex items-center justify-center"
+        style={{ background: 'radial-gradient(circle, #0a0012 40%, #1a0020 100%)' }}
+      >
+        <div
+          className="w-10 h-10 rounded-full animate-pulse"
+          style={{ background: 'radial-gradient(circle, #050008, #000)' }}
+        />
+      </div>
+
+      <p className="absolute bottom-16 font-body text-[11px] tracking-[0.45em] uppercase animate-pulse"
+        style={{ color: 'rgba(212,162,23,0.5)' }}>
+        Entering the system…
+      </p>
+    </div>
+  )
+}
+
+// ─── Star Card ────────────────────────────────────────────────────────────
+function StarCard({
+  service, sector, index, onClick,
 }: {
-  service: Service; sector: Sector; selected: boolean; index: number; onClick: () => void
+  service: Service; sector: Sector; index: number; onClick: () => void
 }) {
   return (
     <button
       onClick={onClick}
-      className="w-full text-left rounded-2xl border transition-all duration-300 p-6 md:p-8 relative overflow-hidden focus:outline-none"
+      className="group w-full text-left rounded-2xl border p-8 relative overflow-hidden transition-all duration-400 hover:-translate-y-2 focus:outline-none"
       style={{
-        borderColor: selected ? sector.color : 'rgba(255,255,255,0.07)',
-        background: selected
-          ? `linear-gradient(135deg, ${sector.color}15 0%, rgba(10,10,10,0.95) 70%)`
-          : 'rgba(255,255,255,0.02)',
-        boxShadow: selected ? `0 0 32px ${sector.glow}, inset 0 1px 0 ${sector.color}20` : 'none',
+        borderColor: `${sector.color}28`,
+        background: `radial-gradient(ellipse at 50% 0%, ${sector.color}12 0%, rgba(5,5,14,0.97) 65%)`,
       }}
     >
+      {/* Top accent line */}
       <div
-        className="absolute top-0 left-0 right-0 h-px transition-opacity duration-300"
-        style={{ background: `linear-gradient(90deg, transparent, ${sector.color}, transparent)`, opacity: selected ? 1 : 0 }}
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-0 h-px transition-all duration-500 group-hover:w-full"
+        style={{ background: `linear-gradient(90deg, transparent, ${sector.color}, transparent)` }}
       />
+
+      {/* Hover glow */}
       <div
-        className="w-9 h-9 rounded-xl flex items-center justify-center font-display text-sm font-semibold mb-5 transition-all duration-300"
-        style={{
-          background: selected ? `${sector.color}30` : `${sector.color}10`,
-          color: sector.color,
-          border: `1px solid ${selected ? sector.color + '60' : sector.color + '20'}`,
-        }}
-      >
-        {String(index + 1).padStart(2, '0')}
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{ background: `radial-gradient(ellipse at top, ${sector.glow} 0%, transparent 60%)` }}
+      />
+
+      {/* Star marker */}
+      <div className="relative z-10 flex items-center gap-3 mb-5">
+        <div
+          className="flex items-center justify-center w-10 h-10 rounded-full text-lg font-bold transition-transform duration-300 group-hover:scale-110"
+          style={{ background: `${sector.color}20`, border: `1.5px solid ${sector.color}50`, color: sector.color }}
+        >
+          ★
+        </div>
+        <span
+          className="font-body text-[10px] tracking-[0.25em] uppercase"
+          style={{ color: sector.color }}
+        >
+          Star {String(index + 1).padStart(2, '0')}
+        </span>
       </div>
-      <h3 className="font-display text-xl font-semibold text-white mb-2 leading-tight">{service.name}</h3>
-      <p className="font-body text-sm text-white/50 leading-relaxed mb-5">{service.tagline}</p>
-      <ul className="flex flex-col gap-2">
+
+      <h3 className="font-display text-xl font-semibold text-white mb-2 leading-tight relative z-10">
+        ★ {service.name}
+      </h3>
+      <p className="font-body text-sm text-white/50 leading-relaxed mb-6 relative z-10">
+        {service.tagline}
+      </p>
+
+      {/* Key pain points as bullets */}
+      <ul className="flex flex-col gap-2 mb-6 relative z-10">
         {service.painPoints.slice(0, 3).map(pp => (
           <li key={pp.title} className="flex items-start gap-2 font-body text-xs text-white/40">
-            <CheckCircle2 size={12} className="mt-0.5 flex-shrink-0" style={{ color: selected ? sector.color : 'rgba(255,255,255,0.3)' }} />
+            <span className="mt-0.5 flex-shrink-0" style={{ color: sector.color }}>✦</span>
             {pp.title}
           </li>
         ))}
       </ul>
-      {selected && (
-        <div className="mt-5 inline-flex items-center gap-1.5 font-body text-xs font-semibold px-3 py-1.5 rounded-full" style={{ background: `${sector.color}20`, color: sector.color }}>
-          <span className="w-1.5 h-1.5 rounded-full" style={{ background: sector.color }} />
-          Selected
-        </div>
-      )}
+
+      {/* CTA */}
+      <div
+        className="relative z-10 inline-flex items-center gap-2 font-body text-xs font-semibold px-5 py-2.5 rounded-xl transition-all duration-300 group-hover:gap-3"
+        style={{ background: `${sector.color}18`, border: `1px solid ${sector.color}40`, color: sector.color }}
+      >
+        Enter This Star <ChevronRight size={14} />
+      </div>
     </button>
   )
 }
 
-// ─── Pain Points Section ───────────────────────────────────────────────────
-function PainPointsSection({ sector, service }: { sector: Sector; service: Service }) {
-  if (!service.painPoints?.length) return null
-  return (
-    <section className="py-20 bg-white/[0.02] border-y border-white/7">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border mb-4 font-body text-xs tracking-[0.2em] uppercase" style={{ borderColor: `${sector.color}30`, background: `${sector.color}10`, color: sector.color }}>
-            The Problem
-          </div>
-          <h2 className="font-display text-4xl md:text-5xl font-light text-white mb-3">Sound <span className="text-white/35">Familiar?</span></h2>
-          <p className="font-body text-white/45 max-w-lg mx-auto text-sm leading-relaxed">{service.solution}</p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {service.painPoints.map(pp => (
-            <div key={pp.title} className="rounded-2xl border border-white/7 p-7" style={{ background: 'rgba(255,255,255,0.02)' }}>
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl mb-5" style={{ background: `${sector.color}12`, border: `1px solid ${sector.color}20` }}>{pp.icon}</div>
-              <h3 className="font-display text-lg font-semibold text-white mb-2">{pp.title}</h3>
-              <p className="font-body text-sm text-white/45 leading-relaxed">{pp.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// ─── JSON-LD Structured Data ───────────────────────────────────────────────
+// ─── JSON-LD ───────────────────────────────────────────────────────────────
 function ServiceJsonLd({ sector }: { sector: Sector }) {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
     name: sector.name,
-    description: sector.heroSub,
+    description: sector.tagline,
     provider: {
       '@type': 'Organization',
       name: 'One United Enterprise LLC',
@@ -107,103 +135,145 @@ function ServiceJsonLd({ sector }: { sector: Sector }) {
       '@type': 'OfferCatalog',
       name: `${sector.name} Services`,
       itemListElement: sector.services.map((s, i) => ({
-        '@type': 'Offer',
-        position: i + 1,
-        name: s.name,
-        description: s.tagline,
+        '@type': 'Offer', position: i + 1, name: s.name, description: s.tagline,
       })),
     },
   }
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 }
 
-// ─── Main Client Component ─────────────────────────────────────────────────
+// ─── Main Page ─────────────────────────────────────────────────────────────
 export default function SectorFunnelClient({ sector }: { sector: Sector }) {
-  const [selectedService, setSelectedService] = useState<Service>(sector.services[0])
+  const router = useRouter()
+  const [entering, setEntering] = useState(false)
+
+  async function handleStarClick(serviceId: string) {
+    setEntering(true)
+    await new Promise(r => setTimeout(r, 900))
+    router.push(`/service/${sector.id}/${serviceId}`)
+  }
 
   return (
     <>
       <ServiceJsonLd sector={sector} />
+      {entering && <BlackHoleOverlay color={sector.color} />}
+
       <Navbar />
-      <main style={{ background: '#0a0a0a', minHeight: '100vh' }}>
+      <main style={{ background: '#07070F', minHeight: '100vh' }}>
 
-        {/* ── Hero ────────────────────────────────────────────────── */}
-        <section className="relative min-h-[80vh] flex flex-col justify-end px-6 pb-20 pt-36 overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none" style={{ background: `radial-gradient(ellipse at 30% 50%, ${sector.glow} 0%, transparent 55%)` }} />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/30 to-transparent pointer-events-none" />
-          <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${sector.color}, transparent)` }} />
+        {/* ── Planet Hero ─────────────────────────────────────────── */}
+        <section
+          className="relative min-h-[60vh] flex flex-col justify-center items-center text-center px-6 pt-36 pb-24 overflow-hidden"
+        >
+          {/* Radial atmosphere */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{ background: `radial-gradient(ellipse at 50% 0%, ${sector.glow} 0%, transparent 60%)` }}
+          />
+          <div className="absolute top-0 left-0 right-0 h-px"
+            style={{ background: `linear-gradient(90deg, transparent, ${sector.color}, transparent)` }} />
 
-          <div className="relative z-10 max-w-6xl mx-auto w-full">
-            <div className="flex items-center gap-2 font-body text-xs text-white/30 mb-8 flex-wrap">
-              <Link href="/" className="hover:text-white/60 transition-colors">Home</Link>
-              <ChevronRight size={12} />
-              <span style={{ color: `${sector.color}cc` }}>{sector.name}</span>
+          {/* Orbital rings behind planet icon */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+            <div className="rounded-full border border-gold/8" style={{ width: 340, height: 340, margin: -170 }} />
+            <div className="absolute rounded-full border border-gold/5" style={{ width: 520, height: 520, top: -90, left: -90 }} />
+          </div>
+
+          {/* Breadcrumb */}
+          <div className="relative z-10 flex items-center gap-2 font-body text-xs text-white/30 mb-10">
+            <Link href="/" className="hover:text-white/60 transition-colors">Home</Link>
+            <ChevronRight size={12} />
+            <span style={{ color: `${sector.color}cc` }}>{sector.name}</span>
+          </div>
+
+          {/* Planet disc */}
+          <div
+            className="relative z-10 flex items-center justify-center mb-8 rounded-full"
+            style={{
+              width: 130, height: 130,
+              background: `radial-gradient(circle at 38% 32%, ${sector.color}40 0%, ${sector.color}16 40%, rgba(5,5,14,0.97) 100%)`,
+              border: '2.5px solid #D4A217',
+              boxShadow: `0 0 40px ${sector.glow}, 0 0 80px ${sector.glow}25`,
+            }}
+          >
+            <span className="text-5xl">{sector.icon}</span>
+          </div>
+
+          <div className="relative z-10">
+            <div
+              className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full border font-body text-[10px] tracking-[0.25em] uppercase"
+              style={{ borderColor: `${sector.color}30`, background: `${sector.color}10`, color: sector.color }}
+            >
+              {sector.shortName} — Select Your Star
             </div>
-            <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border" style={{ borderColor: `${sector.color}30`, background: `${sector.color}10` }}>
-              <span className="text-lg">{sector.icon}</span>
-              <span className="font-body text-xs tracking-[0.2em] uppercase" style={{ color: sector.color }}>{sector.shortName}</span>
-            </div>
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light leading-[1.05] text-white mb-5 max-w-4xl">{sector.heroHeadline}</h1>
-            <p className="font-body text-xl text-white/55 max-w-2xl leading-relaxed mb-10">{sector.heroSub}</p>
-            <div className="flex flex-wrap gap-4 mb-10">
-              {sector.stats.slice(0, 3).map(stat => (
-                <div key={stat.label} className="px-5 py-3 rounded-xl border border-white/7 bg-white/[0.03] text-center min-w-[100px]">
-                  <div className="font-display text-2xl font-semibold" style={{ color: sector.color }}>{stat.prefix || ''}{stat.value}{stat.suffix || ''}</div>
-                  <div className="font-body text-[10px] text-white/35 tracking-wide mt-0.5">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-            <a href="#services" className="inline-flex items-center gap-2 font-body text-sm font-semibold px-8 py-4 rounded-xl transition-all duration-300 hover:scale-[1.02]" style={{ background: sector.color, boxShadow: `0 0 30px ${sector.color}40`, color: '#0a0a0a' }}>
-              Choose Your Service <ArrowDown size={16} />
-            </a>
+            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-light text-white mb-4 leading-[1.05]">
+              {sector.name}
+            </h1>
+            <p className="font-body text-lg text-white/50 max-w-2xl leading-relaxed">
+              {sector.tagline}
+            </p>
+          </div>
+
+          {/* Down arrow */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-40">
+            <span className="font-body text-[9px] tracking-[0.3em] uppercase text-white/40">Choose a Star</span>
+            <div className="w-px h-10 bg-gradient-to-b from-white/30 to-transparent" />
           </div>
         </section>
 
-        {/* ── Service Selector ────────────────────────────────────── */}
-        <section id="services" className="py-20 px-6">
+        {/* ── Stars Picker ────────────────────────────────────────── */}
+        <section className="py-16 px-6">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border mb-4 font-body text-xs tracking-[0.2em] uppercase" style={{ borderColor: `${sector.color}30`, background: `${sector.color}10`, color: sector.color }}>
-                Choose Your Service
-              </div>
-              <h2 className="font-display text-4xl md:text-5xl font-light text-white mb-3">What We <span style={{ color: sector.color }}>Deliver</span></h2>
-              <p className="font-body text-white/45 max-w-lg mx-auto text-sm">Select the service that best fits your needs — your selection updates the form below.</p>
+              <p className="font-body text-xs text-white/30 tracking-[0.3em] uppercase mb-3">
+                ★ Stars in the {sector.shortName} System
+              </p>
+              <h2 className="font-display text-3xl md:text-4xl font-light text-white">
+                Which <span style={{ color: sector.color }}>Star</span> Will You Enter?
+              </h2>
+              <p className="font-body text-sm text-white/40 mt-3 max-w-lg mx-auto">
+                Each star is a dedicated service. Click to enter its black hole and access pricing, the team, and enrollment.
+              </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {sector.services.map((service, i) => (
-                <ServiceCard key={service.id} service={service} sector={sector} selected={selectedService.id === service.id} index={i} onClick={() => setSelectedService(service)} />
+                <StarCard
+                  key={service.id}
+                  service={service}
+                  sector={sector}
+                  index={i}
+                  onClick={() => handleStarClick(service.id)}
+                />
               ))}
-            </div>
-            <div className="flex justify-center mt-10">
-              <div className="flex flex-col items-center gap-2 font-body text-xs text-white/30">
-                <span>Selected: <span style={{ color: sector.color }}>{selectedService.name}</span></span>
-                <a href="#pain-points" className="transition-colors hover:text-white/50"><ArrowDown size={20} style={{ color: sector.color }} /></a>
-              </div>
             </div>
           </div>
         </section>
-
-        {/* ── Pain Points ─────────────────────────────────────────── */}
-        <div id="pain-points"><PainPointsSection sector={sector} service={selectedService} /></div>
-
-        {/* ── Pricing ─────────────────────────────────────────────── */}
-        <PricingSection sector={sector} service={selectedService} />
-
-        {/* ── Lead Form ───────────────────────────────────────────── */}
-        <div id="lead-form" className="py-8"><LeadForm sector={sector} service={selectedService} /></div>
 
         {/* ── Bottom CTA ──────────────────────────────────────────── */}
         <section className="py-16 px-6">
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="rounded-3xl p-12 border relative overflow-hidden" style={{ borderColor: `${sector.color}25`, background: `linear-gradient(135deg, ${sector.color}08 0%, rgba(10,10,10,0.95) 100%)` }}>
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-20 blur-[50px] pointer-events-none" style={{ background: `${sector.color}20` }} />
-              <div className="relative z-10">
-                <h2 className="font-display text-3xl md:text-4xl font-light text-white mb-3">Prefer to Talk First?</h2>
-                <p className="font-body text-white/45 mb-7 text-sm">Book a free strategy call with our {sector.name} team.</p>
-                <a href={selectedService.calendlyUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-body text-sm font-semibold px-8 py-4 rounded-xl transition-all duration-300 hover:scale-[1.02]" style={{ background: sector.color, boxShadow: `0 0 24px ${sector.color}35`, color: '#0a0a0a' }}>
-                  Book a Free Consultation <ArrowRight size={16} />
-                </a>
-              </div>
+          <div className="max-w-2xl mx-auto text-center">
+            <div
+              className="rounded-3xl p-10 border relative overflow-hidden"
+              style={{ borderColor: `${sector.color}20`, background: `linear-gradient(135deg, ${sector.color}08 0%, rgba(5,5,14,0.97) 100%)` }}
+            >
+              <div
+                className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-16 blur-[50px] pointer-events-none"
+                style={{ background: `${sector.color}20` }}
+              />
+              <p className="font-display text-2xl font-light text-white mb-2 relative z-10">Not sure which star?</p>
+              <p className="font-body text-sm text-white/40 mb-6 relative z-10">
+                Book a free strategy call — we&apos;ll map the right path through the system.
+              </p>
+              <a
+                href="https://calendly.com/oneunitedenterprise"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-body text-sm font-semibold px-8 py-3.5 rounded-xl transition-all duration-300 hover:scale-[1.02]"
+                style={{ background: sector.color, color: '#07070F' }}
+              >
+                Book a Free Consultation
+              </a>
             </div>
           </div>
         </section>

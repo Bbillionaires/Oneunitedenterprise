@@ -33,7 +33,7 @@ export default function HeroSection() {
         </div>
 
         <h1 className="font-display text-6xl md:text-7xl lg:text-8xl font-light leading-[0.95] mb-6">
-          <span className="text-white">One Vision.</span>
+          <span className="text-white">One Universe.</span>
           <br />
           <span className="text-gradient-gold">Infinite Reach.</span>
         </h1>
@@ -63,7 +63,7 @@ export default function HeroSection() {
             href="#sectors"
             className="inline-flex items-center gap-2 font-body text-base font-medium px-8 py-4 rounded-xl border border-white/10 text-white/60 hover:border-white/20 hover:text-white transition-all duration-300"
           >
-            Explore Our Sectors
+            Explore the Planets
             <ChevronDown size={18} />
           </Link>
         </div>

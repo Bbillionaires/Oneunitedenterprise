@@ -1,107 +1,124 @@
 'use client'
 import Link from 'next/link'
-import { ArrowRight, Film, Briefcase, Heart, TrendingUp, Globe } from 'lucide-react'
 import { SECTORS } from '@/data/config'
 import SectionLabel from '@/components/ui/SectionLabel'
-import AnimatedCounter from '@/components/ui/AnimatedCounter'
 
-const SECTOR_ICONS: Record<string, React.ElementType> = {
-  film: Film,
-  consulting: Briefcase,
-  nonprofit: Globe,
-  medical: Heart,
-  investment: TrendingUp,
-}
+const PLANET_SECTORS = ['film', 'consulting', 'nonprofit', 'medical', 'investment']
 
 export default function SectorGrid() {
+  const planets = SECTORS.filter(s => PLANET_SECTORS.includes(s.id))
+
   return (
-    <section id="sectors" className="section-padding container-wide mx-auto px-6">
-      <div className="text-center mb-16">
-        <SectionLabel className="justify-center">What We Do</SectionLabel>
-        <h2 className="font-display text-5xl md:text-6xl font-light text-white mb-4">
-          Five Pillars of <span className="text-gradient-gold">Excellence</span>
-        </h2>
-        <p className="font-body text-white/50 max-w-xl mx-auto text-lg">
-          Each sector is a fully operational division with dedicated expertise, networks, and resources.
+    <section id="sectors" className="relative section-padding overflow-hidden">
+      {/* Orbital ring backdrops */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+        <div className="absolute rounded-full border border-gold/6" style={{ width: 520, height: 520 }} />
+        <div className="absolute rounded-full border border-gold/4" style={{ width: 820, height: 820 }} />
+        <div className="absolute rounded-full border border-gold/[0.025]" style={{ width: 1120, height: 1120 }} />
+        <div className="absolute rounded-full border border-gold/[0.015]" style={{ width: 1420, height: 1420 }} />
+      </div>
+
+      <div className="container-wide mx-auto px-6 relative z-10">
+        <div className="text-center mb-16">
+          <SectionLabel className="justify-center">The Solar System</SectionLabel>
+          <h2 className="font-display text-5xl md:text-6xl font-light text-white mb-4">
+            Choose Your <span className="text-gradient-gold">Planet</span>
+          </h2>
+          <p className="font-body text-white/50 max-w-xl mx-auto text-lg">
+            Each planet is a fully operational economic division. Select one to explore its stars and enter the system.
+          </p>
+        </div>
+
+        {/* Planet grid — 3 top + 2 bottom on desktop */}
+        <div className="flex flex-col items-center gap-10 md:gap-14">
+          {/* Row 1: 3 planets */}
+          <div className="flex flex-wrap justify-center gap-8 md:gap-14">
+            {planets.slice(0, 3).map(sector => (
+              <PlanetCard key={sector.id} sector={sector} />
+            ))}
+          </div>
+          {/* Row 2: 2 planets centered */}
+          <div className="flex flex-wrap justify-center gap-8 md:gap-14">
+            {planets.slice(3).map(sector => (
+              <PlanetCard key={sector.id} sector={sector} />
+            ))}
+          </div>
+        </div>
+
+        <p className="text-center font-body text-xs text-white/20 mt-16 tracking-widest uppercase">
+          More planets coming soon — Education · Technology · Infrastructure · Legal · Agriculture
         </p>
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {SECTORS.map((sector, i) => {
-          const Icon = SECTOR_ICONS[sector.id] || Briefcase
-          const isLast = i === SECTORS.length - 1
-          return (
-            <Link
-              key={sector.id}
-              href={`/${sector.id}`}
-              className={`group relative rounded-2xl overflow-hidden border border-white/7 transition-all duration-500 hover:-translate-y-2 hover:border-opacity-30 ${isLast ? 'md:col-span-2 lg:col-span-1' : ''}`}
-              style={{
-                background: `linear-gradient(135deg, ${sector.color}10 0%, rgba(13,13,28,0.95) 60%)`,
-                '--sector-glow': sector.glow,
-              } as React.CSSProperties}
-            >
-              {/* Hover glow overlay */}
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                style={{ background: `radial-gradient(ellipse at top left, ${sector.glow} 0%, transparent 60%)` }}
-              />
-
-              {/* Top accent line */}
-              <div className="h-px w-full" style={{ background: `linear-gradient(90deg, ${sector.color} 0%, transparent 100%)` }} />
-
-              <div className="p-8">
-                {/* Icon */}
-                <div
-                  className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110"
-                  style={{ background: `${sector.color}20`, border: `1px solid ${sector.color}30` }}
-                >
-                  <Icon size={24} style={{ color: sector.color }} />
-                </div>
-
-                <div className="mb-2">
-                  <span className="font-body text-xs tracking-[0.2em] uppercase" style={{ color: sector.color }}>
-                    {sector.shortName}
-                  </span>
-                </div>
-
-                <h3 className="font-display text-2xl font-semibold text-white mb-3 leading-tight">
-                  {sector.name}
-                </h3>
-
-                <p className="font-body text-sm text-white/50 leading-relaxed mb-6">
-                  {sector.tagline}
-                </p>
-
-                {/* Mini stats */}
-                <div className="flex gap-6 mb-8">
-                  {sector.stats.slice(0, 2).map(stat => (
-                    <div key={stat.label}>
-                      <div className="font-display text-2xl font-semibold" style={{ color: sector.color }}>
-                        <AnimatedCounter
-                          target={parseFloat(stat.value.replace(/[^0-9.]/g, ''))}
-                          prefix={stat.prefix || ''}
-                          suffix={stat.suffix || stat.value.replace(/[0-9.]/g, '')}
-                          decimals={stat.value.includes('.') ? 1 : 0}
-                        />
-                      </div>
-                      <div className="font-body text-xs text-white/35">{stat.label}</div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* CTA */}
-                <div
-                  className="flex items-center gap-2 font-body text-sm font-semibold transition-all duration-300 group-hover:gap-3"
-                  style={{ color: sector.color }}
-                >
-                  Explore Sector
-                  <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
-                </div>
-              </div>
-            </Link>
-          )
-        })}
-      </div>
     </section>
+  )
+}
+
+function PlanetCard({ sector }: { sector: (typeof SECTORS)[number] }) {
+  return (
+    <Link href={`/${sector.id}`} className="group flex flex-col items-center gap-4">
+      {/* The planet */}
+      <div
+        className="relative flex flex-col items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-3"
+        style={{
+          width: 210,
+          height: 210,
+          borderRadius: '50%',
+          background: `radial-gradient(circle at 38% 32%, ${sector.color}45 0%, ${sector.color}18 40%, rgba(5,5,14,0.97) 100%)`,
+          border: '2.5px solid #D4A217',
+          boxShadow: `0 0 35px ${sector.glow}, 0 0 70px ${sector.glow}22, inset 0 0 40px ${sector.color}0c`,
+        }}
+      >
+        {/* Surface highlight — light catches top-left like a sphere */}
+        <div
+          className="absolute pointer-events-none"
+          style={{
+            top: '14%', left: '18%',
+            width: '34%', height: '22%',
+            borderRadius: '50%',
+            background: `${sector.color}35`,
+            filter: 'blur(10px)',
+          }}
+        />
+
+        {/* Atmosphere ring 1 */}
+        <div
+          className="absolute inset-0 rounded-full border border-gold/28 transition-all duration-500 group-hover:border-gold/65 group-hover:scale-[1.04]"
+          style={{ margin: -7 }}
+        />
+        {/* Atmosphere ring 2 */}
+        <div
+          className="absolute inset-0 rounded-full border border-gold/10 transition-all duration-500 group-hover:border-gold/32 group-hover:scale-[1.10]"
+          style={{ margin: -18 }}
+        />
+
+        {/* Icon */}
+        <span className="text-5xl mb-3 relative z-10 drop-shadow-lg">{sector.icon}</span>
+
+        {/* Short name */}
+        <span
+          className="font-display text-lg font-semibold text-white text-center px-6 relative z-10 leading-tight"
+        >
+          {sector.shortName}
+        </span>
+
+        {/* Subtle CTA */}
+        <span
+          className="font-body text-[10px] tracking-[0.25em] uppercase mt-1.5 relative z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          style={{ color: sector.color }}
+        >
+          Enter ↗
+        </span>
+      </div>
+
+      {/* Label below planet */}
+      <div className="text-center">
+        <p className="font-display text-sm text-white/70 group-hover:text-white transition-colors duration-300">
+          {sector.name}
+        </p>
+        <p className="font-body text-[11px] text-white/30 mt-0.5 max-w-[180px] leading-snug">
+          {sector.tagline.split('.')[0]}
+        </p>
+      </div>
+    </Link>
   )
 }

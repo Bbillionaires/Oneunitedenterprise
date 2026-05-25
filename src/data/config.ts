@@ -60,8 +60,8 @@ export const SECTORS: Sector[] = [
   // 1. FILM & ENTERTAINMENT
   // ─────────────────────────────────────────────────────────────
   {
-    id: 'film', name: 'Film & Entertainment', shortName: 'Film',
-    tagline: 'Cinematic Content That Commands Attention and Converts',
+    id: 'film', name: 'Media & Creative Arts', shortName: 'Media',
+    tagline: 'Story-driven content, film, podcasts, and creative production that build brands and move culture.',
     heroHeadline: 'Your Brand Deserves a Standing Ovation.',
     heroSub: 'Premium video production, media systems, and ad content that stops the scroll, builds authority, and drives revenue.',
     color: FILM.color, colorDark: FILM.dark, colorBg: FILM.bg, glow: FILM.glow,
@@ -223,8 +223,8 @@ export const SECTORS: Sector[] = [
   // 2. BIZ CONSULTING
   // ─────────────────────────────────────────────────────────────
   {
-    id: 'consulting', name: 'Biz Consulting', shortName: 'Consulting',
-    tagline: 'AI-Powered Systems That Scale Revenue Without Scaling Headcount',
+    id: 'consulting', name: 'Business & Commerce', shortName: 'Commerce',
+    tagline: 'AI-powered systems, automation, and intelligence that scale revenue and optimize how business operates.',
     heroHeadline: 'Stop Running a Business. Start Running a System.',
     heroSub: 'We install AI automation, lead generation engines, and competitive intelligence frameworks that grow your revenue predictably — whether you\'re working or not.',
     color: CONS.color, colorDark: CONS.dark, colorBg: CONS.bg, glow: CONS.glow,
@@ -383,8 +383,8 @@ export const SECTORS: Sector[] = [
   // 3. GLOBAL NON PROFIT
   // ─────────────────────────────────────────────────────────────
   {
-    id: 'nonprofit', name: 'Global Non Profit', shortName: 'Non Profit',
-    tagline: 'Transforming Communities. Empowering Futures. Creating Lasting Legacy.',
+    id: 'nonprofit', name: 'Community & Social Impact', shortName: 'Community',
+    tagline: 'Workforce development, community programs, and grant strategy that transform lives and build lasting legacies.',
     heroHeadline: 'Real Change Requires Real Infrastructure.',
     heroSub: 'Greenwood 100 Inc — a global 501(c)(3) building pathways to education, employment, and economic independence for communities worldwide.',
     color: NPRO.color, colorDark: NPRO.dark, colorBg: NPRO.bg, glow: NPRO.glow,
@@ -543,8 +543,8 @@ export const SECTORS: Sector[] = [
   // 4. HEALTH & MEDICAL
   // ─────────────────────────────────────────────────────────────
   {
-    id: 'medical', name: 'Health & Medical', shortName: 'Medical',
-    tagline: 'Dignity-Centered Care Coordination for Those Who Deserve It Most',
+    id: 'medical', name: 'Health & Life Sciences', shortName: 'Health',
+    tagline: 'Care coordination, housing, and staffing solutions built on dignity, access, and measurable outcomes.',
     heroHeadline: 'Healthcare Isn\'t Just a Service. It\'s a Right.',
     heroSub: 'Specialized health and medical services supporting veterans, persons with disabilities, and vulnerable populations — connecting people to the care, housing, and support they deserve.',
     color: MEDI.color, colorDark: MEDI.dark, colorBg: MEDI.bg, glow: MEDI.glow,
@@ -703,8 +703,8 @@ export const SECTORS: Sector[] = [
   // 5. INVESTMENT & ACQUISITION
   // ─────────────────────────────────────────────────────────────
   {
-    id: 'investment', name: 'Investment Opportunities', shortName: 'Investment',
-    tagline: 'Strategic Capital. Calculated Risk. Maximum Returns.',
+    id: 'investment', name: 'Capital & Finance', shortName: 'Finance',
+    tagline: 'Strategic capital deployment, acquisition advisory, and real estate that builds generational wealth.',
     heroHeadline: 'Capital Doesn\'t Create Opportunity. Vision Does.',
     heroSub: 'Multi-industry investment and acquisition expertise that identifies, evaluates, and closes deals other investors miss — from business acquisitions and capital raises to real estate and strategic assets.',
     color: INVT.color, colorDark: INVT.dark, colorBg: INVT.bg, glow: INVT.glow,
