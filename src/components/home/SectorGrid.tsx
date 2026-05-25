@@ -3,7 +3,10 @@ import Link from 'next/link'
 import { SECTORS } from '@/data/config'
 import SectionLabel from '@/components/ui/SectionLabel'
 
-const PLANET_SECTORS = ['film', 'consulting', 'nonprofit', 'medical', 'investment', 'technology']
+const PLANET_SECTORS = [
+  'film', 'consulting', 'nonprofit', 'medical', 'investment',
+  'technology', 'education', 'infrastructure', 'legal', 'agriculture', 'energy',
+]
 
 export default function SectorGrid() {
   const planets = SECTORS.filter(s => PLANET_SECTORS.includes(s.id))
@@ -25,29 +28,28 @@ export default function SectorGrid() {
             Choose Your <span className="text-gradient-gold">Planet</span>
           </h2>
           <p className="font-body text-white/50 max-w-xl mx-auto text-lg">
-            Each planet is a fully operational economic division. Select one to explore its stars and enter the system.
+            Eleven planets. One unified economy. Select a planet to explore its stars and enter the system.
           </p>
         </div>
 
-        {/* Planet grid — 3 top + 3 bottom */}
-        <div className="flex flex-col items-center gap-10 md:gap-14">
-          {/* Row 1: 3 planets */}
-          <div className="flex flex-wrap justify-center gap-8 md:gap-14">
-            {planets.slice(0, 3).map(sector => (
+        {/* Planet grid — 4 + 4 + 3 rows */}
+        <div className="flex flex-col items-center gap-10 md:gap-12">
+          <div className="flex flex-wrap justify-center gap-6 md:gap-10">
+            {planets.slice(0, 4).map(sector => (
               <PlanetCard key={sector.id} sector={sector} />
             ))}
           </div>
-          {/* Row 2: 3 planets */}
-          <div className="flex flex-wrap justify-center gap-8 md:gap-14">
-            {planets.slice(3).map(sector => (
+          <div className="flex flex-wrap justify-center gap-6 md:gap-10">
+            {planets.slice(4, 8).map(sector => (
+              <PlanetCard key={sector.id} sector={sector} />
+            ))}
+          </div>
+          <div className="flex flex-wrap justify-center gap-6 md:gap-10">
+            {planets.slice(8).map(sector => (
               <PlanetCard key={sector.id} sector={sector} />
             ))}
           </div>
         </div>
-
-        <p className="text-center font-body text-xs text-white/20 mt-16 tracking-widest uppercase">
-          More planets coming soon — Education · Infrastructure · Legal · Agriculture · Energy
-        </p>
       </div>
     </section>
   )
