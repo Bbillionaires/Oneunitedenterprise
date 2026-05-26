@@ -4,6 +4,8 @@ import { usePathname } from 'next/navigation'
 import { useState, useEffect, useRef } from 'react'
 import { Menu, X, ChevronDown } from 'lucide-react'
 import { SECTORS, BRAND } from '@/data/config'
+import { useTheme } from '@/context/ThemeContext'
+import ThemeToggle from '@/components/ui/ThemeToggle'
 import { cn } from '@/lib/utils'
 
 const PLANET_IDS = [
@@ -19,6 +21,7 @@ export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const pathname  = usePathname()
   const dropRef   = useRef<HTMLDivElement>(null)
+  const { isDark } = useTheme()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -28,7 +31,6 @@ export default function Navbar() {
 
   useEffect(() => { setMobileOpen(false); setDropdownOpen(false) }, [pathname])
 
-  // Close dropdown on outside click
   useEffect(() => {
     function handler(e: MouseEvent) {
       if (dropRef.current && !dropRef.current.contains(e.target as Node)) {
@@ -40,6 +42,14 @@ export default function Navbar() {
   }, [])
 
   const activePlanet = PLANETS.find(s => pathname.startsWith(`/${s.id}`))
+
+  // Theme-aware inline style values
+  const mutedText   = isDark ? 'rgba(245,240,232,0.65)' : 'rgba(20,20,20,0.65)'
+  const faintBorder = isDark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.07)'
+  const faintBg     = isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)'
+  const dropdownBg  = isDark
+    ? 'rgba(7,7,15,0.97)'
+    : 'rgba(253,252,248,0.97)'
 
   return (
     <header
@@ -66,55 +76,52 @@ export default function Navbar() {
             )}
           >
             Sectors
-            <ChevronDown
-              size={14}
-              className={cn('transition-transform duration-200', dropdownOpen && 'rotate-180')}
-            />
+            <ChevronDown size={14} className={cn('transition-transform duration-200', dropdownOpen && 'rotate-180')} />
           </button>
 
-          {/* Dropdown panel */}
           {dropdownOpen && (
             <div
               className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[780px] rounded-2xl border border-black/10 p-5 shadow-2xl"
-              style={{ background: 'rgba(253,252,248,0.97)', backdropFilter: 'blur(20px)' }}
+              style={{ background: dropdownBg, backdropFilter: 'blur(20px)' }}
             >
               <p className="font-body text-[10px] tracking-[0.3em] uppercase text-gray-900/25 mb-4 px-1">
                 ★ The Solar System — Choose a Planet
               </p>
               <div className="grid grid-cols-4 gap-2">
-                {PLANETS.map(s => (
-                  <Link
-                    key={s.id}
-                    href={`/${s.id}`}
-                    className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl transition-all duration-200 group"
-                    style={{
-                      background: pathname.startsWith(`/${s.id}`) ? `${s.color}18` : 'transparent',
-                      border: `1px solid ${pathname.startsWith(`/${s.id}`) ? s.color + '35' : 'transparent'}`,
-                    }}
-                    onMouseEnter={e => (e.currentTarget.style.background = `${s.color}12`)}
-                    onMouseLeave={e => (e.currentTarget.style.background = pathname.startsWith(`/${s.id}`) ? `${s.color}18` : 'transparent')}
-                  >
-                    <span className="text-base flex-shrink-0">{s.icon}</span>
-                    <div className="min-w-0">
-                      <p
-                        className="font-body text-xs font-semibold leading-tight truncate"
-                        style={{ color: pathname.startsWith(`/${s.id}`) ? s.color : 'rgba(255,255,255,0.75)' }}
-                      >
-                        {s.shortName}
-                      </p>
-                      <p className="font-body text-[10px] text-gray-900/30 leading-tight truncate mt-0.5">
-                        {s.name}
-                      </p>
-                    </div>
-                  </Link>
-                ))}
+                {PLANETS.map(s => {
+                  const isActive = pathname.startsWith(`/${s.id}`)
+                  return (
+                    <Link
+                      key={s.id}
+                      href={`/${s.id}`}
+                      className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl transition-all duration-200 group"
+                      style={{
+                        background:   isActive ? `${s.color}18` : 'transparent',
+                        border: `1px solid ${isActive ? s.color+'35' : 'transparent'}`,
+                      }}
+                      onMouseEnter={e => (e.currentTarget.style.background = `${s.color}12`)}
+                      onMouseLeave={e => (e.currentTarget.style.background = isActive ? `${s.color}18` : 'transparent')}
+                    >
+                      <span className="text-base flex-shrink-0">{s.icon}</span>
+                      <div className="min-w-0">
+                        <p className="font-body text-xs font-semibold leading-tight truncate"
+                          style={{ color: isActive ? s.color : mutedText }}>
+                          {s.shortName}
+                        </p>
+                        <p className="font-body text-[10px] text-gray-900/30 leading-tight truncate mt-0.5">
+                          {s.name}
+                        </p>
+                      </div>
+                    </Link>
+                  )
+                })}
               </div>
             </div>
           )}
         </div>
 
         {/* Desktop right */}
-        <div className="hidden lg:flex items-center gap-4 flex-shrink-0">
+        <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
           {activePlanet && (
             <span
               className="font-body text-xs px-3 py-1.5 rounded-full border"
@@ -123,6 +130,7 @@ export default function Navbar() {
               {activePlanet.icon} {activePlanet.shortName}
             </span>
           )}
+          <ThemeToggle />
           <Link
             href={BRAND.calendly}
             target="_blank"
@@ -133,13 +141,16 @@ export default function Navbar() {
         </div>
 
         {/* Mobile toggle */}
-        <button
-          className="lg:hidden p-2 text-gray-900/70 hover:text-gray-900"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        <div className="lg:hidden flex items-center gap-2">
+          <ThemeToggle />
+          <button
+            className="p-2 text-gray-900/70 hover:text-gray-900"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile menu */}
@@ -150,25 +161,28 @@ export default function Navbar() {
               ★ The Solar System
             </p>
             <div className="grid grid-cols-2 gap-2 mb-5">
-              {PLANETS.map(s => (
-                <Link
-                  key={s.id}
-                  href={`/${s.id}`}
-                  className="flex items-center gap-2 px-3 py-2.5 rounded-xl border transition-colors"
-                  style={{
-                    borderColor: pathname.startsWith(`/${s.id}`) ? `${s.color}50` : 'rgba(255,255,255,0.07)',
-                    background: pathname.startsWith(`/${s.id}`) ? `${s.color}12` : 'rgba(255,255,255,0.02)',
-                  }}
-                >
-                  <span className="text-sm">{s.icon}</span>
-                  <span
-                    className="font-body text-xs font-medium leading-tight"
-                    style={{ color: pathname.startsWith(`/${s.id}`) ? s.color : 'rgba(255,255,255,0.65)' }}
+              {PLANETS.map(s => {
+                const isActive = pathname.startsWith(`/${s.id}`)
+                return (
+                  <Link
+                    key={s.id}
+                    href={`/${s.id}`}
+                    className="flex items-center gap-2 px-3 py-2.5 rounded-xl border transition-colors"
+                    style={{
+                      borderColor: isActive ? `${s.color}50` : faintBorder,
+                      background:  isActive ? `${s.color}12` : faintBg,
+                    }}
                   >
-                    {s.shortName}
-                  </span>
-                </Link>
-              ))}
+                    <span className="text-sm">{s.icon}</span>
+                    <span
+                      className="font-body text-xs font-medium leading-tight"
+                      style={{ color: isActive ? s.color : mutedText }}
+                    >
+                      {s.shortName}
+                    </span>
+                  </Link>
+                )
+              })}
             </div>
             <Link
               href={BRAND.calendly}

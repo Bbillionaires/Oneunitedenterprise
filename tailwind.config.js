@@ -1,15 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        base:    '#FDFCF8',
-        surface: '#F5F2EA',
-        card:    '#EDEAD8',
-        card2:   '#E5E1CE',
+        // CSS-variable-based so dark mode flips automatically
+        base:    'rgb(var(--base-rgb) / <alpha-value>)',
+        surface: 'rgb(var(--surface-rgb) / <alpha-value>)',
+        card:    'rgb(var(--card-rgb) / <alpha-value>)',
+        card2:   'rgb(var(--card2-rgb) / <alpha-value>)',
+        ink:     'rgb(var(--ink-rgb) / <alpha-value>)',
         border:  'rgba(0,0,0,0.08)',
-        ink:     '#141414',
         gold:     { DEFAULT: '#C9A84C', light: '#E8C86A', dark: '#8B6914', glow: 'rgba(201,168,76,0.25)' },
         copper:   { DEFAULT: '#B87333', light: '#D4894A', dark: '#7A4A20' },
         sector: {

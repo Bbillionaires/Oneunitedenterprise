@@ -3,6 +3,7 @@ import { Suspense } from 'react'
 import './globals.css'
 import SpaceBackground from '@/components/SpaceBackground'
 import { AffiliateTracker } from '@/components/AffiliateTracker'
+import { ThemeProvider } from '@/context/ThemeContext'
 
 const BASE_URL = 'https://oneunitedenterprise.vercel.app'
 
@@ -73,13 +74,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <SpaceBackground />
-        <Suspense fallback={null}>
-          <AffiliateTracker />
-        </Suspense>
-        <div style={{ position: 'relative', zIndex: 1 }}>
-          {children}
-        </div>
+        {/* Anti-flash: apply dark class before React hydrates */}
+        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var p=localStorage.getItem('oe-theme');if(p==='dark'){document.documentElement.classList.add('dark')}else if(!p||p==='auto'){var et=new Date(new Date().toLocaleString('en-US',{timeZone:'America/New_York'}));var h=et.getHours()+et.getMinutes()/60;if(h<6||h>20)document.documentElement.classList.add('dark')}}catch(e){}})();` }} />
+        <ThemeProvider>
+          <SpaceBackground />
+          <Suspense fallback={null}>
+            <AffiliateTracker />
+          </Suspense>
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            {children}
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   )
