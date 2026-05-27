@@ -65,7 +65,7 @@ function PlanetCard({ sector }: { sector: (typeof SECTORS)[number] }) {
           width: 210,
           height: 210,
           borderRadius: '50%',
-          background: `radial-gradient(circle at 38% 32%, ${sector.color}45 0%, ${sector.color}18 40%, rgba(253,252,248,0.97) 100%)`,
+          background: `radial-gradient(circle at 38% 32%, ${sector.color}45 0%, ${sector.color}18 40%, rgb(var(--base-rgb) / 0.97) 100%)`,
           border: '2.5px solid #D4A217',
           boxShadow: `0 0 35px ${sector.glow}, 0 0 70px ${sector.glow}22, inset 0 0 40px ${sector.color}0c`,
         }}

@@ -57,7 +57,7 @@ function StarCard({
       className="group w-full text-left rounded-2xl border p-8 relative overflow-hidden transition-all duration-400 hover:-translate-y-2 focus:outline-none"
       style={{
         borderColor: `${sector.color}28`,
-        background: `radial-gradient(ellipse at 50% 0%, ${sector.color}12 0%, rgba(253,252,248,0.97) 65%)`,
+        background: `radial-gradient(ellipse at 50% 0%, ${sector.color}12 0%, rgb(var(--base-rgb) / 0.97) 65%)`,
       }}
     >
       {/* Top accent line */}
@@ -191,7 +191,7 @@ export default function SectorFunnelClient({ sector }: { sector: Sector }) {
             className="relative z-10 flex items-center justify-center mb-8 rounded-full"
             style={{
               width: 130, height: 130,
-              background: `radial-gradient(circle at 38% 32%, ${sector.color}40 0%, ${sector.color}16 40%, rgba(253,252,248,0.97) 100%)`,
+              background: `radial-gradient(circle at 38% 32%, ${sector.color}40 0%, ${sector.color}16 40%, rgb(var(--base-rgb) / 0.97) 100%)`,
               border: '2.5px solid #D4A217',
               boxShadow: `0 0 40px ${sector.glow}, 0 0 80px ${sector.glow}25`,
             }}
@@ -255,7 +255,7 @@ export default function SectorFunnelClient({ sector }: { sector: Sector }) {
           <div className="max-w-2xl mx-auto text-center">
             <div
               className="rounded-3xl p-10 border relative overflow-hidden"
-              style={{ borderColor: `${sector.color}20`, background: `linear-gradient(135deg, ${sector.color}08 0%, rgba(253,252,248,0.97) 100%)` }}
+              style={{ borderColor: `${sector.color}20`, background: `linear-gradient(135deg, ${sector.color}08 0%, rgb(var(--base-rgb) / 0.97) 100%)` }}
             >
               <div
                 className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-16 blur-[50px] pointer-events-none"

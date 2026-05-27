@@ -5,6 +5,7 @@ import { X, Tag, CheckCircle2, AlertCircle, Loader2, CreditCard, Building2, Copy
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js'
+import { useTheme } from '@/context/ThemeContext'
 
 interface Package { name: string; price: string; period: string; cta: string }
 interface PaymentModalProps { isOpen: boolean; onClose: () => void; pkg: Package; service: string; sectorColor: string }
@@ -32,7 +33,7 @@ function usePromo(rawPrice: string) {
   return { code, setCode, applied, error, loading, apply, remove, baseAmount, finalAmount }
 }
 
-function StripeForm({ amount, pkg, service, sectorColor, promoCode, onSuccess }: { amount: number; pkg: Package; service: string; sectorColor: string; promoCode: string; onSuccess: () => void }) {
+function StripeForm({ amount, pkg, service, sectorColor, promoCode, isDark, onSuccess }: { amount: number; pkg: Package; service: string; sectorColor: string; promoCode: string; isDark: boolean; onSuccess: () => void }) {
   const stripe   = useStripe()
   const elements = useElements()
   const [status,  setStatus]  = useState<'idle'|'loading'|'error'|'success'>('idle')
@@ -51,7 +52,7 @@ function StripeForm({ amount, pkg, service, sectorColor, promoCode, onSuccess }:
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
       <div className="rounded-xl border border-black/10 bg-white/5 px-4 py-3.5">
-        <CardElement options={{ style: { base: { color: '#141414', fontFamily: 'Inter, sans-serif', fontSize: '15px', '::placeholder': { color: 'rgba(20,20,20,0.35)' } }, invalid: { color: '#ff6b6b' } } }} />
+        <CardElement options={{ style: { base: { color: isDark ? '#F5F0E8' : '#141414', fontFamily: 'Inter, sans-serif', fontSize: '15px', '::placeholder': { color: isDark ? 'rgba(245,240,232,0.35)' : 'rgba(20,20,20,0.35)' }, backgroundColor: 'transparent' }, invalid: { color: '#ff6b6b' } } }} />
       </div>
       {status === 'error' && <p className="flex items-center gap-2 text-sm text-red-400"><AlertCircle size={14} />{message}</p>}
       <button type="submit" disabled={status === 'loading' || !stripe}
@@ -183,9 +184,10 @@ function getStripe() {
 export default function PaymentModal({ isOpen, onClose, pkg, service, sectorColor }: PaymentModalProps) {
   const [method,  setMethod]  = useState<PayMethod>('zelle')
   const [success, setSuccess] = useState(false)
-  const promo  = usePromo(pkg.price)
-  const stripe = getStripe()
-  const amount = promo.finalAmount || promo.baseAmount
+  const promo    = usePromo(pkg.price)
+  const stripe   = getStripe()
+  const amount   = promo.finalAmount || promo.baseAmount
+  const { isDark } = useTheme()
 
   useEffect(() => {
     if (!isOpen) { setSuccess(false); setMethod('zelle') }
@@ -205,10 +207,10 @@ export default function PaymentModal({ isOpen, onClose, pkg, service, sectorColo
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      style={{ background: 'rgba(253,252,248,0.85)', backdropFilter: 'blur(12px)' }}
+      style={{ background: isDark ? 'rgba(7,7,15,0.88)' : 'rgba(253,252,248,0.88)', backdropFilter: 'blur(12px)' }}
       onClick={e => { if (e.target === e.currentTarget) onClose() }}>
       <div className="relative w-full max-w-md rounded-2xl flex flex-col max-h-[90vh] overflow-y-auto"
-        style={{ background: 'transparent', border: '1px solid rgba(255,255,255,0.08)' }}>
+        style={{ background: isDark ? 'rgba(15,15,28,0.98)' : 'rgba(253,252,248,0.98)', border: `1px solid ${isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)'}` }}>
         <div className="flex items-start justify-between p-6 pb-0">
           <div>
             <h2 className="font-display text-xl text-gray-900">{pkg.name}</h2>
@@ -257,14 +259,14 @@ export default function PaymentModal({ isOpen, onClose, pkg, service, sectorColo
                       className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold transition-all"
                       style={method === m.id
                         ? { background: `${sectorColor}20`, border: `1px solid ${sectorColor}50`, color: sectorColor }
-                        : { background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.45)' }}>
+                        : { background: isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)', border: `1px solid ${isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)'}`, color: isDark ? 'rgba(245,240,232,0.45)' : 'rgba(20,20,20,0.45)' }}>
                       <span>{m.icon}</span>{m.label}
                     </button>
                   ))}
                 </div>
               </div>
               <div>
-                {method === 'stripe'  && (stripe ? <Elements stripe={stripe}><StripeForm amount={amount} pkg={pkg} service={service} sectorColor={sectorColor} promoCode={promo.applied ? promo.code : ''} onSuccess={() => setSuccess(true)} /></Elements> : <PaymentNotConfigured label="Stripe" />)}
+                {method === 'stripe'  && (stripe ? <Elements stripe={stripe}><StripeForm amount={amount} pkg={pkg} service={service} sectorColor={sectorColor} promoCode={promo.applied ? promo.code : ''} isDark={isDark} onSuccess={() => setSuccess(true)} /></Elements> : <PaymentNotConfigured label="Stripe" />)}
                 {method === 'paypal'  && <PayPalTab amount={amount} packageName={pkg.name} service={service} onSuccess={() => setSuccess(true)} />}
                 {method === 'square'  && <SquareTab  amount={amount} sectorColor={sectorColor} />}
                 {method === 'cashapp' && <CashAppTab amount={amount} sectorColor={sectorColor} />}
